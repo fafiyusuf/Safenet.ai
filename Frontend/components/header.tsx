@@ -1,14 +1,14 @@
 "use client"
 
+import { FileText, Lock, Menu, Shield } from "lucide-react"
 import Link from "next/link"
-import { Shield, FileText, Menu, Lock } from "lucide-react"
-import { SafeExitButton } from "./safe-exit-button"
-import { LanguageToggle } from "./language-toggle"
-import { DisguiseModeToggle, useDisguiseMode } from "./disguise-mode"
-import { Button } from "./ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
+
 import type { Language } from "@/lib/i18n"
 import { getTranslation } from "@/lib/i18n"
+import { useDisguiseMode } from "./disguise-mode"
+import { LanguageToggle } from "./language-toggle"
+import { Button } from "./ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
 
 interface HeaderProps {
   language: Language
@@ -51,9 +51,8 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <DisguiseModeToggle disguised={disguised} onToggle={setDisguised} />
           <LanguageToggle language={language} onToggle={onLanguageChange} />
-          <SafeExitButton />
+
 
           {/* Mobile Menu */}
           <Sheet>

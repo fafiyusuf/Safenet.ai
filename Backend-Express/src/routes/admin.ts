@@ -1,5 +1,8 @@
+import dotenv from 'dotenv';
 import { Request, Response, Router } from 'express';
 import { query } from '../utils/database';
+
+dotenv.config();
 
 const router = Router();
 
@@ -16,8 +19,11 @@ const adminAuth = (req: Request, res: Response, next: Function) => {
     const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
     const [username, password] = credentials.split(':');
 
-    // Simple hardcoded check (should be environment variables in production)
-    if (username === 'admin' && password === 'admin_1234') {
+    // Check against environment variables
+    const adminUsername = process.env.ADMIN_USERNAME || 'admin';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'admin_1234';
+
+    if (username === adminUsername && password === adminPassword) {
       next();
     } else {
       res.status(401).json({ error: 'Invalid credentials' });
