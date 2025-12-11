@@ -5,9 +5,10 @@
 A bilingual (English/Amharic) web platform that uses AI to analyze online abuse, generate legal evidence, and connect survivors with support resources.
 
 ![License](https://img.shields.io/badge/license-Private-red)
-![Python](https://img.shields.io/badge/python-3.9+-blue)
+![Node.js](https://img.shields.io/badge/node.js-24.8-green)
 ![Next.js](https://img.shields.io/badge/next.js-16-black)
-![FastAPI](https://img.shields.io/badge/fastapi-0.109-green)
+![Express](https://img.shields.io/badge/express-4.18-blue)
+![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)
 
 ## 🎯 Overview
 
@@ -52,7 +53,7 @@ Safenet.ai helps survivors of technology-facilitated gender-based violence (TFGB
 ```
 ┌─────────────┐         ┌─────────────┐         ┌─────────────┐
 │   Frontend  │────────▶│   Backend   │────────▶│    Neon     │
-│  (Next.js)  │         │  (FastAPI)  │         │ (PostgreSQL)│
+│  (Next.js)  │         │ (Express.js)│         │ (PostgreSQL)│
 └─────────────┘         └─────────────┘         └─────────────┘
                               │
                               │
@@ -67,74 +68,82 @@ Safenet.ai helps survivors of technology-facilitated gender-based violence (TFGB
 
 **Frontend:**
 - Next.js 16 (App Router)
-- TypeScript
+- React 19
+- TypeScript 5
 - Tailwind CSS
-- Radix UI
+- Radix UI Components
 - React Hook Form
 
 **Backend:**
-- FastAPI
-- Python 3.11
-- Tesseract OCR
-- ReportLab (PDF)
-- psycopg2 (PostgreSQL)
+- Express.js 4.18
+- Node.js 24.8
+- TypeScript 5.3
+- Tesseract.js (OCR)
+- PDFKit (PDF Generation)
+- pg (PostgreSQL Driver)
+- Sharp (Image Processing)
 
 **Database:**
-- Neon PostgreSQL (serverless)
+- Neon PostgreSQL (Serverless Cloud)
 
 **AI/ML:**
-- Google Gemini Pro
+- Google Generative AI (Gemini Pro)
 
 ## 🚀 Quick Start
 
-### Option 1: Standard Setup (Recommended for Development)
+### Prerequisites
+- Node.js 24.8+ (or latest LTS)
+- pnpm (for Frontend)
+- Neon PostgreSQL account (free tier available)
+- Google Gemini API key
 
-See **[SETUP.md](./SETUP.md)** for detailed instructions.
-
-Quick version:
+### Standard Setup (Recommended)
 
 ```bash
-# 1. Set up Neon database
-# Go to https://console.neon.tech/ and create a database
+# 1. Clone the repository
+git clone <repository-url>
+cd safenet-ai-project-plan
 
-# 2. Backend setup
-cd Backend/scripts
-cp .env.example .env
-# Edit .env with your credentials
-pip install -r requirements.txt
-python init_db.py  # Initialize database
-python main.py     # Start backend
+# 2. Set up Backend
+cd Backend-Express
+npm install                    # Install dependencies (291 packages)
+cp .env.example .env          # Create environment file
+# Edit .env with your credentials:
+#   - DATABASE_URL (from Neon)
+#   - GEMINI_API_KEY (from Google AI Studio)
+#   - ADMIN_USERNAME and ADMIN_PASSWORD
+npm run dev                    # Start backend on port 8000
 
-# 3. Frontend setup (in new terminal)
+# 3. Set up Frontend (in new terminal)
 cd Frontend
-cp .env.example .env.local
-# Edit .env.local
-pnpm install
-pnpm dev
+pnpm install                   # Install dependencies
+cp .env.example .env.local    # Create environment file
+# Edit .env.local:
+#   - NEXT_PUBLIC_API_URL=http://localhost:8000
+pnpm dev                       # Start frontend on port 3000
 
 # 4. Open http://localhost:3000
 ```
 
-### Option 2: Docker Setup (Recommended for Production)
+### Docker Setup (Alternative)
+
+> **Note:** Docker configuration is available but needs updating for Express.js backend
 
 ```bash
-# 1. Create environment file
-cp .env.example .env
-# Edit .env with your credentials
-
-# 2. Build and run
+# Update docker-compose.yml for Express backend
 docker-compose up --build
 
-# 3. Access:
+# Access:
 # Frontend: http://localhost:3000
 # Backend: http://localhost:8000
 ```
 
 ## 📚 Documentation
 
-- **[SETUP.md](./SETUP.md)** - Quick start guide
-- **[Backend/README.md](./Backend/README.md)** - Backend API documentation
+- **[HOW_TO_RUN.md](./HOW_TO_RUN.md)** - Quick start guide
+- **[Backend-Express/STATUS.md](./Backend-Express/STATUS.md)** - Backend status & troubleshooting
 - **[Frontend/README.md](./Frontend/README.md)** - Frontend development guide
+- **[INTEGRATION_STATUS.md](./INTEGRATION_STATUS.md)** - Integration documentation
 
 ## 🔑 Required Credentials
 
@@ -146,9 +155,10 @@ docker-compose up --build
 
 ### 2. Google Gemini API Key
 - **What**: AI classification API
-- **Where**: https://makersuite.google.com/app/apikey
+- **Where**: https://aistudio.google.com/app/apikey
 - **Cost**: Free tier available (60 requests/minute)
 - **Required**: Yes (for AI features)
+- **Alternative**: Rule-based classification fallback included
 
 ### 3. Admin Credentials
 - **What**: Dashboard access
@@ -159,29 +169,43 @@ docker-compose up --build
 
 ```sql
 -- Reports table
-reports (
-  id VARCHAR PRIMARY KEY,
-  created_at TIMESTAMP,
-  platform_id VARCHAR,
-  language VARCHAR,
-  extracted_text TEXT,
-  category VARCHAR,
-  severity INTEGER (0-100),
-  risk_level VARCHAR (low/medium/high),
-  confidence DECIMAL,
-  highlighted_phrases JSONB,
-  file_hash VARCHAR,
-  expires_at TIMESTAMP
-)
+CREATE TABLE reports (
+  id VARCHAR(255) PRIMARY KEY,
+  created_at TIMESTAMP DEFAULT NOW(),
+  expires_at TIMESTAMP NOT NULL,
+  platform_id VARCHAR(50) NOT NULL,
+  language VARCHAR(10) NOT NULL,
+  original_text TEXT,
+  extracted_text TEXT NOT NULL,
+  category VARCHAR(50) NOT NULL,
+  severity INTEGER CHECK (severity >= 0 AND severity <= 100),
+  risk_level VARCHAR(20) NOT NULL,
+  confidence DECIMAL(3,2) CHECK (confidence >= 0 AND confidence <= 1),
+  rationale TEXT,
+  highlighted_phrases JSONB DEFAULT '[]'::jsonb,
+  file_hash VARCHAR(64),
+  anonymous BOOLEAN DEFAULT true,
+  metadata JSONB DEFAULT '{}'::jsonb
+);
 
 -- Files table
-files (
+CREATE TABLE files (
   id SERIAL PRIMARY KEY,
-  report_id VARCHAR REFERENCES reports,
-  filename VARCHAR,
-  sha256_hash VARCHAR,
-  file_size INTEGER
-)
+  report_id VARCHAR(255) REFERENCES reports(id) ON DELETE CASCADE,
+  filename VARCHAR(255) NOT NULL,
+  mime_type VARCHAR(100) NOT NULL,
+  file_size INTEGER NOT NULL,
+  file_hash VARCHAR(64) NOT NULL,
+  storage_path VARCHAR(500),
+  uploaded_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Indexes
+CREATE INDEX idx_reports_created_at ON reports(created_at);
+CREATE INDEX idx_reports_platform ON reports(platform_id);
+CREATE INDEX idx_reports_category ON reports(category);
+CREATE INDEX idx_reports_risk_level ON reports(risk_level);
+CREATE INDEX idx_files_report_id ON files(report_id);
 ```
 
 ## 🛡️ Security Features
@@ -221,10 +245,10 @@ Built-in directory includes:
 
 ### Backend Development
 ```bash
-cd Backend/scripts
-python main.py
+cd Backend-Express
+npm run dev
 # API: http://localhost:8000
-# Docs: http://localhost:8000/docs
+# Health: http://localhost:8000/health
 ```
 
 ### Frontend Development
@@ -236,64 +260,102 @@ pnpm dev
 
 ### Database Management
 ```bash
-# Initialize/reset database
-cd Backend/scripts
-python init_db.py
+# Database initializes automatically on first backend start
+# Access Neon dashboard: https://console.neon.tech/
 
-# Access Neon dashboard
-# https://console.neon.tech/
+# Manual connection test
+cd Backend-Express
+node -e "const {Pool}=require('pg');const p=new Pool({connectionString:process.env.DATABASE_URL,ssl:{rejectUnauthorized:false}});p.query('SELECT NOW()').then(r=>console.log('✅ Connected:',r.rows[0])).catch(e=>console.error('❌',e.message))"
 ```
 
 ## 🧪 Testing
 
-### Test Backend Connection
+### Test Backend Health
 ```bash
 curl http://localhost:8000/health
+# Expected: {"status":"healthy","timestamp":"..."}
 ```
 
-### Test Frontend
+### Test Static Endpoints (No DB Required)
 ```bash
-curl http://localhost:3000/api/platforms
+# Get platforms list
+curl http://localhost:8000/api/platforms
+
+# Get resources (English)
+curl http://localhost:8000/api/resources?language=en
+
+# Get resources (Amharic)
+curl http://localhost:8000/api/resources?language=am
 ```
 
-### Test Database
+### Test Upload (Requires DB)
 ```bash
-cd Backend/scripts
-python -c "from database import initialize_database; initialize_database()"
+curl -X POST http://localhost:8000/api/upload \
+  -F "file=@screenshot.png" \
+  -F "platform_id=facebook" \
+  -F "language=en"
+```
+
+### Test Admin Endpoints (Requires Auth)
+```bash
+curl http://localhost:8000/api/admin/stats \
+  -u admin:admin_1234
 ```
 
 ## 📦 Deployment
 
 ### Production Checklist
 
-- [ ] Change default admin password
-- [ ] Generate strong JWT secret
-- [ ] Set up HTTPS/SSL
-- [ ] Configure production DATABASE_URL
-- [ ] Set environment to `production`
+- [ ] Change default admin password in `.env`
+- [ ] Generate strong JWT secret (32+ characters)
+- [ ] Set `NODE_ENV=production`
+- [ ] Configure production DATABASE_URL (Neon)
+- [ ] Set up HTTPS/SSL certificates
 - [ ] Enable rate limiting
-- [ ] Set up monitoring
-- [ ] Configure backups
-- [ ] Review CORS settings
-- [ ] Set up CDN (optional)
+- [ ] Set up monitoring (error tracking, uptime)
+- [ ] Configure database backups
+- [ ] Review CORS settings (`CORS_ORIGIN`)
+- [ ] Set up CDN for static assets (optional)
+- [ ] Add request logging
+- [ ] Configure file storage (S3/R2/etc.)
 
-### Deploy with Docker
+### Deploy Backend to Cloud
 
+**Railway:**
 ```bash
-docker-compose up -d
+cd Backend-Express
+railway login
+railway init
+railway up
 ```
 
-### Deploy to Cloud
+**Render:**
+```bash
+# Create new Web Service
+# Build: npm install
+# Start: npm start
+# Add environment variables from .env
+```
 
-Compatible with:
-- AWS (ECS, EC2)
-- Google Cloud (Cloud Run)
-- Azure (App Service)
-- DigitalOcean (App Platform)
-- Railway
-- Render
+**Vercel/Netlify (Frontend):**
+```bash
+cd Frontend
+vercel --prod
+# or
+netlify deploy --prod
+```
 
-See individual README files for platform-specific instructions.
+### Compatible Platforms
+- **Railway** - Recommended for Express backend
+- **Render** - Free tier available
+- **Fly.io** - Global deployment
+- **Vercel** - Best for Next.js frontend
+- **Netlify** - Alternative for frontend
+- **DigitalOcean App Platform**
+- **AWS (ECS, EC2, Lambda)**
+- **Google Cloud (Cloud Run)**
+
+See [Backend-Express/STATUS.md](./Backend-Express/STATUS.md) for deployment guides.
 
 ## 🤝 Contributing
 
@@ -318,14 +380,34 @@ For technical issues or questions, contact the development team.
 
 ## 🗺️ Roadmap
 
-- [ ] Mobile app (iOS/Android)
+### Phase 1 - Current ✅
+- [x] Express.js backend with TypeScript
+- [x] AI classification with Gemini
+- [x] OCR with Tesseract.js
+- [x] PDF generation
+- [x] Bilingual support (English/Amharic)
+- [x] Admin dashboard
+- [x] Neon PostgreSQL integration
+
+### Phase 2 - In Progress 🔄
+- [ ] Fix Neon database connectivity
+- [ ] Add request validation (Zod/Joi)
+- [ ] Implement rate limiting
+- [ ] Add file storage (S3/Cloudflare R2)
+- [ ] JWT authentication for admin
+- [ ] API documentation (OpenAPI/Swagger)
+- [ ] Unit & integration tests
+
+### Phase 3 - Planned 📋
+- [ ] Mobile app (React Native)
 - [ ] SMS integration
-- [ ] Multi-language support (Oromo, Tigrinya)
+- [ ] Additional languages (Oromo, Tigrinya, Somali)
 - [ ] Real-time chat support
 - [ ] Blockchain evidence verification
-- [ ] API for partner organizations
-- [ ] Machine learning improvements
+- [ ] Partner organization API
+- [ ] Advanced ML models (fine-tuned)
 - [ ] Offline mode support
+- [ ] Browser extension
 
 ## ⚠️ Important Notes
 

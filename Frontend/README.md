@@ -18,7 +18,7 @@ Next.js web application for Safenet.ai - Technology-Facilitated Gender-Based Vio
 
 - Node.js 18+ (recommended: 20+)
 - pnpm (recommended) or npm
-- Backend API running (see Backend/README.md)
+- Backend API running (see Backend-Express/README.md)
 
 ## Installation
 
