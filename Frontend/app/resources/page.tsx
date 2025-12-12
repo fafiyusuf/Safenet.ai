@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "@/hooks/use-language"
 import { REGIONS } from "@/lib/constants"
 import { getTranslation } from "@/lib/i18n"
-import { AlertTriangle, Building2, Globe, HeartHandshake, Home, Info, Mail, MapPin, Phone, Scale, Shield } from "lucide-react"
+import { AlertTriangle, Building2, Globe, HeartHandshake, Home, Info, Mail, MapPin, Phone, Scale, Shield, Lock, Gavel, Brain, BookOpen, CheckCircle2 } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const typeIcons = {
@@ -237,14 +237,19 @@ export default function ResourcesPage() {
                 </CardHeader>
                 <CardContent>
                   <Tabs defaultValue="overview" className="w-full">
-                    <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 gap-2">
-                      <TabsTrigger value="overview">{t.resources.gbvInfo.tabs.overview}</TabsTrigger>
-                      <TabsTrigger value="cyberstalking">{t.resources.gbvInfo.tabs.cyberstalking}</TabsTrigger>
-                      <TabsTrigger value="harassment">{t.resources.gbvInfo.tabs.harassment}</TabsTrigger>
-                      <TabsTrigger value="impersonation">{t.resources.gbvInfo.tabs.impersonation}</TabsTrigger>
-                      <TabsTrigger value="doxing">{t.resources.gbvInfo.tabs.doxing}</TabsTrigger>
-                      <TabsTrigger value="imageAbuse">{t.resources.gbvInfo.tabs.imageAbuse}</TabsTrigger>
-                    </TabsList>
+                    <div className="overflow-x-auto pb-2 -mx-2 px-2">
+                      <TabsList className="inline-flex h-auto flex-wrap gap-2 bg-transparent p-0">
+                        <TabsTrigger value="overview" className="text-xs sm:text-sm whitespace-nowrap">{t.resources.gbvInfo.tabs.overview}</TabsTrigger>
+                        <TabsTrigger value="cyberstalking" className="text-xs sm:text-sm whitespace-nowrap">{t.resources.gbvInfo.tabs.cyberstalking}</TabsTrigger>
+                        <TabsTrigger value="harassment" className="text-xs sm:text-sm whitespace-nowrap">{t.resources.gbvInfo.tabs.harassment}</TabsTrigger>
+                        <TabsTrigger value="impersonation" className="text-xs sm:text-sm whitespace-nowrap">{t.resources.gbvInfo.tabs.impersonation}</TabsTrigger>
+                        <TabsTrigger value="doxing" className="text-xs sm:text-sm whitespace-nowrap">{t.resources.gbvInfo.tabs.doxing}</TabsTrigger>
+                        <TabsTrigger value="imageAbuse" className="text-xs sm:text-sm whitespace-nowrap">{t.resources.gbvInfo.tabs.imageAbuse}</TabsTrigger>
+                        <TabsTrigger value="prevention" className="text-xs sm:text-sm whitespace-nowrap">{t.resources.gbvInfo.tabs.prevention}</TabsTrigger>
+                        <TabsTrigger value="legalRights" className="text-xs sm:text-sm whitespace-nowrap">{t.resources.gbvInfo.tabs.legalRights}</TabsTrigger>
+                        <TabsTrigger value="psychologicalImpact" className="text-xs sm:text-sm whitespace-nowrap">{t.resources.gbvInfo.tabs.psychologicalImpact}</TabsTrigger>
+                      </TabsList>
+                    </div>
 
                     <TabsContent value="overview" className="mt-6 space-y-4">
                       <div>
@@ -445,6 +450,280 @@ export default function ResourcesPage() {
                             <li key={idx} className="flex gap-2">
                               <span className="text-green-500 mt-1">•</span>
                               <span>{action}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </TabsContent>
+
+                    {/* Prevention & Digital Safety Tab */}
+                    <TabsContent value="prevention" className="mt-6 space-y-6">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                          <Lock className="h-5 w-5 text-blue-500" />
+                          {t.resources.gbvInfo.content.prevention.title}
+                        </h3>
+                        <p className="text-muted-foreground mb-4">
+                          {t.resources.gbvInfo.content.prevention.description}
+                        </p>
+                      </div>
+
+                      {/* Privacy Settings */}
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <Lock className="h-4 w-4 text-blue-500" />
+                          {t.resources.gbvInfo.content.prevention.privacySettings.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.prevention.privacySettings.tips.map((tip: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <CheckCircle2 className="h-4 w-4 text-blue-500 mt-1 shrink-0" />
+                              <span className="text-sm">{tip}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Digital Hygiene */}
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-green-500" />
+                          {t.resources.gbvInfo.content.prevention.digitalHygiene.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.prevention.digitalHygiene.tips.map((tip: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <CheckCircle2 className="h-4 w-4 text-green-500 mt-1 shrink-0" />
+                              <span className="text-sm">{tip}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Recognize Warning Signs */}
+                      <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-900">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <AlertTriangle className="h-4 w-4 text-amber-600" />
+                          {t.resources.gbvInfo.content.prevention.recognizeWarnings.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.prevention.recognizeWarnings.signs.map((sign: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <span className="text-amber-600 mt-1">•</span>
+                              <span className="text-sm">{sign}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Safe Content Sharing */}
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <BookOpen className="h-4 w-4 text-purple-500" />
+                          {t.resources.gbvInfo.content.prevention.safeSharing.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.prevention.safeSharing.guidelines.map((guideline: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <CheckCircle2 className="h-4 w-4 text-purple-500 mt-1 shrink-0" />
+                              <span className="text-sm">{guideline}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </TabsContent>
+
+                    {/* Legal Rights Tab */}
+                    <TabsContent value="legalRights" className="mt-6 space-y-6">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                          <Gavel className="h-5 w-5 text-primary" />
+                          {t.resources.gbvInfo.content.legalRights.title}
+                        </h3>
+                        <p className="text-muted-foreground mb-4">
+                          {t.resources.gbvInfo.content.legalRights.description}
+                        </p>
+                      </div>
+
+                      {/* Constitutional Rights */}
+                      <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <Scale className="h-4 w-4 text-primary" />
+                          {t.resources.gbvInfo.content.legalRights.constitutionalRights.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.legalRights.constitutionalRights.rights.map((right: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <CheckCircle2 className="h-4 w-4 text-primary mt-1 shrink-0" />
+                              <span className="text-sm">{right}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Criminal Laws */}
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <Gavel className="h-4 w-4 text-red-500" />
+                          {t.resources.gbvInfo.content.legalRights.criminalLaws.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.legalRights.criminalLaws.laws.map((law: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <span className="text-red-500 mt-1 shrink-0">•</span>
+                              <span className="text-sm">{law}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Legal Actions */}
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-green-500" />
+                          {t.resources.gbvInfo.content.legalRights.legalActions.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.legalRights.legalActions.actions.map((action: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <CheckCircle2 className="h-4 w-4 text-green-500 mt-1 shrink-0" />
+                              <span className="text-sm">{action}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Evidence Collection */}
+                      <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-900">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <BookOpen className="h-4 w-4 text-blue-600" />
+                          {t.resources.gbvInfo.content.legalRights.evidenceCollection.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.legalRights.evidenceCollection.steps.map((step: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <span className="text-blue-600 font-semibold mt-1 shrink-0">{idx + 1}.</span>
+                              <span className="text-sm">{step}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Where to Report */}
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <Phone className="h-4 w-4 text-primary" />
+                          {t.resources.gbvInfo.content.legalRights.reporting.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.legalRights.reporting.options.map((option: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <Phone className="h-4 w-4 text-primary mt-1 shrink-0" />
+                              <span className="text-sm">{option}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </TabsContent>
+
+                    {/* Psychological Impact Tab */}
+                    <TabsContent value="psychologicalImpact" className="mt-6 space-y-6">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                          <Brain className="h-5 w-5 text-purple-500" />
+                          {t.resources.gbvInfo.content.psychologicalImpact.title}
+                        </h3>
+                        <p className="text-muted-foreground mb-4">
+                          {t.resources.gbvInfo.content.psychologicalImpact.description}
+                        </p>
+                      </div>
+
+                      {/* Common Effects */}
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <Brain className="h-4 w-4 text-purple-500" />
+                          {t.resources.gbvInfo.content.psychologicalImpact.commonEffects.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.psychologicalImpact.commonEffects.effects.map((effect: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <span className="text-purple-500 mt-1">•</span>
+                              <span className="text-sm">{effect}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Validating Feelings */}
+                      <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-900">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <HeartHandshake className="h-4 w-4 text-blue-600" />
+                          {t.resources.gbvInfo.content.psychologicalImpact.validatingFeelings.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.psychologicalImpact.validatingFeelings.messages.map((message: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <CheckCircle2 className="h-4 w-4 text-blue-600 mt-1 shrink-0" />
+                              <span className="text-sm font-medium">{message}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Coping Strategies */}
+                      <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border border-green-200 dark:border-green-900">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-green-600" />
+                          {t.resources.gbvInfo.content.psychologicalImpact.copingStrategies.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.psychologicalImpact.copingStrategies.strategies.map((strategy: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <CheckCircle2 className="h-4 w-4 text-green-600 mt-1 shrink-0" />
+                              <span className="text-sm">{strategy}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* When to Seek Help */}
+                      <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-900">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <AlertTriangle className="h-4 w-4 text-amber-600" />
+                          {t.resources.gbvInfo.content.psychologicalImpact.whenToSeekHelp.title}
+                        </h4>
+                        <ul className="space-y-2 mb-4">
+                          {t.resources.gbvInfo.content.psychologicalImpact.whenToSeekHelp.signs.map((sign: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <AlertTriangle className="h-4 w-4 text-amber-600 mt-1 shrink-0" />
+                              <span className="text-sm">{sign}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-4 pt-4 border-t border-amber-200 dark:border-amber-900">
+                          <p className="text-sm font-semibold mb-2">{language === "am" ? "የድጋፍ ግብዓቶች:" : "Support Resources:"}</p>
+                          <ul className="space-y-1">
+                            {t.resources.gbvInfo.content.psychologicalImpact.whenToSeekHelp.resources.map((resource: string, idx: number) => (
+                              <li key={idx} className="flex gap-2">
+                                <span className="text-amber-600">•</span>
+                                <span className="text-sm">{resource}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* Supporting Others */}
+                      <div className="bg-muted/50 p-4 rounded-lg">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <HeartHandshake className="h-4 w-4 text-pink-500" />
+                          {t.resources.gbvInfo.content.psychologicalImpact.supportingOthers.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {t.resources.gbvInfo.content.psychologicalImpact.supportingOthers.howToHelp.map((help: string, idx: number) => (
+                            <li key={idx} className="flex gap-2">
+                              <CheckCircle2 className="h-4 w-4 text-pink-500 mt-1 shrink-0" />
+                              <span className="text-sm">{help}</span>
                             </li>
                           ))}
                         </ul>

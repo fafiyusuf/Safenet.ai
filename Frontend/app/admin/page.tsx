@@ -1,17 +1,17 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { BarChart3, FileText, AlertTriangle, TrendingUp, ExternalLink, Shield, LogOut, User } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
-import type { AdminStats, Report, AbuseCategory, RiskLevel } from "@/lib/types"
 import { PLATFORMS } from "@/lib/constants"
+import type { AbuseCategory, AdminStats, Report, RiskLevel } from "@/lib/types"
+import { AlertTriangle, BarChart3, ExternalLink, FileText, LogOut, Shield, TrendingUp, User } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 const categoryLabels: Record<AbuseCategory, string> = {
   harassment: "Harassment",
@@ -30,11 +30,11 @@ const riskColors: Record<RiskLevel, string> = {
 }
 
 const CHART_COLORS = [
-  "hsl(var(--chart-1))",
-  "hsl(var(--chart-2))",
-  "hsl(var(--chart-3))",
-  "hsl(var(--chart-4))",
-  "hsl(var(--chart-5))",
+  "hsl(142 76% 36%)",  // Green
+  "hsl(142 70% 45%)",  // Lighter Green
+  "hsl(142 65% 55%)",  // Even Lighter Green
+  "hsl(142 60% 65%)",  // Light Green
+  "hsl(142 55% 75%)",  // Very Light Green
 ]
 
 export default function AdminDashboard() {
@@ -45,31 +45,45 @@ export default function AdminDashboard() {
   const [session, setSession] = useState<{ username: string } | null>(null)
   const [loggingOut, setLoggingOut] = useState(false)
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [statsRes, reportsRes, sessionRes] = await Promise.all([
-          fetch("/api/admin/stats"),
-          fetch("/api/admin/reports?limit=10"),
-          fetch("/api/auth/session"),
-        ])
+  // Fetch data function
+  const fetchData = async () => {
+    try {
+      const [statsRes, reportsRes, sessionRes] = await Promise.all([
+        fetch("/api/admin/stats"),
+        fetch("/api/admin/reports?limit=10"),
+        fetch("/api/auth/session"),
+      ])
 
-        if (statsRes.ok) setStats(await statsRes.json())
-        if (reportsRes.ok) {
-          const data = await reportsRes.json()
-          setReports(data.reports)
-        }
-        if (sessionRes.ok) {
-          const data = await sessionRes.json()
-          if (data.authenticated) {
-            setSession({ username: data.username })
-          }
-        }
-      } finally {
-        setLoading(false)
+      if (statsRes.ok) setStats(await statsRes.json())
+      if (reportsRes.ok) {
+        const data = await reportsRes.json()
+        setReports(data.reports)
       }
+      if (sessionRes.ok) {
+        const data = await sessionRes.json()
+        if (data.authenticated) {
+          setSession({ username: data.username })
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    } finally {
+      setLoading(false)
     }
+  }
+
+  // Initial fetch
+  useEffect(() => {
     fetchData()
+  }, [])
+
+  // Auto-refresh every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchData()
+    }, 30000) // 30 seconds
+
+    return () => clearInterval(interval)
   }, [])
 
   async function handleLogout() {
@@ -219,7 +233,7 @@ export default function AdminDashboard() {
                         borderRadius: "8px",
                       }}
                     />
-                    <Bar dataKey="count" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="count" fill="hsl(142 76% 36%)" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               ) : (
@@ -247,7 +261,7 @@ export default function AdminDashboard() {
                       outerRadius={100}
                       paddingAngle={2}
                       dataKey="value"
-                      label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                      label={({ name, percent }) => `${name} (${((percent || 0) * 100).toFixed(0)}%)`}
                       labelLine={false}
                     >
                       {categoryData.map((_, index) => (
@@ -291,7 +305,7 @@ export default function AdminDashboard() {
                       borderRadius: "8px",
                     }}
                   />
-                  <Bar dataKey="count" fill="hsl(var(--chart-2))" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="count" fill="hsl(142 76% 36%)" radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             ) : (

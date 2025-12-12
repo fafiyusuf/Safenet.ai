@@ -45,6 +45,19 @@ export const getClient = async (): Promise<PoolClient> => {
 
 export const initializeDatabase = async () => {
   try {
+    // Create admins table
+    await query(`
+      CREATE TABLE IF NOT EXISTS admins (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(100) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        email VARCHAR(255),
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        last_login TIMESTAMP,
+        is_active BOOLEAN DEFAULT true
+      );
+    `);
+
     // Create reports table
     await query(`
       CREATE TABLE IF NOT EXISTS reports (
@@ -86,6 +99,13 @@ export const initializeDatabase = async () => {
     await query('CREATE INDEX IF NOT EXISTS idx_reports_platform ON reports(platform_id);');
     await query('CREATE INDEX IF NOT EXISTS idx_reports_category ON reports(category);');
     await query('CREATE INDEX IF NOT EXISTS idx_reports_risk_level ON reports(risk_level);');
+
+    // Insert default admin if not exists (using bcrypt hash for 'admin_1234')
+    await query(`
+      INSERT INTO admins (username, password_hash, email)
+      VALUES ('admin', '$2b$10$HXIc7OraVw2hx6t9NDWIwO8YBQoZVOnQw.kk75eJ6fS2KlgwSVAGS', 'admin@safenet.ai')
+      ON CONFLICT (username) DO NOTHING;
+    `);
 
     console.log('✅ Database tables created successfully');
   } catch (error) {

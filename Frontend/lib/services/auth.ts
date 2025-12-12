@@ -1,20 +1,18 @@
-import { cookies } from "next/headers"
 import { SignJWT, jwtVerify } from "jose"
+import { cookies } from "next/headers"
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "safenet-dev-secret-change-in-production")
-
-// Admin credentials from environment variables
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin"
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "safenet2024"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
 export interface AdminSession {
   username: string
+  password: string // Store encrypted password for backend auth
   role: "admin"
   exp: number
 }
 
-export async function createSession(username: string): Promise<string> {
-  const token = await new SignJWT({ username, role: "admin" })
+export async function createSession(username: string, password: string): Promise<string> {
+  const token = await new SignJWT({ username, password, role: "admin" })
     .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime("8h")
     .setIssuedAt()
@@ -38,10 +36,20 @@ export async function verifySession(): Promise<AdminSession | null> {
 }
 
 export async function validateCredentials(username: string, password: string): Promise<boolean> {
-  // Constant-time comparison to prevent timing attacks
-  const usernameMatch = username === ADMIN_USERNAME
-  const passwordMatch = password === ADMIN_PASSWORD
-  return usernameMatch && passwordMatch
+  try {
+    // Validate against backend database
+    const credentials = Buffer.from(`${username}:${password}`).toString('base64')
+    const response = await fetch(`${API_URL}/api/admin/stats`, {
+      headers: {
+        'Authorization': `Basic ${credentials}`
+      }
+    })
+    
+    return response.ok
+  } catch (error) {
+    console.error('Credential validation error:', error)
+    return false
+  }
 }
 
 export async function setSessionCookie(token: string): Promise<void> {

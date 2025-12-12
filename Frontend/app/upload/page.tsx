@@ -2,20 +2,19 @@
 
 import type React from "react"
 
-import { useState, useCallback } from "react"
-import { useRouter } from "next/navigation"
-import { Upload, FileText, AlertTriangle, Loader2 } from "lucide-react"
+import { Header } from "@/components/header"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Header } from "@/components/header"
-import { ContentWarningModal } from "@/components/content-warning-modal"
-import { getTranslation } from "@/lib/i18n"
+import { Textarea } from "@/components/ui/textarea"
 import { useLanguage } from "@/hooks/use-language"
 import { PLATFORMS } from "@/lib/constants"
+import { getTranslation } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
+import { AlertTriangle, FileText, Loader2, Upload } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useCallback, useState } from "react"
 
 export default function UploadPage() {
   const router = useRouter()
@@ -26,7 +25,6 @@ export default function UploadPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [showWarning, setShowWarning] = useState(true)
 
   const t = getTranslation(language)
 
@@ -102,13 +100,6 @@ export default function UploadPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header language={language} onLanguageChange={setLanguage} />
-
-      <ContentWarningModal
-        open={showWarning}
-        onConfirm={() => setShowWarning(false)}
-        onCancel={() => router.push("/")}
-        language={language}
-      />
 
       <main className="flex-1 py-12">
         <div className="container mx-auto px-4 max-w-2xl">
