@@ -1,0 +1,21 @@
+services:
+  # Backend API Service
+  - type: web
+    name: safenet-backend
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: cd Backend-Express && npm install && npm run build
+    startCommand: cd Backend-Express && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+      - key: PORT
+        value: 8000
+    healthCheckPath: /health
