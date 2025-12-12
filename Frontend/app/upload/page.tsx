@@ -12,7 +12,7 @@ import { useLanguage } from "@/hooks/use-language"
 import { PLATFORMS } from "@/lib/constants"
 import { getTranslation } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
-import { AlertTriangle, FileText, Loader2, Upload } from "lucide-react"
+import { AlertTriangle, CheckCircle2, FileText, Loader2, MessageCircle, Scale, Upload } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useCallback, useState } from "react"
 
@@ -102,13 +102,84 @@ export default function UploadPage() {
       <Header language={language} onLanguageChange={setLanguage} />
 
       <main className="flex-1 py-12">
-        <div className="container mx-auto px-4 max-w-2xl">
+        <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-foreground">{t.upload.title}</h1>
             <p className="mt-2 text-muted-foreground">{t.upload.subtitle}</p>
           </div>
 
-          <Card>
+          {/* Emergency Hotlines Alert
+          <Alert className="mb-6 border-red-500/50 bg-red-50 dark:bg-red-950/20">
+            <Phone className="h-5 w-5 text-red-600" />
+            <div className="ml-2">
+              <div className="font-semibold text-red-900 dark:text-red-200">{t.upload.emergencyTitle}</div>
+              <AlertDescription className="text-red-800 dark:text-red-300 mt-1">
+                {t.upload.emergencyText}
+                <div className="flex gap-3 mt-2 font-bold text-lg">
+                  {t.upload.hotlines.map((number, i) => (
+                    <a
+                      key={i}
+                      href={`tel:${number}`}
+                      className="inline-flex items-center gap-1 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                    >
+                      <Phone className="h-4 w-4" />
+                      {number}
+                    </a>
+                  ))}
+                </div>
+              </AlertDescription>
+            </div>
+          </Alert> */}
+
+          {/* How It Works - Info Cards */}
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold text-center mb-4">{t.upload.howItWorks}</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Evidence Mode Info */}
+              <Card className="border-2 border-green-500/30 bg-green-500/5">
+                <CardHeader>
+                  <CardTitle className="text-base flex items-center gap-2">
+                    <Scale className="h-5 w-5 text-green-600" />
+                    {t.upload.evidenceMode.title}
+                  </CardTitle>
+                  <CardDescription>{t.upload.evidenceMode.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {t.upload.evidenceMode.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {/* Conversational Mode Info */}
+              <Card className="border-2 border-blue-500/30 bg-blue-500/5">
+                <CardHeader>
+                  <CardTitle className="text-base flex items-center gap-2">
+                    <MessageCircle className="h-5 w-5 text-blue-600" />
+                    {t.upload.conversationalMode.title}
+                  </CardTitle>
+                  <CardDescription>{t.upload.conversationalMode.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {t.upload.conversationalMode.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <CheckCircle2 className="h-4 w-4 text-blue-600 mt-0.5 shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          <Card className="max-w-2xl mx-auto">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Upload className="h-5 w-5" />

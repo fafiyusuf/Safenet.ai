@@ -44,6 +44,30 @@ export const translations = {
       submit: "Analyze Content",
       submitting: "Analyzing...",
       warning: "Content warning: The analysis may display disturbing content.",
+      emergencyTitle: "Need Immediate Help?",
+      emergencyText: "If you're in immediate danger, call these GBV hotlines in Ethiopia:",
+      hotlines: ["7711", "6388", "8044"],
+      evidenceMode: {
+        title: "📸 Upload Evidence (Screenshot)",
+        description: "For formal documentation and legal proceedings",
+        features: [
+          "AI analyzes screenshot content",
+          "Generate tamper-proof evidence PDF",
+          "Create legal complaint document",
+          "Formal analysis for authorities"
+        ]
+      },
+      conversationalMode: {
+        title: "💬 Get Advice (Text Only)",
+        description: "For supportive guidance and safety recommendations",
+        features: [
+          "Share content for assessment",
+          "Receive personalized safety advice",
+          "Get support recommendations",
+          "Confidential and judgment-free"
+        ]
+      },
+      howItWorks: "How it works",
     },
     // Results page
     results: {
@@ -55,6 +79,9 @@ export const translations = {
       rationale: "Analysis",
       flaggedPhrases: "Flagged Phrases",
       extractedText: "Extracted Content",
+      adviceTitle: "Safety Advice",
+      conversationalNote: "Based on the text you shared, here's our assessment and advice:",
+      evidenceNote: "This analysis is based on evidence you provided.",
       actions: {
         evidence: "Download Evidence PDF",
         complaint: "Generate Legal Complaint",
@@ -305,7 +332,7 @@ export const translations = {
                 "Women and Children Affairs Office of the Attorney General",
                 "Platform reporting mechanisms (Facebook, Instagram, Twitter, etc.)",
                 "Ethiopian Women Lawyers Association (EWLA) for legal aid",
-                "National GBV Hotline (8383) for immediate support",
+                "National GBV Hotlines (7711, 6388, 8044) for immediate support",
                 "Ministry of Women and Social Affairs",
               ],
             },
@@ -366,7 +393,7 @@ export const translations = {
               resources: [
                 "Contact a psychologist or psychiatrist",
                 "Reach out to AWSAD for counseling services",
-                "Call the National GBV Hotline (8383) for immediate support",
+                "Call the National GBV Hotlines (7711, 6388, 8044) for immediate support",
                 "Seek support from Yenege Tesfa for psychosocial assistance",
                 "Join support groups facilitated by NGOs",
               ],
@@ -443,6 +470,30 @@ export const translations = {
       submit: "ይዘት ተንትን",
       submitting: "እየተተነተነ ነው...",
       warning: "የይዘት ማስጠንቀቂያ: ትንተናው አስቸጋሪ ይዘት ሊያሳይ ይችላል።",
+      emergencyTitle: "ፈጣን እርዳታ ያስፈልግዎታል?",
+      emergencyText: "በቅጽበታዊ አደጋ ውስጥ ከሆኑ፣ እነዚህን የኢትዮጵያ GBV የእገዛ መስመሮች ይደውሉ፡",
+      hotlines: ["7711", "6388", "8044"],
+      evidenceMode: {
+        title: "📸 ማስረጃ ስቀል (ቅጽበታዊ ገጽ እይታ)",
+        description: "ለመደበኛ ሰነድ እና ህጋዊ ሂደቶች",
+        features: [
+          "AI የቅጽበታዊ ገጽ እይታ ይዘት ይተነትናል",
+          "የማይበላሽ የማስረጃ PDF ያመነጩ",
+          "የህግ ቅሬታ ሰነድ ይፍጠሩ",
+          "ለባለስልጣናት መደበኛ ትንታኔ"
+        ]
+      },
+      conversationalMode: {
+        title: "💬 ምክር ያግኙ (ጽሁፍ ብቻ)",
+        description: "ለድጋፍ መመሪያ እና የደህንነት ምክሮች",
+        features: [
+          "ይዘትን ለግምገማ ያጋሩ",
+          "ግላዊ የደህንነት ምክር ይቀበሉ",
+          "የድጋፍ ምክሮች ያግኙ",
+          "ሚስጥራዊ እና ያለ ፍርድ"
+        ]
+      },
+      howItWorks: "እንዴት ይሰራል",
     },
     // Results page
     results: {
@@ -454,6 +505,9 @@ export const translations = {
       rationale: "ትንተና",
       flaggedPhrases: "የተሰመሩ ሀረጎች",
       extractedText: "የተወጣ ይዘት",
+      adviceTitle: "የደህንነት ምክር",
+      conversationalNote: "ባጋራችሁት ጽሁፍ ላይ በመመርኮዝ፣ ይህ የእኛ ግምገማና ምክር ነው፡",
+      evidenceNote: "ይህ ትንታኔ የተመሰረተው በሰጡት ማስረጃ ላይ ነው።",
       actions: {
         evidence: "የማስረጃ PDF አውርድ",
         complaint: "የህግ ቅሬታ አመንጭ",

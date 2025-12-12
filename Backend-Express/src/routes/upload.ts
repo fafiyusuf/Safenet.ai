@@ -70,7 +70,8 @@ router.post('/', upload.single('file'), async (req: Request<{}, {}, UploadReques
 
     // Classify content using AI
     console.log('Classifying content...');
-    const classification = await classifyContent(extractedText, language);
+    const hasEvidence = !!req.file; // true if file uploaded, false if text only
+    const classification = await classifyContent(extractedText, language, hasEvidence);
 
     // Generate report ID
     const reportId = crypto.randomUUID();
@@ -83,8 +84,9 @@ router.post('/', upload.single('file'), async (req: Request<{}, {}, UploadReques
     const reportResult = await query(
       `INSERT INTO reports (
         id, created_at, expires_at, platform_id, language, original_text, extracted_text, category, 
-        severity, risk_level, confidence, rationale, highlighted_phrases, file_hash, anonymous, metadata
-      ) VALUES ($1, NOW(), $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+        severity, risk_level, confidence, rationale, highlighted_phrases, file_hash, anonymous, metadata,
+        advice, is_conversational
+      ) VALUES ($1, NOW(), $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
       RETURNING *`,
       [
         reportId,
@@ -101,7 +103,9 @@ router.post('/', upload.single('file'), async (req: Request<{}, {}, UploadReques
         JSON.stringify(classification.highlighted_phrases),
         fileHash,
         true, // anonymous
-        {}    // metadata
+        {},    // metadata
+        classification.advice || null, // advice (for conversational mode)
+        classification.is_conversational || false // is_conversational
       ]
     );
 
@@ -141,7 +145,9 @@ router.post('/', upload.single('file'), async (req: Request<{}, {}, UploadReques
         risk_level: report.risk_level,
         confidence: report.confidence,
         rationale: report.rationale,
-        highlighted_phrases: classification.highlighted_phrases
+        highlighted_phrases: classification.highlighted_phrases,
+        advice: classification.advice, // Include advice for text-only submissions
+        is_conversational: classification.is_conversational
       },
       extracted_text: report.extracted_text,
       file_hash: report.file_hash,

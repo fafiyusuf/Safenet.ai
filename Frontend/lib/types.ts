@@ -29,6 +29,8 @@ export interface Report {
   file_hash?: string
   file_url?: string
   expires_at: string
+  advice?: string // NEW: Advice for conversational mode
+  is_conversational?: boolean // NEW: Indicates if this was text-only analysis
 }
 
 export interface UploadedFile {
@@ -66,6 +68,8 @@ export interface ClassificationResult {
   confidence: number
   rationale: string
   highlighted_phrases: string[]
+  advice?: string // NEW: Advice for text-only analysis
+  is_conversational?: boolean // NEW: Indicates conversational mode
 }
 
 export interface UploadRequest {

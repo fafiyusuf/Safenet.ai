@@ -76,7 +76,9 @@ export const initializeDatabase = async () => {
         highlighted_phrases JSONB DEFAULT '[]'::jsonb,
         file_hash VARCHAR(64),
         anonymous BOOLEAN DEFAULT true,
-        metadata JSONB DEFAULT '{}'::jsonb
+        metadata JSONB DEFAULT '{}'::jsonb,
+        advice TEXT,
+        is_conversational BOOLEAN DEFAULT false
       );
     `);
 
@@ -106,6 +108,11 @@ export const initializeDatabase = async () => {
       VALUES ('admin', '$2b$10$HXIc7OraVw2hx6t9NDWIwO8YBQoZVOnQw.kk75eJ6fS2KlgwSVAGS', 'admin@safenet.ai')
       ON CONFLICT (username) DO NOTHING;
     `);
+
+    // Migration: Add conversational mode columns if they don't exist
+    await query('ALTER TABLE reports ADD COLUMN IF NOT EXISTS advice TEXT;');
+    await query('ALTER TABLE reports ADD COLUMN IF NOT EXISTS is_conversational BOOLEAN DEFAULT false;');
+    await query('CREATE INDEX IF NOT EXISTS idx_reports_conversational ON reports(is_conversational);');
 
     console.log('✅ Database tables created successfully');
   } catch (error) {

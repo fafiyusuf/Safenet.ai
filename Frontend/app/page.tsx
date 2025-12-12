@@ -144,17 +144,31 @@ export default function LandingPage() {
                         </h3>
                         <p className="text-muted-foreground">
                           {language === "am" 
-                            ? "ብሔራዊ የጾታ ጥቃት ስልክ መስመር 24/7 ሚስጥራዊ ድጋፍ ይሰጣል"
-                            : "National GBV Hotline provides 24/7 confidential support"}
+                            ? "ብሔራዊ የጾታ ጥቃት ስልክ መስመሮች 24/7 ሚስጥራዊ ድጋፍ ይሰጣሉ"
+                            : "National GBV Hotlines provide 24/7 confidential support"}
                         </p>
                       </div>
                     </div>
-                    <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg shrink-0">
-                      <a href="tel:8383" className="gap-2">
-                        <AlertCircle className="h-5 w-5" />
-                        {language === "am" ? "8383 ደውል" : "Call 8383"}
-                      </a>
-                    </Button>
+                    <div className="flex flex-wrap gap-2 shrink-0">
+                      <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg">
+                        <a href="tel:7711" className="gap-2">
+                          <AlertCircle className="h-5 w-5" />
+                          {language === "am" ? "7711 ደውል" : "Call 7711"}
+                        </a>
+                      </Button>
+                      <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg">
+                        <a href="tel:6388" className="gap-2">
+                          <AlertCircle className="h-5 w-5" />
+                          {language === "am" ? "6388 ደውል" : "Call 6388"}
+                        </a>
+                      </Button>
+                      <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg">
+                        <a href="tel:8044" className="gap-2">
+                          <AlertCircle className="h-5 w-5" />
+                          {language === "am" ? "8044 ደውል" : "Call 8044"}
+                        </a>
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

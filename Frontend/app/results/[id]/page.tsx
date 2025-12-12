@@ -1,19 +1,19 @@
 "use client"
 
-import { useState, useEffect, use } from "react"
-import Link from "next/link"
-import { useSearchParams } from "next/navigation"
-import { FileText, Scale, Users, Plus, ArrowLeft } from "lucide-react"
+import { BlurredContent } from "@/components/blurred-content"
+import { Header } from "@/components/header"
+import { RiskBanner } from "@/components/risk-banner"
+import { SeverityMeter } from "@/components/severity-meter"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Header } from "@/components/header"
-import { SeverityMeter } from "@/components/severity-meter"
-import { RiskBanner } from "@/components/risk-banner"
-import { BlurredContent } from "@/components/blurred-content"
 import { getTranslation, type Language } from "@/lib/i18n"
-import type { Report, AbuseCategory } from "@/lib/types"
+import type { AbuseCategory, Report } from "@/lib/types"
+import { ArrowLeft, FileText, Plus, Scale, Users } from "lucide-react"
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { use, useEffect, useState } from "react"
 
 const categoryLabels: Record<AbuseCategory, { en: string; am: string }> = {
   harassment: { en: "Harassment", am: "ትንኮሳ" },
@@ -114,6 +114,32 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
           {/* Risk Banner */}
           <RiskBanner level={report.risk_level} language={language} className="mb-6" />
 
+          {/* Conversational Mode Notice */}
+          {report.is_conversational && (
+            <Card className="mb-6 border-primary/30 bg-primary/5">
+              <CardContent className="pt-6">
+                <p className="text-sm text-muted-foreground">
+                  {t.results.conversationalNote}
+                </p>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Safety Advice (Conversational Mode Only) */}
+          {report.advice && report.is_conversational && (
+            <Card className="mb-6 border-blue-500/30 bg-blue-500/5">
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Users className="h-5 w-5 text-blue-600" />
+                  {t.results.adviceTitle}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground leading-relaxed">{report.advice}</p>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Classification Results */}
           <Card className="mb-6">
             <CardHeader>
@@ -161,7 +187,12 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
           {/* Extracted Content */}
           <Card className="mb-6">
             <CardHeader>
-              <CardTitle className="text-lg">{t.results.extractedText}</CardTitle>
+              <CardTitle className="text-lg">
+                {report.is_conversational 
+                  ? (language === "am" ? "የተጋራ ይዘት" : "Content You Shared")
+                  : t.results.extractedText
+                }
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <BlurredContent warning={language === "am" ? "ይህ ይዘት አስቸጋሪ ሊሆን ይችላል" : "This content may be disturbing"}>
@@ -175,32 +206,45 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
           {/* Actions */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Actions</CardTitle>
+              <CardTitle className="text-lg">
+                {report.is_conversational ? (language === "am" ? "ቀጣይ እርምጃዎች" : "Next Steps") : "Actions"}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid sm:grid-cols-2 gap-3">
-                <Button
-                  onClick={handleDownloadEvidence}
-                  variant="outline"
-                  className="justify-start gap-2 bg-transparent"
-                >
-                  <FileText className="h-4 w-4" />
-                  {t.results.actions.evidence}
-                </Button>
-                <Button
-                  onClick={handleDownloadComplaint}
-                  variant="outline"
-                  className="justify-start gap-2 bg-transparent"
-                >
-                  <Scale className="h-4 w-4" />
-                  {t.results.actions.complaint}
-                </Button>
+                {/* Show Evidence PDF only if file was uploaded (not conversational) */}
+                {!report.is_conversational && report.file_hash && (
+                  <Button
+                    onClick={handleDownloadEvidence}
+                    variant="outline"
+                    className="justify-start gap-2 bg-transparent"
+                  >
+                    <FileText className="h-4 w-4" />
+                    {t.results.actions.evidence}
+                  </Button>
+                )}
+                
+                {/* Show Complaint PDF only if there's evidence */}
+                {!report.is_conversational && (
+                  <Button
+                    onClick={handleDownloadComplaint}
+                    variant="outline"
+                    className="justify-start gap-2 bg-transparent"
+                  >
+                    <Scale className="h-4 w-4" />
+                    {t.results.actions.complaint}
+                  </Button>
+                )}
+                
+                {/* Always show Resources */}
                 <Button asChild variant="outline" className="justify-start gap-2 bg-transparent">
                   <Link href="/resources">
                     <Users className="h-4 w-4" />
                     {t.results.actions.resources}
                   </Link>
                 </Button>
+                
+                {/* Always show New Report */}
                 <Button asChild variant="outline" className="justify-start gap-2 bg-transparent">
                   <Link href="/upload">
                     <Plus className="h-4 w-4" />

@@ -236,7 +236,7 @@ CREATE INDEX idx_files_report_id ON files(report_id);
 Built-in directory includes:
 - Ethiopian Women Lawyers Association (EWLA)
 - Association for Women's Sanctuary and Development
-- National GBV Hotline (8383)
+- National GBV Hotlines (7711, 6388, 8044)
 - Network of Ethiopian Women's Association
 - Federal Police Cyber Crime Unit
 - And more...
