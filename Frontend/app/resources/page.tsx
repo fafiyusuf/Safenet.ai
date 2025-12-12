@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "@/hooks/use-language"
 import { REGIONS } from "@/lib/constants"
 import { getTranslation } from "@/lib/i18n"
-import { AlertTriangle, Building2, Globe, HeartHandshake, Home, Info, Mail, MapPin, Phone, Scale, Shield, Lock, Gavel, Brain, BookOpen, CheckCircle2 } from "lucide-react"
+import { AlertTriangle, BookOpen, Brain, Building2, CheckCircle2, Gavel, Globe, HeartHandshake, Home, Info, Lock, Mail, MapPin, Phone, Scale, Shield } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const typeIcons = {

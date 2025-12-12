@@ -1,12 +1,12 @@
 "use client"
 
-import Link from "next/link"
-import { Shield, FileText, Users, ArrowRight, Lock, CheckCircle2, AlertCircle } from "lucide-react"
+import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Header } from "@/components/header"
-import { getTranslation } from "@/lib/i18n"
 import { useLanguage } from "@/hooks/use-language"
+import { getTranslation } from "@/lib/i18n"
+import { AlertCircle, ArrowRight, CheckCircle2, FileText, Lock, Shield, Users } from "lucide-react"
+import Link from "next/link"
 
 export default function LandingPage() {
   const { language, setLanguage } = useLanguage()
