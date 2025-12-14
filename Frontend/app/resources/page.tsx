@@ -109,19 +109,33 @@ export default function ResourcesPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-foreground">
-                          {language === "am" ? "ብሔራዊ የጾታ ጥቃት ስልክ መስመር" : "National GBV Hotline"}
+                          {language === "am" ? "ብሔራዊ የጾታ ጥቃት ስልክ መስመሮች" : "National GBV Hotlines"}
                         </h3>
                         <p className="text-sm text-muted-foreground">
-                          {language === "am" ? "24/7 ሚስጥራዊ ድጋፍ" : "24/7 confidential support"}
+                          {language === "am" ? "24/7 ሚስጥራዊ ድጋፍ ይሰጣሉ" : "provide 24/7 confidential support"}
                         </p>
                       </div>
                     </div>
-                    <Button asChild size="lg" className="gap-2">
-                      <a href="tel:8383">
-                        <Phone className="h-4 w-4" />
-                        8383
-                      </a>
-                    </Button>
+                    <div className="flex flex-wrap gap-2">
+                      <Button asChild size="lg" className="gap-2">
+                        <a href="tel:7711">
+                          <Phone className="h-4 w-4" />
+                          {language === "am" ? "7711 ደውል" : "Call 7711"}
+                        </a>
+                      </Button>
+                      <Button asChild size="lg" className="gap-2">
+                        <a href="tel:6388">
+                          <Phone className="h-4 w-4" />
+                          {language === "am" ? "6388 ደውል" : "Call 6388"}
+                        </a>
+                      </Button>
+                      <Button asChild size="lg" className="gap-2">
+                        <a href="tel:8044">
+                          <Phone className="h-4 w-4" />
+                          {language === "am" ? "8044 ደውል" : "Call 8044"}
+                        </a>
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
