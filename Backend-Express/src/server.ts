@@ -11,6 +11,7 @@ dotenv.config();
 
 // Import routes
 import adminRoutes from './routes/admin.js';
+import chatRoutes from './routes/chat.js';
 import complaintRoutes from './routes/complaint.js';
 import evidenceRoutes from './routes/evidence.js';
 import platformRoutes from './routes/platforms.js';
@@ -43,6 +44,7 @@ app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
+app.use('/api/chat', chatRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/evidence', evidenceRoutes);

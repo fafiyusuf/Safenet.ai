@@ -1,6 +1,6 @@
 "use client"
 
-import { FileText, Lock, Menu, Shield } from "lucide-react"
+import { FileText, Lock, Menu, MessageSquare, Shield } from "lucide-react"
 import Link from "next/link"
 
 import type { Language } from "@/lib/i18n"
@@ -23,7 +23,7 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
   const BrandIcon = disguised ? FileText : Shield
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <BrandIcon className="h-6 w-6 text-primary" />
@@ -37,6 +37,10 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
           </Link>
           <Link href="/upload" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             {t.nav.upload}
+          </Link>
+          <Link href="/chat" className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+            <MessageSquare className="h-3 w-3" />
+            {language === 'en' ? 'Support' : 'ድጋፍ'}
           </Link>
           <Link href="/resources" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             {t.nav.resources}
@@ -72,6 +76,13 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
                   className="text-lg font-medium text-foreground hover:text-primary transition-colors"
                 >
                   {t.nav.upload}
+                </Link>
+                <Link
+                  href="/chat"
+                  className="text-lg font-medium text-foreground hover:text-primary transition-colors flex items-center gap-2"
+                >
+                  <MessageSquare className="h-4 w-4" />
+                  {language === 'en' ? 'Support' : 'ድጋፍ'}
                 </Link>
                 <Link
                   href="/resources"

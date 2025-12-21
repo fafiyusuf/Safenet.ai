@@ -94,6 +94,19 @@ export const translations = {
         low: "LOW RISK",
       },
     },
+    // Chat/Support page
+    chat: {
+      title: "Support Counselor",
+      subtitle: "Always here to listen",
+      placeholder: "Share what's on your mind... (you're safe here)",
+      send: "Send",
+      thinking: "Thinking...",
+      privacy: "💙 Your conversations are private and confidential",
+      inDanger: "In Immediate Danger?",
+      emergency: "Emergency Support",
+      typing: "Counselor is typing...",
+      initialMessage: "Hi, I'm here to listen and support you. You're not alone. How are you feeling today? 💙",
+    },
     // Resources page
     resources: {
       title: "Support Resources",
@@ -519,6 +532,19 @@ export const translations = {
         medium: "መካከለኛ አደጋ - ድጋፍ መፈለግ ያስቡ",
         low: "ዝቅተኛ አደጋ",
       },
+    },
+    // Chat/Support page
+    chat: {
+      title: "ድጋፍ ምክር",
+      subtitle: "ሁልጊዜ ለመስማት እዚህ ነኝ",
+      placeholder: "ምን እንደሚያስብ ሙግት... (እዚህ ደህንነት ነው)",
+      send: "ላክ",
+      thinking: "ሲያስብ...",
+      privacy: "💙 ሕቶ ስውር እና በምስጢር ይቀመጣል",
+      inDanger: "በወቅታዊ አደጋ?",
+      emergency: "አስቸኳይ ድጋፍ",
+      typing: "ምክር ሐኪም ይጠይቃል...",
+      initialMessage: "ሰላም፣ እዚህ ላቆም እና ድጋፊ ነኝ። ብቻ አይደለህም። ዛሬ እንዴት ይሰማህ? 💙",
     },
     // Resources page
     resources: {
