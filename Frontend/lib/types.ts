@@ -11,7 +11,7 @@ export type AbuseCategory =
 
 export type RiskLevel = "low" | "medium" | "high"
 
-export type Language = "en" | "am"
+export type Language = "en" | "am" | "om" | "ti" | "so"
 
 export interface Report {
   id: string
@@ -46,14 +46,18 @@ export interface UploadedFile {
 export interface Resource {
   id: string
   name: string
-  name_am: string
+  name_am?: string
   type: "ngo" | "legal_aid" | "helpline" | "shelter"
-  phone?: string
-  email?: string
-  website?: string
+  phone?: string | null
+  email?: string | null
+  website?: string | null
   region: string
   description: string
-  description_am: string
+  description_am?: string
+  services?: string[]
+  availability?: string
+  locations?: string
+  address?: string
 }
 
 export interface Platform {

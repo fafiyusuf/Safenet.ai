@@ -1,4 +1,4 @@
-import { createSession, setSessionCookie, validateCredentials } from "@/lib/services/auth"
+import { createSession, loginToBackend, setSessionCookie } from "@/lib/services/auth"
 import { type NextRequest, NextResponse } from "next/server"
 
 export async function POST(request: NextRequest) {
@@ -9,16 +9,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Username and password required" }, { status: 400 })
     }
 
-    const isValid = await validateCredentials(username, password)
+    const loginResult = await loginToBackend(username, password)
 
-    if (!isValid) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 })
+    if (!loginResult.success || !loginResult.token) {
+      return NextResponse.json({ error: loginResult.error || "Invalid credentials" }, { status: 401 })
     }
 
-    const token = await createSession(username, password)
-    await setSessionCookie(token)
+    const sessionToken = await createSession(loginResult.username || username, loginResult.token)
+    await setSessionCookie(sessionToken)
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true, username: loginResult.username || username })
   } catch (error) {
     console.error("Login error:", error)
     return NextResponse.json({ error: "Authentication failed" }, { status: 500 })

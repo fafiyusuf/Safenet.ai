@@ -6,13 +6,47 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
 export interface AdminSession {
   username: string
-  password: string // Store encrypted password for backend auth
+  token: string // Secure backend-issued JWT token (no plaintext password)
   role: "admin"
   exp: number
 }
 
-export async function createSession(username: string, password: string): Promise<string> {
-  const token = await new SignJWT({ username, password, role: "admin" })
+export interface LoginResult {
+  success: boolean
+  token?: string
+  username?: string
+  error?: string
+}
+
+export async function loginToBackend(username: string, password: string): Promise<LoginResult> {
+  try {
+    const response = await fetch(`${API_URL}/api/admin/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    })
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}))
+      return { success: false, error: err.error || "Invalid credentials" }
+    }
+
+    const data = await response.json()
+    return {
+      success: true,
+      token: data.token,
+      username: data.admin?.username || username,
+    }
+  } catch (error) {
+    console.error("Backend login error:", error)
+    return { success: false, error: "Unable to reach authentication server" }
+  }
+}
+
+export async function createSession(username: string, backendToken: string): Promise<string> {
+  const token = await new SignJWT({ username, token: backendToken, role: "admin" })
     .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime("8h")
     .setIssuedAt()
@@ -32,23 +66,6 @@ export async function verifySession(): Promise<AdminSession | null> {
     return payload as unknown as AdminSession
   } catch {
     return null
-  }
-}
-
-export async function validateCredentials(username: string, password: string): Promise<boolean> {
-  try {
-    // Validate against backend database
-    const credentials = Buffer.from(`${username}:${password}`).toString('base64')
-    const response = await fetch(`${API_URL}/api/admin/stats`, {
-      headers: {
-        'Authorization': `Basic ${credentials}`
-      }
-    })
-    
-    return response.ok
-  } catch (error) {
-    console.error('Credential validation error:', error)
-    return false
   }
 }
 

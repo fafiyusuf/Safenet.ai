@@ -4,9 +4,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
+  const { searchParams } = new URL(request.url)
+  const isDownload = searchParams.get("download") === "true"
+  const disposition = isDownload ? "attachment" : "inline"
 
   try {
-    const response = await fetch(`${API_URL}/api/evidence/${id}/pdf`)
+    const response = await fetch(`${API_URL}/api/evidence/${id}/pdf?download=${isDownload}`)
 
     if (!response.ok) {
       return NextResponse.json({ error: "Report not found" }, { status: 404 })
@@ -17,7 +20,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     return new NextResponse(pdfBuffer, {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="evidence-${id}.pdf"`,
+        "Content-Disposition": `${disposition}; filename="evidence-${id}.pdf"`,
       },
     })
   } catch (error) {

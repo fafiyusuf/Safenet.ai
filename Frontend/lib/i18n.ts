@@ -1,4 +1,4 @@
-export type Language = "en" | "am"
+export type Language = "en" | "am" | "om" | "ti" | "so"
 
 export const translations = {
   en: {
@@ -143,7 +143,7 @@ export const translations = {
             description: "Online Gender-Based Violence (GBV) refers to harmful acts committed through digital platforms that target individuals based on their gender. It can take many forms and has serious psychological, emotional, and sometimes physical consequences.",
             keyPoints: [
               "Online GBV is a serious crime that violates human rights",
-              "It disproportionately affects women, girls, and LGBTQ+ individuals",
+              "It disproportionately affects women, girls, and other vulnerable groups",
               "It can happen on any digital platform including social media, messaging apps, and email",
               "The impact can be just as harmful as offline violence",
               "You have the right to safety both online and offline",
@@ -582,7 +582,7 @@ export const translations = {
             description: "የመስመር ላይ ጾታን መሰረት ያደረገ ጥቃት በዲጂታል መድረኮች በኩል የሚፈጸሙ ጎጂ ድርጊቶችን ያመለክታል። በብዙ መልኮች ሊመጣ ይችላል እና ከባድ የስነ-ልቦና፣ ስሜታዊ እና አንዳንድ ጊዜ አካላዊ ውጤቶች አሉት።",
             keyPoints: [
               "የመስመር ላይ GBV የሰብአዊ መብትን የሚጥስ ከባድ ወንጀል ነው",
-              "ሴቶችን፣ ልጃገረዶችን እና LGBTQ+ ግለሰቦችን በተለይ ይነካል",
+              "ሴቶችን፣ ልጃገረዶችን እና ሌሎች ተጋላጭ ቡድኖችን በተለይ ይነካል",
               "ማህበራዊ ሚ디ያ፣ የመልእክት መላላኪያ መተግበሪያዎች እና ኢሜይልን ጨምሮ በማንኛውም ዲጂታል መድረክ ሊሆን ይችላል",
               "ተጽእኖው ከመስመር ውጭ ጥቃት እንደ ጎጂ ሊሆን ይችላል",
               "በመስመር ላይ እና ከመስመር ውጭ ደህንነት የማግኘት መብት አለዎት",
@@ -879,8 +879,623 @@ export const translations = {
       hideContent: "ይዘት ደብቅ",
     },
   },
+  om: {
+    nav: {
+      home: "Fuula Duraa",
+      upload: "Miidhaa Gabaasi",
+      resources: "Deeggarsa",
+      about: "Waa'ee Keenya",
+    },
+    landing: {
+      title: "Qofa keessan miti",
+      subtitle: "SafeNet.ai miidhaa toora interneetaa irratti raawwatamu galmeessuu, xiinxaluu fi tarkaanfii seeraa fudhachuuf isin gargaara",
+      cta: "Miidhaa Gabaasi",
+      safeExit: "Bahiinsa Ariifachiisaa",
+      features: {
+        analyze: {
+          title: "Xiinxala AI",
+          description: "AI'n ammayyaa gosa miidhaa fi sadarkaa balaa addaan baasa",
+        },
+        evidence: {
+          title: "Ragaa Funaanuu",
+          description: "Adeemsa seeraatiif galmee ragaa hin jijjiiramne qopheessaa",
+        },
+        support: {
+          title: "Deeggarsa Argadhaa",
+          description: "Dhaabbilee NGO, gargaarsa seeraa fi toora bilbilaa Itoophiyaa waliin walqunnamaa",
+        },
+      },
+      privacy: "Nageenyi keessan eegamaadha. Daataan hundi akka iccitii ta'etti eegama, guyyoota 30 booda ni haqama.",
+    },
+    upload: {
+      title: "Miidhaa Dijitaalaa Gabaasi",
+      subtitle: "Suuraa (screenshot) fe'aa ykn qabiyyee ergaa miidhaa asitti maxxansaa",
+      dropzone: "Suuraa asitti buusaa ykn fe'uuf cuqqaalaa",
+      dropzoneHint: "JPG, PNG, WebP ni deeggara (hanga 10MB)",
+      orText: "YKAA",
+      textPlaceholder: "Ergaa ykn qabiyyee miidhaa asitti maxxansaa...",
+      platform: "Kun eessatti raawwatame?",
+      platformPlaceholder: "Waltajjii filadhaa",
+      submit: "Qabiyyee Qoradhu",
+      submitting: "Qorachaa jira...",
+      warning: "Akeekkachiisa: Xiinxalli kun qabiyyee nama dhiphisu qabaachuu danda'a.",
+      emergencyTitle: "Gargaarsa Ariifachiisaa Barbaadduu?",
+      emergencyText: "Balaa irra yoo jiraattan bilbiloota gargaarsa GBV Itoophiyaa bilbilaa:",
+      hotlines: ["7711", "6388", "8044"],
+      evidenceMode: {
+        title: "📸 Ragaa Fe'aa (Suuraa)",
+        description: "Galmee seeraa fi adeemsa ragaa qabatamaa qopheessuuf",
+        features: [
+          "AI'n qabiyyee suuraa ni qorata",
+          "Ragaa PDF hin jijjiiramne uuma",
+          "Iyyannoo seeraa qopheessa",
+          "Qaamolee seeraatiif dhiyaata"
+        ]
+      },
+      conversationalMode: {
+        title: "💬 Gorsa Argadhaa (Barreeffama)",
+        description: "Gorsa nageenyaa fi qajeelfama deeggarsaa argachuuf",
+        features: [
+          "Qabiyyee xiinxaluuf qoodaa",
+          "Gorsa nageenyaa dhuunfaa argadhaa",
+          "Yaada deeggarsaa fudhadhaa",
+          "Iccitiin kan eegamee fi murtii malee"
+        ]
+      },
+      howItWorks: "Akkamitti akka hojjetu",
+    },
+    results: {
+      title: "Bu'aa Xiinxalaa",
+      category: "Gosa Miidhaa",
+      severity: "Qabxii Hamaa",
+      riskLevel: "Sadarkaa Balaa",
+      confidence: "Amanamummaa",
+      rationale: "Xiinxala",
+      flaggedPhrases: "Jechoota Balaa Qaban",
+      extractedText: "Qabiyyee Baafame",
+      adviceTitle: "Gorsa Nageenyaa",
+      conversationalNote: "Barreeffama qooddan irratti hundaa'uun, xiinxalli fi gorsi keenya kanadha:",
+      evidenceNote: "Xiinxalli kun ragaa dhiyeessitan irratti hundaa'eeti.",
+      actions: {
+        evidence: "Ragaa PDF Buufadhu",
+        complaint: "Iyyannoo Seeraa Uumi",
+        resources: "Deeggarsa Barbaadi",
+        newReport: "Gabaasa Biraa Dhiyeessi",
+      },
+      risk: {
+        high: "SODDAA OLAANAA - Deeggarsa ariifachiisaan gorfama",
+        medium: "SODDAA GIDDU-GALEESSA - Deeggarsa barbaaduu yaadaa",
+        low: "SODDAA GADI-AANAA",
+      },
+    },
+    chat: {
+      title: "Gorsituu Deeggarsaa",
+      subtitle: "Dhaggeeffachuuf yeroo hunda qophiidha",
+      placeholder: "Waan yaaddoo isinitti ta'e asitti barreessaa... (asitti eegamtuudha)",
+      send: "Ergi",
+      thinking: "Yaadaa jira...",
+      privacy: "💙 Haasa'aan keessan dhuunfaa fi iccitiidha",
+      inDanger: "Balaa Ariifachiisaa Keessa Jirtuu?",
+      emergency: "Deeggarsa Ariifachiisaa",
+      typing: "Gorsituun barreessaa jira...",
+      initialMessage: "Akkam jirtu, isin gargaaruuf as jira. Qofa keessanii miti. Har'a akkam jirtu? 💙",
+    },
+    resources: {
+      title: "Qabeenyaalee Deeggarsaa",
+      subtitle: "Dhaabbilee isin gargaaruu danda'an",
+      filterRegion: "Naannoodhaan calali",
+      allRegions: "Naannolee hunda",
+      mainTabs: {
+        resources: "Dhaabbilee Deeggarsaa",
+        gbvInfo: "Oduu GBV",
+      },
+      types: {
+        ngo: "NGO",
+        legal_aid: "Gargaarsa Seeraa",
+        helpline: "Toora Bilbilaa",
+        shelter: "Bakka Jireenyaa",
+      },
+      gbvInfo: {
+        title: "Miidhaa Koorniyaa Toora Interneetaa Hubachuu",
+        subtitle: "Gosa miidhaalee dijitaalaa fi akkaataa of irraa ittisan baraa",
+        tabs: {
+          overview: "Waliigala",
+          cyberstalking: "Hordoffii Saayibarii",
+          harassment: "Miidhaa fi Qoccolloo",
+          impersonation: "Eenyummaa Falsuu",
+          doxing: "Odeeffannoo Dhuunfaa Facaasuu",
+          imageAbuse: "Miidhaa Suuraa",
+          prevention: "Ittisa & Nageenya",
+          legalRights: "Mirga Seeraa",
+          psychologicalImpact: "Dhiibbaa Xiinsammuu",
+        },
+        content: {
+          overview: {
+            title: "Miidhaan Koorniyaa Dijitaalaa Maali?",
+            description: "Miidhaan koorniyaa toora interneetaa irratti raawwatamu miidhaa koorniyaa irratti hundaa'ee meeshaalee dijitaalaatiin namoota irratti raawwatamudha.",
+            keyPoints: [
+              "Yakka cimaa mirga namoomaa sarbudha",
+              "Dubartoota fi shamarran irratti caalaatti qaqqaba",
+              "Miidiyaa hawaasaa fi ergaawwan hunda irratti mul'achuu danda'a",
+              "Dhiibbaan isaa akkuma miidhaa qaamaa hamaadha",
+              "Mirgi nageenya toora interneetaa keessanii kabajamuu qaba",
+            ],
+          },
+          cyberstalking: {
+            title: "Hordoffii Saayibarii (Cyberstalking)",
+            description: "Deddeebisanii hordofuu fi sodaa itti uumuudha.",
+            signs: ["Ergaawwan baay'ee ergamuu", "Sochii toora interneetaa to'achuu", "Bakka jirtan beekuu agarsiisuu"],
+            actions: ["Ragaa qabadhaa", "Gara cufaa (block) godhaa", "Toora bilbilaa 7711 ykn 991 bilbilaa"]
+          },
+          harassment: {
+            title: "Miidhaa fi Qoccolloo Toora Interneetaa",
+            description: "Jecha jibbiinsaa, arrabsoo fi sodaachisuudha.",
+            signs: ["Ergaa sodaachisaa fudhachuu", "Miidhaa walxaxaa qaqqabuu"],
+            actions: ["Deebii hin kenninaa", "Ragaa galmeessaa", "Gargaarsa seeraa barbaadaa"]
+          },
+          impersonation: {
+            title: "Eenyummaa Falsuu",
+            description: "Maqaa fi suuraa keessan fayyadamuun herrega sobaa banuu.",
+            signs: ["Herrega maqaa keessaniin baname arguu", "Oduu sobaa faca'u"],
+            actions: ["Waltajjiitti gabaasaa", "Jecha icciitii jijjiiraa"]
+          },
+          doxing: {
+            title: "Odeeffannoo Dhuunfaa Facaasuu (Doxing)",
+            description: "Osoo hayyama hin qabaatin teessoo, bilbila fi ragaa dhuunfaa baasuu.",
+            signs: ["Odeeffannoon iccitii toorarratti ba'uu"],
+            actions: ["Haqsiisuuf iyyadhaa", "Poolisiitti gabaasaa"]
+          },
+          imageAbuse: {
+            title: "Miidhaa Suuraa fi Viidiyoo",
+            description: "Suuraa qaama saalaa fi dhuunfaa osoo hin heyyamin facaasuu ykn sodaachisuu.",
+            signs: ["Suuraan faca'a jedhamee sodaachifamuu"],
+            actions: ["Kaffaltii hin kaffalinaa", "Ragaa qabadhaa", "7711 ykn 991 bilbilaa"]
+          },
+          prevention: {
+            title: "Ittisa & Nageenya Dijitaalaa",
+            description: "Tarkaanfii of eeggannoo nageenya dijitaalaa keessan eeguuf gargaaran.",
+            privacySettings: {
+              title: "Nageenya Herregaa",
+              tips: [
+                "Iccitii cimaa fayyadamaa",
+                "Mirkaneessa sadarkaa lamaa (2FA) banadhaa",
+                "Suuraa dhuunfaa nama hin amanamneef hin erginaa"
+              ]
+            },
+            supportingOthers: {
+              title: "Nama Miidhame Deeggaruu",
+              howToHelp: [
+                "Dhaggeeffadhaa, hin xiyyeeffatinaa",
+                "Isaan hin komatinaa",
+                "Toora gargaarsaa 7711 fi EWLA akka argatan gargaaraa"
+              ]
+            }
+          }
+        }
+      }
+    },
+    common: {
+      loading: "Fe'aa jira...",
+      error: "Rakkoon uumameera",
+      retry: "Irra deebi'ii yaali",
+      back: "Duubatti",
+      download: "Buufadhu",
+      showContent: "Qabiyyee Agarsiisi",
+      hideContent: "Qabiyyee Dhoksi",
+    },
+  },
+  ti: {
+    nav: {
+      home: "መበገሲ",
+      upload: "ጥርዓን ኣቕርብ",
+      resources: "ጸጋታት / ሓገዝ",
+      about: "ብዛዕባና",
+    },
+    landing: {
+      title: "በይንኹም ኣይኮንኩምን",
+      subtitle: "SafeNet.ai ኣብ መርበብ ሓበሬታ ዝበጽሕ መጥቃዕቲ ንምምዝጋብ፡ ንምምርማርን ሕጋዊ ስጉምቲ ንምውሳድን ይሕግዘኩም",
+      cta: "ጥርዓን ኣቕርብ",
+      safeExit: "ቅልጡፍ መውጺኢ",
+      features: {
+        analyze: {
+          title: "ምርመራ AI",
+          description: "ዘመናዊ AI ዓይነትን ደረጃን መጥቃዕቲ ፈሊዩ ጉዳይኩም የትርረልኩም",
+        },
+        evidence: {
+          title: "ምእካብ መርትዖ",
+          description: "ንሕጋዊ ከይዲ ዘገልግል ዘይቅየር ናይ መርትዖ ሰነድ የዳሉ",
+        },
+        support: {
+          title: "ሓገዝ ርኸቡ",
+          description: "ምስ ማሕበራት፡ ሕጋዊ ሓገዝን መስመራት ህጹጽ ረድኤትን ኢትዮጵያ ርኸቡ",
+        },
+      },
+      privacy: "ድሕነትኩም ውሑስ እዩ። ኩሉ ሓበሬታ ምስጢራዊ ኮይኑ ድሕሪ 30 መዓልታት ብኡንብኡ ይድምሰስ።",
+    },
+    upload: {
+      title: "ናይ ዲጂታል መጥቃዕቲ መዝግቡ",
+      subtitle: "ስእሊ ስክሪንሾት ጽዓኑ ወይ ድማ ናይቲ መጥቃዕቲ መልእኽቲ ለጥፉ",
+      dropzone: "ስእሊ ኣብዚ ደርብዩ ወይ ንምምራጽ ጠውቑ",
+      dropzoneHint: "JPG, PNG, WebP ይድግፍ (ክሳብ 10MB)",
+      orText: "ወይ",
+      textPlaceholder: "መልእኽቲ መጥቃዕቲ ኣብዚ ለጥፉ...",
+      platform: "እዚ ፍጻመ ኣብ ኣየናይ መድረኽ ተፈጺሙ?",
+      platformPlaceholder: "መድረኽ ምረጹ",
+      submit: "ትሕዝቶ መርምር",
+      submitting: "ይምርመር ኣሎ...",
+      warning: "መጠንቀቕታ: እዚ ምርመራ ዘጨንቕ ትሕዝቶታት ከርኢ ይኽእል እዩ።",
+      emergencyTitle: "ህጹጽ ሓገዝ ትደልዩ ዶ?",
+      emergencyText: "ኣብ ሓደጋ እንተሃሊኹም ናብዞም ናጻ መስመራት ደውሉ:",
+      hotlines: ["7711", "6388", "8044"],
+      evidenceMode: {
+        title: "📸 መርትዖ ጽዓኑ (ስክሪንሾት)",
+        description: "ንሕጋዊ ሰነድን ንፖሊስን ዘገልግል",
+        features: [
+          "AI ንትሕዝቶ ስእሊ ይምርምር",
+          "ዘይቅየር ናይ መርትዖ PDF የዳሉ",
+          "ሕጋዊ ናይ ክሲ ሰነድ የውጽእ",
+          "ንሕጋውያን ኣካላት ዝቐርብ"
+        ]
+      },
+      conversationalMode: {
+        title: "💬 ምኽሪ ረኸቡ (ጽሑፍ ጥራይ)",
+        description: "ናይ ስነ-ልቦና ደገፍን ድሕነትን ምኽሪ ንምርካብ",
+        features: [
+          "ትሕዝቶ ንምግምጋም ኣካፍሉ",
+          "ናይ ድሕነት ምኽሪ ረኸቡ",
+          "ናይ ደገፍ ሓሳባት ተቐበሉ",
+          "ምስጢራውን ብዘይ ፍርድን"
+        ]
+      },
+      howItWorks: "ብኸመይ ይሰርሕ",
+    },
+    results: {
+      title: "ውጽኢት ምርመራ",
+      category: "ዓይነት መጥቃዕቲ",
+      severity: "መጠን ከበድቲ",
+      riskLevel: "ደረጃ ሓደጋ",
+      confidence: "ምትእምማን",
+      rationale: "ትንተና",
+      flaggedPhrases: "ዝተለለዩ ኣስገእቲ ቃላት",
+      extractedText: "ዝወጸ ጽሑፍ",
+      adviceTitle: "ናይ ድሕነት ምኽሪ",
+      conversationalNote: "ብመሰረት ዘካፈልክምዎ ጽሑፍ፡ ገምጋምናን ምኽርናን እዚ ይመስል:",
+      evidenceNote: "እዚ ትንተና ኣብ ዘቕረብክምዎ መርትዖ ዝተመርኮሰ እዩ።",
+      actions: {
+        evidence: "መረዳእታ PDF ኣውርድ",
+        complaint: "ሕጋዊ ጥርዓን ኣዳሉ",
+        resources: "ደገፍ ድለዩ",
+        newReport: "ካልእ ሪፖርት ኣቕርብ",
+      },
+      risk: {
+        high: "ላዕለዋይ ሓደጋ - ህጹጽ ደገፍ ይምከር",
+        medium: "ማእከላይ ሓደጋ - ደገፍ ምድላይ ሕሰቡ",
+        low: "ትሑት ሓደጋ",
+      },
+    },
+    chat: {
+      title: "ኣማኻሪ ደገፍ",
+      subtitle: "ንምስማዕ ወትሩ ድሉው",
+      placeholder: "ዝስምዓኩም ዘሎ ኣካፍሉ... (ኣብዚ ውሑስ ኢኹም)",
+      send: "ስደድ",
+      thinking: "ይሓስብ ኣሎ...",
+      privacy: "💙 ዕላልኩም ውልቃውን ምስጢራውን እዩ",
+      inDanger: "ኣብ ህጹጽ ሓደጋ ዲኹም ዘለኹም?",
+      emergency: "ህጹጽ ደገፍ",
+      typing: "ኣማኻሪ ይጽሕፍ ኣሎ...",
+      initialMessage: "ሰላም፡ ክሰምዓኩምን ክድግፈኩምን ኣብዚ ኣለኹ። በይንኹም ኣይኮንኩምን። ሎሚ ከመይ ኣለኹም? 💙",
+    },
+    resources: {
+      title: "ናይ ደገፍ ጸጋታት",
+      subtitle: "ክሕግዙኹም ዝኽእሉ ማሕበራት",
+      filterRegion: "ብዞባ ኣጣሪ",
+      allRegions: "ኩሎም ዞባታት",
+      mainTabs: {
+        resources: "ማሕበራት ደገፍ",
+        gbvInfo: "ሓበሬታ GBV",
+      },
+      types: {
+        ngo: "NGO",
+        legal_aid: "ሕጋዊ ሓገዝ",
+        helpline: "ናይ ሓገዝ መስመር",
+        shelter: "መዕቆቢ",
+      },
+      gbvInfo: {
+        title: "ዲጂታል መጥቃዕቲ ጾታ ምርዳእ",
+        subtitle: "ዓይነታት ዲጂታል መጥቃዕትን ሜላታት ምክልኻልን ፍለጡ",
+        tabs: {
+          overview: "ሓፈሻዊ",
+          cyberstalking: "ምክትታል ሳይበር",
+          harassment: "ምግልባጥን ምፍርራህን",
+          impersonation: "ምስሊ ምውሳድ",
+          doxing: "ናይ ብሕቲ ሓበሬታ ምዝርጋሕ",
+          imageAbuse: "መጥቃዕቲ ምስሊ",
+          prevention: "ምክልኻልን ድሕነትን",
+          legalRights: "ሕጋዊ መሰላት",
+          psychologicalImpact: "ስነ-ልቦናዊ ጽልዋ",
+        },
+        content: {
+          overview: {
+            title: "ናይ መርበብ ሓበሬታ መጥቃዕቲ ጾታ እንታይ እዩ?",
+            description: "ብዲጂታል መሳርሒታት ኣቢሉ ኣብ ልዕሊ ሰባት ብጾታ ምኽንያት ዝፍጸም ጎዳኢ ተግባር እዩ።",
+            keyPoints: [
+              "ሰብኣዊ መሰላት ዝጥሕስ ከቢድ ገበን እዩ",
+              "ብፍላይ ደቂ ኣንስትዮን ኣዋልድን ይጥቃዓ",
+              "ኣብ ዝኾነ ናይ ማሕበራዊ ሚዲያ መድረኽ ከጋጥም ይኽእል",
+              "ጽልዋኡ ከምቲ ናይ ገጽ ንገጽ መጥቃዕቲ ሓደገኛ እዩ",
+              "ናይ መርበብ ሓበሬታ ድሕነትኩም ናይ ምሕላው መሰል ኣለኩም",
+            ],
+          },
+          cyberstalking: {
+            title: "ምክትታል ሳይበር (Cyberstalking)",
+            description: "ተደጋጋሚ ምክትታልን ፍርሒ ምፍጣርን።",
+            signs: ["ብዙሕ መልእኽትታት ምስዳድ", "ናይ ኦንላይን ምንቅስቓስኩም ምቁጽጻር"],
+            actions: ["መረዳእታታት ሰንዱ", "ብኡንብኡ ዕጸዉ (Block)", "ናብ 7711 ወይ 991 ደውሉ"]
+          },
+          harassment: {
+            title: "ናይ ኦንላይን ምፍርራህ",
+            description: "ጸርፊ፡ ናይ ጽልኢ ዘረባን ምፍርራህን።",
+            signs: ["ናይ ምፍርራህ መልእኽትታት ምርካብ"],
+            actions: ["መልሲ ኣይትሃቡ", "መርትዖታት ኣክቡ", "ሕጋዊ ሓገዝ ሕተቱ"]
+          },
+          impersonation: {
+            title: "ናይ ሓሶት መንነት ምፍጣር",
+            description: "ብሽምኩምን ስእልኹምን ናይ ሓሶት ኣካውንት ምኽፋት።",
+            signs: ["ብሽምኩም ዝተኸፍተ ኣካውንት ምርኣይ"],
+            actions: ["ናብቲ ፕላትፎርም ኣመልክቱ", "ፓስዎርድኩም ቀይሩ"]
+          },
+          doxing: {
+            title: "ናይ ብሕቲ ሓበሬታ ምዝርጋሕ (Doxing)",
+            description: "ኣድራሻኹም፡ ስልክኹምን ናይ ብሕቲ ምስጢርኩምን ምብታን።",
+            signs: ["ናይ ብሕቲ ሰነዳት ኣብ ኦንላይን ምርኣይ"],
+            actions: ["ክድምሰስ ሕተቱ", "ንፖሊስ ሓብሩ"]
+          },
+          imageAbuse: {
+            title: "መጥቃዕቲ ምስሊን ስእልን",
+            description: "ዘይግቡእ ናይ ብሕቲ ስእልታት ምዝርጋሕ ወይ ምፍርራህ።",
+            signs: ["ስእልኺ ክዝርግሖ እየ ምባል"],
+            actions: ["ገንዘብ ኣይትኽፈሉ", "መረዳእታ ሓዙ", "ናብ 7711 ወይ 991 ደውሉ"]
+          },
+          prevention: {
+            title: "ምክልኻልን ድሕነትን",
+            description: "ንዲጂታል ድሕነትኩም ዝሕግዙ ኣገደስቲ ስጉምትታት።",
+            privacySettings: {
+              title: "ናይ ድሕነት ቅጥዕታት",
+              tips: [
+                "ሓያል ፓስዎርድ ተጠቐሙ",
+                "ናይ ክልተ-ደረጃ መረጋገጺ (2FA) ኣስርሑ",
+                "ናይ ብሕቲ ስእልታት ንዘይትኣምንዎም ሰባት ኣይትስደዱ"
+              ]
+            },
+            supportingOthers: {
+              title: "ንዝተጎድአ ሰብ ምድጋፍ",
+              howToHelp: [
+                "እመኑዎም፡ ኣይትጠራጠሩ",
+                "ኣይትውቀሱዎም",
+                "ናብ EWLAን 7711ን ሓገዝ ክረኽቡ ሓግዙዎም"
+              ]
+            }
+          }
+        }
+      }
+    },
+    common: {
+      loading: "ይጽዕን ኣሎ...",
+      error: "ጸገም ኣጋጢሙ",
+      retry: "ደጊምካ ፈትን",
+      back: "ተመለስ",
+      download: "ኣውርድ",
+      showContent: "ትሕዝቶ ኣርኢ",
+      hideContent: "ትሕዝቶ ሕባእ",
+    },
+  },
+  so: {
+    nav: {
+      home: "Guriga",
+      upload: "Gudbi Xadgudub",
+      resources: "Xarumaha Taageerada",
+      about: "Nagu Saabsan",
+    },
+    landing: {
+      title: "Keligaa ma tihid",
+      subtitle: "SafeNet.ai waxay kaa caawinaysaa inaad diiwaangeliso, falanqeyso, oo aad tallaabo sharciyeed ka qaaddo xadgudubyada internetka",
+      cta: "Gudbi Xadgudub",
+      safeExit: "Ka-bixid Degdeg ah",
+      features: {
+        analyze: {
+          title: "Falanqaynta AI",
+          description: "AI casri ah ayaa kala saarta nooca xadgudubka iyo heerka halista",
+        },
+        evidence: {
+          title: "Ururinta Caddeymaha",
+          description: "Soo saar dukumenti caddeyn ah oo aan la beddeli karin oo sharciga hortiisa gala",
+        },
+        support: {
+          title: "Hel Taageero",
+          description: "La xiriir hay'adaha NGO-yada, gargaarka sharciga, iyo khadadka caawimada ee Itoobiya",
+        },
+      },
+      privacy: "Badbaadadaadu waa dhowran tahay. Xogta oo dhan waa la sir-xafiday oo si toos ah ayaa loo tirtirayaa 30 maalmood ka dib.",
+    },
+    upload: {
+      title: "Diiwaangeli Xadgudubka Internetka",
+      subtitle: "Soo rar sawir screenshot ah ama dheji qoraalka fariinta xadgudubka ah",
+      dropzone: "Halkan soo dhig sawirka ama guji si aad u soo rarto",
+      dropzoneHint: "Waxay taageertaa JPG, PNG, WebP (ugu badnaan 10MB)",
+      orText: "AMA",
+      textPlaceholder: "Dheji fariinta xadgudubka ah halkan...",
+      platform: "Xagee arrintani ka dhacday?",
+      platformPlaceholder: "Dooro madasha",
+      submit: "Falanqee Nuxurka",
+      submitting: "Waa la falanqeynayaa...",
+      warning: "Digniin: Falanqayntu waxay muujin kartaa nuxur dhib ama dhiillo leh.",
+      emergencyTitle: "Ma u Baahan Tahay Caawimo Degdeg ah?",
+      emergencyText: "Haddii aad ku jirto halis degdeg ah, wac khadadka caawimada GBV ee Itoobiya:",
+      hotlines: ["7711", "6388", "8044"],
+      evidenceMode: {
+        title: "📸 Soo rar Caddeyn (Sawir)",
+        description: "Diiwaangelin rasmi ah iyo dacwado sharciyeed",
+        features: [
+          "AI waxay falanqaysaa nuxurka sawirka",
+          "Soo saar caddeyn PDF ah oo aan la faragelin karin",
+          "Diyaari dacwad sharciyeed",
+          "Dukumenti rasmi ah oo booliska loo gudbiyo"
+        ]
+      },
+      conversationalMode: {
+        title: "💬 Hel Talo (Qoraal Keliya)",
+        description: "Hanuunin taageero iyo talooyin badbaado",
+        features: [
+          "Wadaag nuxurka si loo qiimeeyo",
+          "Hel talooyin badbaado oo gaar ah",
+          "Hel talooyin taageero ah",
+          "Sir ah oo aan xukun lahayn"
+        ]
+      },
+      howItWorks: "Sida ay u shaqeyso",
+    },
+    results: {
+      title: "Natiijooyinka Falanqaynta",
+      category: "Qaybta Xadgudubka",
+      severity: "Heerka Darnaanta",
+      riskLevel: "Heerka Halista",
+      confidence: "Kalsoonida",
+      rationale: "Falanqaynta",
+      flaggedPhrases: "Weedhaha Khatarta ah ee la Helay",
+      extractedText: "Qoraalka Laga Soo Saaray",
+      adviceTitle: "Talada Badbaadada",
+      conversationalNote: "Iyada oo lagu saleynayo qoraalka aad wadaagtay, halkan waa qiimeyntayada iyo taladeena:",
+      evidenceNote: "Falanqayntani waxay ku saleysan tahay caddeymaha aad bixisay.",
+      actions: {
+        evidence: "Degso Caddeynta PDF",
+        complaint: "Diyaari Dacwada Sharciga",
+        resources: "Raadso Taageero",
+        newReport: "Gudbi Warbixin Kale",
+      },
+      risk: {
+        high: "HALIS SARE - Waxaa lagula talinayaa caawimo degdeg ah",
+        medium: "HALIS DHEX-DHEXAAD AH - Ka fiirso raadinta caawimo",
+        low: "HALIS HOOSE",
+      },
+    },
+    chat: {
+      title: "La-taliyaha Taageerada",
+      subtitle: "Had iyo jeer halkan u jooga inuu ku dhageysto",
+      placeholder: "La wadaag waxa maskaxdaada ku jira... (halkan waad ku badbaaddaa)",
+      send: "Dir",
+      thinking: "Fekeraya...",
+      privacy: "💙 Wadahadalkaagu waa mid gaar ah oo sir ah",
+      inDanger: "Ma ku Jirtaa Halis Degdeg ah?",
+      emergency: "Taageero Degdeg ah",
+      typing: "La-taliyaha ayaa qoraya...",
+      initialMessage: "Nabadeey, waxaan halkan u joogaa inaan ku dhageysto oo aan ku taageero. Keligaa ma tihid. Sideed dareemaysaa maanta? 💙",
+    },
+    resources: {
+      title: "Xarumaha Taageerada",
+      subtitle: "Ururada ku caawin kara",
+      filterRegion: "Ku kala saar gobolka",
+      allRegions: "Dhammaan gobollada",
+      mainTabs: {
+        resources: "Xarumaha Taageerada",
+        gbvInfo: "Xogta GBV",
+      },
+      types: {
+        ngo: "NGO",
+        legal_aid: "Gargaarka Sharciga",
+        helpline: "Khadka Caawimada",
+        shelter: "Hoyga Gabbaadka",
+      },
+      gbvInfo: {
+        title: "Fahamka Xadgudubka Jinsiga ee Internetka",
+        subtitle: "Baro noocyada kala duwan ee xadgudubka internetka iyo sida looga hortago",
+        tabs: {
+          overview: "Dulmar",
+          cyberstalking: "Dabagalka Internetka",
+          harassment: "Dhibaateynta",
+          impersonation: "Isku-yeelidda Qof Kale",
+          doxing: "Faafinta Xogta Gaarka ah",
+          imageAbuse: "Xadgudubka Sawirrada",
+          prevention: "Kahortagga & Badbaadada",
+          legalRights: "Xuquuqdaada Sharciga ah",
+          psychologicalImpact: "Saameynta Maskaxda",
+        },
+        content: {
+          overview: {
+            title: "Waa Maxay GBV-ga Internetka?",
+            description: "Xadgudubka ku saleysan jinsiga ee tiknoolojiyadda fududaysay waa ficil waxyeello leh oo loo adeegsado aaladaha dijitaalka ah.",
+            keyPoints: [
+              "Waa dambi culus oo xadgudub ku ah xuquuqda aadanaha",
+              "Waxay si gaar ah u saameysaa haweenka iyo gabdhaha",
+              "Waxay ka dhici kartaa dhammaan aaladaha baraha bulshada",
+              "Saameynteedu waxay la mid tahay rabshadaha jirka",
+              "Waxaad xaq u leedahay badbaado buuxda",
+            ],
+          },
+          cyberstalking: {
+            title: "Dabagalka Internetka (Cyberstalking)",
+            description: "Dabaggal joogto ah oo cabsi gelin leh.",
+            signs: ["Fariimo xad-dhaaf ah", "La socodka dhaqdhaqaaqaaga internetka"],
+            actions: ["Xafid caddeymaha", "Isla markiiba xannib (Block)", "Wac 7711 ama 991"]
+          },
+          harassment: {
+            title: "Dhibaateynta Internetka",
+            description: "Hadallo nacayb ah, cay iyo handadaad joogto ah.",
+            signs: ["Helitaanka fariimo hanjabaad ah"],
+            actions: ["Ha u jawaabin", "Keydi dhammaan caddeymaha", "Raadso gargaar sharci"]
+          },
+          impersonation: {
+            title: "Isku-yeelidda Qof Kale (Aqoonsi Been-abuur ah)",
+            description: "In lagugu sameeyo cinwaanno been abuur ah oo magacaaga iyo sawirkaaga wata.",
+            signs: ["Akoonno magacaaga wata oo la arko"],
+            actions: ["U dacwoo baraha bulshada", "Beddel erayada sirta ah"]
+          },
+          doxing: {
+            title: "Faafinta Xogta Gaarka ah (Doxing)",
+            description: "In internetka lagu faafiyo cinwaankaaga, taleefankaaga ama macluumaadkaaga sirta ah.",
+            signs: ["Xogtaada gaarka ah oo la faafiyo"],
+            actions: ["Dalbo in laga saaro", "U sheeg booliska"]
+          },
+          imageAbuse: {
+            title: "Xadgudubka Sawirrada Gaarka ah",
+            description: "Faafinta ama ku handadaadda sawirradaada gaarka ah adigoon raalli ka ahayn.",
+            signs: ["Hanjabaad faafin sawirro ah"],
+            actions: ["Lacag ha bixin", "Hayso caddeymaha", "Wac 7711 ama 991"]
+          },
+          prevention: {
+            title: "Kahortagga & Badbaadada",
+            description: "Tallaabooyinka lagu ilaaliyo badbaadadaada dijitaalka ah.",
+            privacySettings: {
+              title: "Nidaaminta Sirta",
+              tips: [
+                "Isticmaal eray sir ah oo adag",
+                "Fur xaqiijinta labada tallaabo (2FA)",
+                "Ha u dirin sawirro gaar ah dad aadan aaminin"
+              ]
+            },
+            supportingOthers: {
+              title: "Taageeridda Qof Dhibban",
+              howToHelp: [
+                "Aamin oo ha shakiyin",
+                "Ha eedayn iyaga",
+                "Ku hag inay la xiriiraan 7711 iyo EWLA"
+              ]
+            }
+          }
+        }
+      }
+    },
+    common: {
+      loading: "Waa la soo rarayaa...",
+      error: "Khalad ayaa dhacay",
+      retry: "Isku day mar kale",
+      back: "Dib u noqo",
+      download: "Degso",
+      showContent: "Muuji Nuxurka",
+      hideContent: "Qari Nuxurka",
+    },
+  },
 }
 
 export function getTranslation(lang: Language) {
-  return translations[lang]
+  return (translations as any)[lang] || translations.en
 }

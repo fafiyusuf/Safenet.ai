@@ -10,8 +10,12 @@ export const extractTextFromImage = async (imageBuffer: Buffer, language: string
       .sharpen()
       .toBuffer();
 
-    // Determine Tesseract language
-    const tessLang = language === 'am' ? 'amh+eng' : 'eng';
+    // Determine Tesseract language:
+    // Ge'ez script (Amharic and Tigrinya) uses amh+eng. Latin script (English, Afaan Oromoo, Somali) uses eng.
+    let tessLang = 'eng';
+    if (language === 'am' || language === 'ti') {
+      tessLang = 'amh+eng';
+    }
 
     // Perform OCR
     const { data: { text } } = await Tesseract.recognize(

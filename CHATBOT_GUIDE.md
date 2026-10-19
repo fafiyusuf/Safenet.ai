@@ -71,7 +71,7 @@ Vercel Frontend (/chat page)
     ↓ (API call)
 Render Backend (/api/chat)
     ↓ (Gemini API)
-Google Gemini AI (gemini-2.0-flash-exp)
+Google Gemini AI (gemini-2.5-flash-exp)
     ↓ (Response)
 Browser → Display message
 ```

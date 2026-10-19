@@ -1,26 +1,22 @@
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { Request, Response, Router } from 'express';
+import jwt from 'jsonwebtoken';
 import { query } from '../utils/database';
 
 dotenv.config();
 
 const router = Router();
+const JWT_SECRET = process.env.JWT_SECRET || 'safenet-jwt-secret-key-change-in-production';
 
-// Simple admin authentication middleware
-const adminAuth = async (req: Request, res: Response, next: Function) => {
-  const authHeader = req.headers.authorization;
-  
-  if (!authHeader || !authHeader.startsWith('Basic ')) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-
+// Admin login endpoint (public)
+router.post('/login', async (req: Request, res: Response) => {
   try {
-    const base64Credentials = authHeader.split(' ')[1];
-    const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
-    const [username, password] = credentials.split(':');
+    const { username, password } = req.body;
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Username and password required' });
+    }
 
-    // Check against database
     const result = await query(
       'SELECT * FROM admins WHERE username = $1 AND is_active = true',
       [username]
@@ -43,15 +39,82 @@ const adminAuth = async (req: Request, res: Response, next: Function) => {
       [admin.id]
     );
 
-    (req as any).admin = admin;
-    next();
-  } catch (error) {
-    console.error('Admin auth error:', error);
-    res.status(401).json({ error: 'Invalid authorization header' });
+    const token = jwt.sign(
+      { id: admin.id, username: admin.username, role: 'admin' },
+      JWT_SECRET,
+      { expiresIn: '8h' }
+    );
+
+    res.json({
+      success: true,
+      token,
+      admin: {
+        id: admin.id,
+        username: admin.username,
+        email: admin.email
+      }
+    });
+  } catch (error: any) {
+    console.error('Admin login error:', error);
+    res.status(500).json({ error: 'Login failed', message: error.message });
   }
+});
+
+// Admin authentication middleware (supports Bearer JWT token & legacy Basic auth)
+const adminAuth = async (req: Request, res: Response, next: Function) => {
+  const authHeader = req.headers.authorization;
+  
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Unauthorized: missing authorization header' });
+  }
+
+  // 1. Bearer Token Authentication (Preferred)
+  if (authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1];
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET);
+      (req as any).admin = decoded;
+      return next();
+    } catch (err) {
+      return res.status(401).json({ error: 'Invalid or expired token' });
+    }
+  }
+
+  // 2. Fallback: Basic Authentication
+  if (authHeader.startsWith('Basic ')) {
+    try {
+      const base64Credentials = authHeader.split(' ')[1];
+      const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
+      const [username, password] = credentials.split(':');
+
+      const result = await query(
+        'SELECT * FROM admins WHERE username = $1 AND is_active = true',
+        [username]
+      );
+
+      if (result.rows.length === 0) {
+        return res.status(401).json({ error: 'Invalid credentials' });
+      }
+
+      const admin = result.rows[0];
+      const passwordMatch = await bcrypt.compare(password, admin.password_hash);
+
+      if (!passwordMatch) {
+        return res.status(401).json({ error: 'Invalid credentials' });
+      }
+
+      (req as any).admin = admin;
+      return next();
+    } catch (error) {
+      console.error('Admin basic auth error:', error);
+      return res.status(401).json({ error: 'Invalid authorization header' });
+    }
+  }
+
+  return res.status(401).json({ error: 'Unauthorized: invalid authorization format' });
 };
 
-// Apply auth middleware to all admin routes
+// Apply auth middleware to all routes below
 router.use(adminAuth);
 
 // Get statistics

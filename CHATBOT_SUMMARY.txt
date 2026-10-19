@@ -25,7 +25,7 @@ HOW IT WORKS:
 1. User visits /chat page
 2. User types message to the counselor
 3. Message sent to backend API (/api/chat)
-4. Gemini AI (gemini-2.0-flash-exp) processes with therapeutic prompt
+4. Gemini AI (gemini-2.5-flash-exp) processes with therapeutic prompt
 5. AI response displayed in chat interface
 6. Conversation context maintained (last 10 messages)
 7. User can continue chatting or use emergency buttons
@@ -59,7 +59,7 @@ TECHNICAL IMPLEMENTATION:
 -------------------------
 Backend Files Created:
   ✅ Backend-Express/src/services/chatbot.ts
-     - Therapist AI service using Gemini 2.0
+     - Therapist AI service using Gemini 2.5
      - Dual-language system prompts
      - Conversation management
 
@@ -153,7 +153,7 @@ DEPLOYMENT STATUS:
 ✅ Backend: Running on Render.com
 ✅ Frontend: Running on Vercel
 ✅ Database: Neon PostgreSQL (when needed)
-✅ API: Google Gemini 2.0 Flash
+✅ API: Google Gemini 2.5 Flash
 
 Everything is production-ready and deployed!
 

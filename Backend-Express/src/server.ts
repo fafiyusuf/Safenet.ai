@@ -22,8 +22,27 @@ import uploadRoutes from './routes/upload.js';
 // Import database
 import { initializeDatabase } from './utils/database.js';
 
+import rateLimit from 'express-rate-limit';
+
 const app: Application = express();
 const PORT = process.env.PORT || 8000;
+
+// Rate limiters for computationally expensive & AI routes
+const uploadLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  message: { error: 'Too many upload attempts. Please wait a few minutes before trying again.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const chatLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 60,
+  message: { error: 'Too many messages sent. Please pause a moment before continuing.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Middleware
 app.use(helmet());
@@ -44,14 +63,15 @@ app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
-app.use('/api/chat', chatRoutes);
-app.use('/api/upload', uploadRoutes);
+app.use('/api/chat', chatLimiter, chatRoutes);
+app.use('/api/upload', uploadLimiter, uploadRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/evidence', evidenceRoutes);
 app.use('/api/complaint', complaintRoutes);
 app.use('/api/platforms', platformRoutes);
 app.use('/api/resources', resourceRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/auth', adminRoutes);
 
 // Error handling
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

@@ -60,7 +60,7 @@
 **Frontend:** Next.js 16 + React + TypeScript + Tailwind CSS  
 **Backend:** Express.js + Node.js + TypeScript  
 **Database:** Neon PostgreSQL (Serverless)  
-**AI:** Google Gemini 2.0 + Custom rule-based fallback (50+ keywords)  
+**AI:** Google Gemini 2.5 + Custom rule-based fallback (50+ keywords)  
 **OCR:** Tesseract.js (English + Amharic)  
 **Deployment:** Vercel (Frontend) + Render (Backend)
 
@@ -93,7 +93,7 @@ Users → Vercel CDN (Frontend) → Render API (Backend) → Neon DB
 
 ### ✅ Phase 1: LIVE IN PRODUCTION
 - [x] Full-stack platform deployed (Render + Vercel)
-- [x] AI classification (Gemini 2.0) + OCR (Tesseract)
+- [x] AI classification (Gemini 2.5) + OCR (Tesseract)
 - [x] PDF evidence + legal complaint generation
 - [x] Bilingual UI (English/Amharic)
 - [x] Admin dashboard with analytics
@@ -317,7 +317,7 @@ No microphone  Backend API    │
 
 | Technology | Purpose | Capabilities |
 |------------|---------|--------------|
-| **Google Gemini 2.0** | Content classification | Threat detection, severity scoring, advice generation |
+| **Google Gemini 2.5** | Content classification | Threat detection, severity scoring, advice generation |
 | **Custom Rule Engine** | Fallback classifier | 50+ keywords, pattern matching, multi-language |
 
 **AI Workflow:**
@@ -557,7 +557,7 @@ Comprehensive guides for every aspect:
 **Status:** 🟢 Live in production (December 2025) - Deployed on Render + Vercel
 
 - [x] Express.js backend with TypeScript
-- [x] AI classification with Google Gemini 2.0
+- [x] AI classification with Google Gemini 2.5
 - [x] OCR with Tesseract.js (English + Amharic)
 - [x] PDF evidence generation
 - [x] Legal complaint form generation

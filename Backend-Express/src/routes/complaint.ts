@@ -18,11 +18,13 @@ router.get('/:id/pdf', async (req: Request, res: Response) => {
 
     const report = result.rows[0];
 
-    const pdfStream = generateComplaintPDF(report, language);
+    const download = req.query.download === 'true';
+    const disposition = download ? 'attachment' : 'inline';
 
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="complaint-${id.substring(0, 8)}-${language}.pdf"`);
+    res.setHeader('Content-Disposition', `${disposition}; filename="complaint-${id.substring(0, 8)}-${language}.pdf"`);
 
+    const pdfStream = generateComplaintPDF(report, language);
     pdfStream.pipe(res);
 
   } catch (error: any) {

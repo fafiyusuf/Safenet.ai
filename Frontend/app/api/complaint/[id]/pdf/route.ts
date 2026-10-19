@@ -6,9 +6,11 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   const { id } = await params
   const { searchParams } = new URL(request.url)
   const language = searchParams.get("lang") || "en"
+  const isDownload = searchParams.get("download") === "true"
+  const disposition = isDownload ? "attachment" : "inline"
 
   try {
-    const response = await fetch(`${API_URL}/api/complaint/${id}/pdf?language=${language}`)
+    const response = await fetch(`${API_URL}/api/complaint/${id}/pdf?language=${language}&download=${isDownload}`)
 
     if (!response.ok) {
       return NextResponse.json({ error: "Report not found" }, { status: 404 })
@@ -19,7 +21,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     return new NextResponse(pdfBuffer, {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="complaint-${id}-${language}.pdf"`,
+        "Content-Disposition": `${disposition}; filename="complaint-${id}-${language}.pdf"`,
       },
     })
   } catch (error) {

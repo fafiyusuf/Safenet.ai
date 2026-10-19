@@ -2,7 +2,6 @@
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { PLATFORMS } from "@/lib/constants"
@@ -148,80 +147,82 @@ export default function AdminDashboard() {
             <Shield className="h-6 w-6 text-primary" />
             <span className="font-semibold text-lg">Safenet.ai Admin</span>
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
             {session && (
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <User className="h-4 w-4" />
-                <span>{session.username}</span>
+              <div className="hidden md:flex items-center gap-1.5 text-xs text-muted-foreground">
+                <User className="h-3.5 w-3.5" />
+                <span className="font-mono">{session.username}</span>
               </div>
             )}
-            <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
-              Back to App
+            <Link href="/" className="text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded hover:bg-muted transition-colors">
+              App
             </Link>
-            <Button variant="outline" size="sm" onClick={handleLogout} disabled={loggingOut}>
-              <LogOut className="h-4 w-4 mr-2" />
-              {loggingOut ? "Logging out..." : "Logout"}
+            <Button variant="outline" size="sm" className="h-8 px-2.5 text-xs" onClick={handleLogout} disabled={loggingOut}>
+              <LogOut className="h-3.5 w-3.5 sm:mr-1.5" />
+              <span className="hidden sm:inline">{loggingOut ? "Exiting..." : "Logout"}</span>
             </Button>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-foreground mb-8">Analytics Dashboard</h1>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Total Reports</CardTitle>
-              <FileText className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{stats?.total_reports || 0}</div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">High Risk</CardTitle>
-              <AlertTriangle className="h-4 w-4 text-destructive" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-destructive">
-                {reports.filter((r) => r.risk_level === "high").length}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Categories</CardTitle>
-              <BarChart3 className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{categoryData.length}</div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Platforms</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{platformData.length}</div>
-            </CardContent>
-          </Card>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-border">
+          <div>
+            <div className="flex items-center gap-2 text-xs font-mono text-emerald-700 dark:text-emerald-400 mb-1">
+              <Shield className="h-3.5 w-3.5" />
+              <span>OFFICIAL TELEMETRY CONSOLE • RESTRICTED ACCESS</span>
+            </div>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">Incident Telemetry & Case Management</h1>
+          </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Reports by Platform</CardTitle>
-              <CardDescription>Distribution across social media platforms</CardDescription>
-            </CardHeader>
-            <CardContent>
+        <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 mb-6">
+          <div className="border border-border rounded-md bg-card p-4">
+            <div className="flex items-center justify-between text-xs text-muted-foreground font-medium">
+              <span>Total Dockets</span>
+              <FileText className="h-4 w-4" />
+            </div>
+            <div className="text-2xl font-bold mt-2 font-mono">{stats?.total_reports || 0}</div>
+          </div>
+
+          <div className="border border-border rounded-md bg-card p-4">
+            <div className="flex items-center justify-between text-xs text-destructive font-medium">
+              <span>High Risk / Critical</span>
+              <AlertTriangle className="h-4 w-4" />
+            </div>
+            <div className="text-2xl font-bold text-destructive mt-2 font-mono">
+              {(stats as any)?.reports_by_risk?.find(
+                (r: any) => r.risk_level?.toLowerCase() === "high" || r.risk_level?.toLowerCase() === "critical"
+              )?.count ?? reports.filter((r) => r.risk_level === "high").length}
+            </div>
+          </div>
+
+          <div className="border border-border rounded-md bg-card p-4">
+            <div className="flex items-center justify-between text-xs text-muted-foreground font-medium">
+              <span>Violation Categories</span>
+              <BarChart3 className="h-4 w-4" />
+            </div>
+            <div className="text-2xl font-bold mt-2 font-mono">{categoryData.length}</div>
+          </div>
+
+          <div className="border border-border rounded-md bg-card p-4">
+            <div className="flex items-center justify-between text-xs text-muted-foreground font-medium">
+              <span>Monitored Platforms</span>
+              <TrendingUp className="h-4 w-4" />
+            </div>
+            <div className="text-2xl font-bold mt-2 font-mono">{platformData.length}</div>
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 mb-6">
+          <div className="border border-border rounded-md bg-card p-5">
+            <div className="pb-4 mb-4 border-b border-border">
+              <h2 className="text-sm font-bold text-foreground">Reports by Platform</h2>
+              <p className="text-xs text-muted-foreground mt-0.5">Distribution across social media platforms</p>
+            </div>
+            <div>
               {platformData.length > 0 ? (
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={280}>
                   <BarChart data={platformData}>
                     <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
                     <XAxis dataKey="name" className="text-xs" tick={{ fill: "hsl(var(--muted-foreground))" }} />
@@ -230,35 +231,35 @@ export default function AdminDashboard() {
                       contentStyle={{
                         backgroundColor: "hsl(var(--card))",
                         border: "1px solid hsl(var(--border))",
-                        borderRadius: "8px",
+                        borderRadius: "6px",
                       }}
                     />
-                    <Bar dataKey="count" fill="hsl(142 76% 36%)" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="count" fill="hsl(142 76% 36%)" radius={[3, 3, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+                <div className="h-[280px] flex items-center justify-center text-muted-foreground text-xs">
                   No data available
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Abuse Categories</CardTitle>
-              <CardDescription>Classification breakdown</CardDescription>
-            </CardHeader>
-            <CardContent>
+          <div className="border border-border rounded-md bg-card p-5">
+            <div className="pb-4 mb-4 border-b border-border">
+              <h2 className="text-sm font-bold text-foreground">Abuse Categories</h2>
+              <p className="text-xs text-muted-foreground mt-0.5">Classification breakdown across statutory offences</p>
+            </div>
+            <div>
               {categoryData.length > 0 ? (
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={280}>
                   <PieChart>
                     <Pie
                       data={categoryData}
                       cx="50%"
                       cy="50%"
-                      innerRadius={60}
-                      outerRadius={100}
+                      innerRadius={55}
+                      outerRadius={90}
                       paddingAngle={2}
                       dataKey="value"
                       label={({ name, percent }) => `${name} (${((percent || 0) * 100).toFixed(0)}%)`}
@@ -272,26 +273,26 @@ export default function AdminDashboard() {
                       contentStyle={{
                         backgroundColor: "hsl(var(--card))",
                         border: "1px solid hsl(var(--border))",
-                        borderRadius: "8px",
+                        borderRadius: "6px",
                       }}
                     />
                   </PieChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+                <div className="h-[280px] flex items-center justify-center text-muted-foreground text-xs">
                   No data available
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>Severity Distribution</CardTitle>
-            <CardDescription>Reports grouped by severity score ranges</CardDescription>
-          </CardHeader>
-          <CardContent>
+        <div className="border border-border rounded-md bg-card p-5 mb-6">
+          <div className="pb-4 mb-4 border-b border-border">
+            <h2 className="text-sm font-bold text-foreground">Severity Distribution</h2>
+            <p className="text-xs text-muted-foreground mt-0.5">Reports grouped by algorithmic threat index</p>
+          </div>
+          <div>
             {severityData.length > 0 ? (
               <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={severityData} layout="vertical">
@@ -302,24 +303,24 @@ export default function AdminDashboard() {
                     contentStyle={{
                       backgroundColor: "hsl(var(--card))",
                       border: "1px solid hsl(var(--border))",
-                      borderRadius: "8px",
+                      borderRadius: "6px",
                     }}
                   />
-                  <Bar dataKey="count" fill="hsl(142 76% 36%)" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="count" fill="hsl(142 76% 36%)" radius={[0, 3, 3, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-[200px] flex items-center justify-center text-muted-foreground">No data available</div>
+              <div className="h-[200px] flex items-center justify-center text-muted-foreground text-xs">No data available</div>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Reports</CardTitle>
-            <CardDescription>Latest submitted reports</CardDescription>
-          </CardHeader>
-          <CardContent>
+        <div className="border border-border rounded-md bg-card p-5">
+          <div className="pb-4 mb-4 border-b border-border">
+            <h2 className="text-sm font-bold text-foreground">Recent Evidence Dockets</h2>
+            <p className="text-xs text-muted-foreground mt-0.5">Latest submitted forensic incident reports</p>
+          </div>
+          <div>
             {reports.length > 0 ? (
               <Table>
                 <TableHeader>
@@ -361,10 +362,10 @@ export default function AdminDashboard() {
                 </TableBody>
               </Table>
             ) : (
-              <div className="py-12 text-center text-muted-foreground">No reports submitted yet</div>
+              <div className="py-12 text-center text-muted-foreground text-xs">No reports submitted yet</div>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </main>
     </div>
   )

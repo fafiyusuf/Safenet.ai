@@ -90,7 +90,10 @@ export enum Platform {
 // Language codes
 export enum Language {
   ENGLISH = 'en',
-  AMHARIC = 'am'
+  AMHARIC = 'am',
+  OROMO = 'om',
+  TIGRINYA = 'ti',
+  SOMALI = 'so'
 }
 
 // Database operations helpers

@@ -3,15 +3,18 @@ import { Pool, PoolClient } from 'pg';
 
 dotenv.config();
 
+const useSsl = process.env.DATABASE_URL &&
+  !process.env.DATABASE_URL.includes('localhost') &&
+  !process.env.DATABASE_URL.includes('127.0.0.1') &&
+  process.env.DB_SSL !== 'false';
+
 // Create PostgreSQL connection pool
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  },
+  ssl: useSsl ? { rejectUnauthorized: false } : false,
   max: 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 30000, // Increased from 10s to 30s
+  connectionTimeoutMillis: 30000,
   statement_timeout: 30000,
 });
 

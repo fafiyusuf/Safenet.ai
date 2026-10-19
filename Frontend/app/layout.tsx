@@ -8,8 +8,8 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Safenet.ai - Report Online Abuse",
-  description: "Document, analyze, and take action against technology-facilitated gender-based violence",
+  title: "SafeNet.ai — Ethiopian Technology-Facilitated GBV Forensics & Support",
+  description: "Preserve court-admissible digital evidence, analyze threats under Ethiopian cyber proclamations, and access confidential crisis support.",
   icons: {
     icon: [
       {
@@ -22,7 +22,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-    generator: 'v0.app'
 }
 
 export const viewport: Viewport = {

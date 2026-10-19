@@ -5,7 +5,6 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { ArrowLeft, Download, Printer, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Header } from "@/components/header"
 import { getTranslation, type Language } from "@/lib/i18n"
@@ -65,64 +64,67 @@ export default function EvidencePage({ params }: { params: Promise<{ id: string 
 
       <main className="flex-1 py-12">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="mb-8">
+          <div className="border-b border-border pb-6 mb-6">
             <Link
               href={`/results/${id}?lang=${language}`}
-              className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4"
+              className="inline-flex items-center text-xs text-muted-foreground hover:text-foreground mb-3 font-medium"
             >
-              <ArrowLeft className="mr-1 h-4 w-4" />
+              <ArrowLeft className="mr-1.5 h-3.5 w-3.5" />
               {t.common.back}
             </Link>
-            <h1 className="text-3xl font-bold text-foreground">Evidence Document</h1>
-            <p className="text-muted-foreground mt-1">Report ID: {id}</p>
+            <div className="flex items-center gap-2 text-xs font-mono text-emerald-700 dark:text-emerald-400 mb-1">
+              <span>FORENSIC EVIDENCE SPECIMEN • CHAIN OF CUSTODY</span>
+            </div>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">Evidence Document</h1>
+            <p className="text-xs font-mono text-muted-foreground mt-1">Docket ID: {id}</p>
           </div>
 
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle>Document Preview</CardTitle>
-              <CardDescription>Review the evidence document before downloading or printing</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex gap-3 mb-6">
-                <Button onClick={handleDownload} className="gap-2">
-                  <Download className="h-4 w-4" />
+          <div className="border border-border rounded-md bg-card p-5 mb-6">
+            <div className="pb-4 mb-4 border-b border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h2 className="text-sm font-bold text-foreground">Document Preview</h2>
+                <p className="text-xs text-muted-foreground mt-0.5">Review the forensic evidence dossier prior to formal export</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Button onClick={handleDownload} size="sm" className="gap-1.5 rounded-md bg-emerald-700 hover:bg-emerald-800 text-white text-xs h-8 px-3">
+                  <Download className="h-3.5 w-3.5" />
                   Download PDF
                 </Button>
-                <Button onClick={handlePrint} variant="outline" className="gap-2 bg-transparent">
-                  <Printer className="h-4 w-4" />
+                <Button onClick={handlePrint} size="sm" variant="outline" className="gap-1.5 rounded-md text-xs h-8 px-3 bg-background">
+                  <Printer className="h-3.5 w-3.5" />
                   Print
                 </Button>
-                <Button asChild variant="outline" className="gap-2 bg-transparent">
+                <Button asChild size="sm" variant="outline" className="gap-1.5 rounded-md text-xs h-8 px-3 bg-background">
                   <a href={`/api/evidence/${id}/pdf`} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4" />
+                    <ExternalLink className="h-3.5 w-3.5" />
                     Open in New Tab
                   </a>
                 </Button>
               </div>
+            </div>
 
-              <div className="border rounded-lg overflow-hidden bg-white">
-                <iframe
-                  src={`/api/evidence/${id}/pdf`}
-                  className="w-full h-[600px]"
-                  title="Evidence Document Preview"
-                />
-              </div>
-            </CardContent>
-          </Card>
+            <div className="border border-border rounded-md overflow-hidden bg-white">
+              <iframe
+                src={`/api/evidence/${id}/pdf`}
+                className="w-full h-[600px]"
+                title="Evidence Document Preview"
+              />
+            </div>
+          </div>
 
           {report?.file_hash && (
-            <Card>
-              <CardHeader>
-                <CardTitle>File Integrity</CardTitle>
-                <CardDescription>Cryptographic hash for verification</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-muted rounded-lg p-4 font-mono text-sm break-all">{report.file_hash}</div>
-                <p className="text-sm text-muted-foreground mt-2">
-                  This SHA-256 hash can be used to verify the original file has not been modified.
-                </p>
-              </CardContent>
-            </Card>
+            <div className="border border-border rounded-md bg-card p-5">
+              <div className="pb-3 mb-3 border-b border-border">
+                <h2 className="text-sm font-bold text-foreground">Cryptographic Integrity Hash</h2>
+                <p className="text-xs text-muted-foreground mt-0.5">SHA-256 fingerprint verified against original evidence payload</p>
+              </div>
+              <div className="bg-muted border border-border/80 rounded-md p-3 font-mono text-xs break-all select-all">
+                {report.file_hash}
+              </div>
+              <p className="text-[11px] text-muted-foreground mt-2">
+                This cryptographic fingerprint confirms the evidence has not been altered or tampered with since initial ingestion.
+              </p>
+            </div>
           )}
         </div>
       </main>

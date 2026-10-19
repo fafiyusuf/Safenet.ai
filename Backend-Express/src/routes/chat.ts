@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { chatWithTherapist } from '../services/chatbot.js';
+import { chatWithTherapist } from '../services/chatbot';
 
 const router = Router();
 
@@ -11,7 +11,7 @@ interface ChatMessage {
 interface ChatRequest {
   message: string;
   conversationHistory: ChatMessage[];
-  language?: 'en' | 'am';
+  language?: 'en' | 'am' | 'om' | 'ti' | 'so';
 }
 
 // POST /api/chat - Send a message to the therapist chatbot
@@ -41,8 +41,9 @@ router.post('/', async (req: Request, res: Response) => {
     const limitedHistory = conversationHistory.slice(-10);
 
     // Validate language
-    if (!['en', 'am'].includes(language)) {
-      return res.status(400).json({ error: 'Language must be "en" or "am"' });
+    const supportedLanguages = ['en', 'am', 'om', 'ti', 'so'];
+    if (!supportedLanguages.includes(language)) {
+      return res.status(400).json({ error: `Language must be one of: ${supportedLanguages.join(', ')}` });
     }
 
     // Call therapist chatbot

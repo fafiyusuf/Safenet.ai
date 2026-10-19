@@ -1,10 +1,10 @@
 version: '3.8'
 
 services:
-  # Backend API
+  # Backend Express API
   backend:
     build:
-      context: ./Backend
+      context: ./Backend-Express
       dockerfile: Dockerfile
     container_name: safenet-backend
     ports:
@@ -12,19 +12,20 @@ services:
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - JWT_SECRET=${JWT_SECRET}
-      - FRONTEND_URL=http://localhost:3000
-      - HOST=0.0.0.0
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-1.5-flash}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin_1234}
+      - JWT_SECRET=${JWT_SECRET:-safenet-production-secret-key-replace}
+      - CORS_ORIGIN=http://localhost:3000
       - PORT=8000
+      - NODE_ENV=production
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 20s
 
   # Frontend Next.js
   frontend:
@@ -36,9 +37,7 @@ services:
       - "3000:3000"
     environment:
       - NEXT_PUBLIC_API_URL=http://backend:8000
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - JWT_SECRET=${JWT_SECRET}
+      - JWT_SECRET=${JWT_SECRET:-safenet-production-secret-key-replace}
       - NODE_ENV=production
     depends_on:
       - backend

@@ -26,11 +26,13 @@ router.get('/:id/pdf', async (req: Request, res: Response) => {
       }
     }
 
-    const pdfStream = generateEvidencePDF(report);
+    const download = req.query.download === 'true';
+    const disposition = download ? 'attachment' : 'inline';
 
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="evidence-${id.substring(0, 8)}.pdf"`);
+    res.setHeader('Content-Disposition', `${disposition}; filename="evidence-${id.substring(0, 8)}.pdf"`);
 
+    const pdfStream = generateEvidencePDF(report);
     pdfStream.pipe(res);
 
   } catch (error: any) {

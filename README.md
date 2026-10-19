@@ -55,7 +55,7 @@ Ethiopia's first **bilingual (English/Amharic)** TFGBV platform with AI-powered 
 **Frontend:** Next.js 16 + React + TypeScript  
 **Backend:** Express.js + Node.js  
 **Database:** Neon PostgreSQL  
-**AI:** Google Gemini 2.0 + 50+ keyword fallback  
+**AI:** Google Gemini 2.5 + 50+ keyword fallback  
 **OCR:** Tesseract.js (English + Amharic)  
 **Hosting:** Vercel + Render
 

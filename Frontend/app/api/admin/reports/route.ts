@@ -9,19 +9,15 @@ export async function GET(request: Request) {
     const limit = searchParams.get("limit") || "50"
     const offset = searchParams.get("offset") || "0"
     
-    // Verify session and get credentials
     const session = await verifySession()
     
-    if (!session) {
+    if (!session || !session.token) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    // Create Basic Auth header
-    const credentials = Buffer.from(`${session.username}:${session.password}`).toString('base64')
-    
     const response = await fetch(`${API_URL}/api/admin/reports?limit=${limit}&offset=${offset}`, {
       headers: {
-        Authorization: `Basic ${credentials}`,
+        Authorization: `Bearer ${session.token}`,
       },
     })
 

@@ -9,7 +9,8 @@ export function useLanguage() {
   useEffect(() => {
     // Check for saved preference
     const saved = localStorage.getItem("safenet-language") as Language | null
-    if (saved && (saved === "en" || saved === "am")) {
+    const validLanguages: Language[] = ["en", "am", "om", "ti", "so"]
+    if (saved && validLanguages.includes(saved)) {
       setLanguage(saved)
     }
   }, [])
