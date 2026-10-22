@@ -4,10 +4,8 @@ import Link from "next/link"
 import Image from "next/image"
 import {
   ArrowRight,
+  Bot,
   Download,
-  FileCheck2,
-  FileText,
-  Gavel,
   Lock,
   MessageSquare,
   Phone,
@@ -54,7 +52,7 @@ interface LocaleContent {
   heroImageCaption: string
   evidenceImageTag: string
   counselorImageTag: string
-  
+
   // Terminal 1 (Forensic)
   intake1Tag: string
   intake1Title: string
@@ -118,13 +116,13 @@ const LOCALES: Record<string, LocaleContent> = {
       { number: "8044", title: "Crisis Referral", hours: "Confidential" },
       { number: "991", title: "Federal Police", hours: "Cyber Crime Unit" },
     ],
-    institutionalHeader: "Federal Democratic Republic of Ethiopia • Civic Safety & Evidence Preservation",
+    institutionalHeader: "Safety & Evidence Preservation",
     portalTitle: "Digital Evidence Preservation & Crisis Support for Technology-Facilitated Abuse",
     portalDesc: "Preserve court-admissible proof from Telegram, WhatsApp, TikTok, Facebook, or SMS. Generate tamper-evident PDF dossiers mapped to Computer Crime Proclamation No. 958/2016, or access confidential, multilingual crisis support.",
     heroImageTag: "Civic Tech for Ethiopian Digital Spaces",
     heroImageCaption: "Preserve court-admissible proof before messages are deleted on Telegram, WhatsApp, TikTok or SMS.",
     evidenceImageTag: "Cryptographic Chain of Custody",
-    counselorImageTag: "Confidential In-Person & Remote Support",
+    counselorImageTag: "Automated 24/7 AI Safety Guidance",
 
     intake1Tag: "Forensic Ingestion",
     intake1Title: "Preserve Digital Evidence",
@@ -138,11 +136,11 @@ const LOCALES: Record<string, LocaleContent> = {
     ],
 
     intake2Tag: "Support Protocol",
-    intake2Title: "Confidential Crisis Counselor",
-    intake2Desc: "Talk privately with our trauma-informed peer counselor. Get actionable safety planning, boundary enforcement guidelines, and immediate regional shelter referrals across Ethiopia.",
-    intake2Action: "Open Crisis Counselor",
+    intake2Title: "AI Support Chat (24/7)",
+    intake2Desc: "Chat privately with our automated AI assistant. Get instant digital safety guidance, evidence preservation advice, boundary checklists, and regional emergency shelter referrals across Ethiopia.",
+    intake2Action: "Open AI Support Chat",
     intake2Specs: [
-      "Languages: Afaan Oromoo, አማርኛ, ትግርኛ, Soomaali, English",
+      "Automated AI assistant (Zero identifying chats stored)",
       "Evidence preservation guidance and risk de-escalation",
       "Direct connection to verified shelter and legal aid directories",
       "Strict confidentiality • No conversation logs stored",
@@ -233,13 +231,13 @@ const LOCALES: Record<string, LocaleContent> = {
       { number: "8044", title: "የአደጋ ጊዜ ድጋፍ", hours: "ሚስጥራዊ" },
       { number: "991", title: "የፌዴራል ፖሊስ", hours: "የሳይበር ክፍል" },
     ],
-    institutionalHeader: "የኢትዮጵያ ፌዴራላዊ ዲሞክራሲያዊ ሪፐብሊክ • የዲጂታል ማስረጃ ማሰባሰቢያ እና የደህንነት መድረክ",
+    institutionalHeader: "የዲጂታል ማስረጃ ማሰባሰቢያ እና የደህንነት መድረክ",
     portalTitle: "የሳይበር ጾታዊ ጥቃት ማስረጃ ማሰባሰቢያ እና የስነ-ልቦና ድጋፍ መድረክ",
     portalDesc: "በቴሌግራም፣ ዋትስአፕ፣ ቲክቶክ፣ ፌስቡክ ወይም ኤስኤምኤስ የደረሰቦትን ጥቃት ማስረጃ በህጋዊ መንገድ ይመዝግቡ። በኮምፒውተር ወንጀል አዋጅ 958/2008 መሰረት የክስ ሰነድ ያዘጋጁ።",
     heroImageTag: "የኢትዮጵያ ዲጂታል ደህንነት መድረክ",
     heroImageCaption: "መልዕክቶች በቴሌግራም፣ ዋትስኣፕ፣ ቲክቶክ ወይም ኤስኤምኤስ ከመጥፋታቸው በፊት ህጋዊ ማስረጃዎን ይመዝግቡ።",
     evidenceImageTag: "ክሪፕቶግራፊክ የማስረጃ ማረጋገጫ",
-    counselorImageTag: "ሚስጥራዊ የስነ-ልቦና እና የህግ ድጋፍ",
+    counselorImageTag: "አውቶሜትድ 24/7 የAI ደህንነት መመሪያ",
 
     intake1Tag: "የማስረጃ ትንታኔ",
     intake1Title: "የዲጂታል ማስረጃ ይመዝግቡ",
@@ -253,11 +251,11 @@ const LOCALES: Record<string, LocaleContent> = {
     ],
 
     intake2Tag: "የድጋፍ አገልግሎት",
-    intake2Title: "ሚስጥራዊ የስነ-ልቦና አማካሪ",
-    intake2Desc: "በቋንቋዎ ከአማካሪ ጋር ሚስጥራዊ ውይይት ያድርጉ። የደህንነት እቅድ፣ የስሜት መረጋጋት እና የኢትዮጵያ የህግና መጠለያ ድጋፍ መረጃዎችን ያግኙ።",
-    intake2Action: "አማካሪ ያነጋግሩ",
+    intake2Title: "የAI ድጋፍ ቻት (24/7)",
+    intake2Desc: "ከአውቶሜትድ AI ረዳታችን ጋር በሚስጥር ይወያዩ። ፈጣን የዲጂታል ደህንነት መመሪያ፣ የማስረጃ አጠባበቅ ዘዴዎችን እና የኢትዮጵያ የአደጋ ጊዜ መጠለያዎች መረጃ ያግኙ።",
+    intake2Action: "የAI ድጋፍ ቻት ይክፈቱ",
     intake2Specs: [
-      "የሚገኙ ቋንቋዎች፡ አማርኛ፣ ኦሮምኛ፣ ትግርኛ፣ ሶማሊኛ፣ እንግሊዝኛ",
+      "አውቶሜትድ የAI ድጋፍ (ምንም የግል መረጃ አይቀመጥም)",
       "የደህንነት እቅድ እና የስጋት መቀነሻ መመሪያዎች",
       "ወደ ተረጋገጡ የኢትዮጵያ ድጋፍ ድርጅቶችና መጠለያዎች ፈጣን ግንኙነት",
       "100% ሚስጥራዊ • ምንም የውይይት መረጃ አይቀመጥም",
@@ -348,13 +346,13 @@ const LOCALES: Record<string, LocaleContent> = {
       { number: "8044", title: "Balaa Yeroo", hours: "Iccitii" },
       { number: "991", title: "Poolisii Federaalaa", hours: "Yakka Saayibarii" },
     ],
-    institutionalHeader: "Rippaabiliika Dimokiraatawaa Federaalawaa Itoophiyaa • Nageenya Lammilee fi Eegumsa Ragaa",
+    institutionalHeader: "Nageenya Lammilee fi Eegumsa Ragaa",
     portalTitle: "Wlaltii Eegumsa Ragaa Miidhaa Saayibarii fi Deeggarsa Yeroo Balaa",
     portalDesc: "Telegram, WhatsApp, TikTok, Facebook ykn SMS irraa ragaalee mana murtiitti fudhatama qaban eegaa. Akka Labsii Yakkoota Kompiitaraa Lakk. 958/2008 tti sanada himataa qopheessaa.",
     heroImageTag: "Nageenya Diijitaalaa Itoophiyaa",
     heroImageCaption: "Ergaawwan Telegram, WhatsApp, TikTok ykn SMS irraa osoo hin haqamin dura ragaa mana murtii qabadhaa.",
     evidenceImageTag: "Kiriptoogiraafii Eegumsa Ragaa",
-    counselorImageTag: "Gorsa Iccitii fi Deeggarsa Seeraa",
+    counselorImageTag: "Qajeelfama Nageenyaa AI 24/7",
 
     intake1Tag: "Qaaccessa Ragaa",
     intake1Title: "Ragaa Diijitaalaa Eegaa",
@@ -368,11 +366,11 @@ const LOCALES: Record<string, LocaleContent> = {
     ],
 
     intake2Tag: "Tajaajila Deeggarsaa",
-    intake2Title: "Gorsaa Iccitii Yeroo Balaa",
-    intake2Desc: "Afaan keessaniin gorsaa waliin haasa'aa. Karoora nageenyaa, dhiphina hir'isuu fi daandiilee seeraa Itoophiyaa beekaa.",
-    intake2Action: "Gorsaa Waliin Haasawaa",
+    intake2Title: "Haasa'a Deeggarsa AI (24/7)",
+    intake2Desc: "Gargaaraa AI owtomaatikii wajjin iccitiin haasa'aa. Qajeelfama nageenya dijitaalaa, ragaa seeraa qabachuu fi odeeffannoo sarara gargaarsa ariifachiisaa Itoophiyaa argadhaa.",
+    intake2Action: "Haasa'a AI Bani",
     intake2Specs: [
-      "Afaanota: Afaan Oromoo, Amaaraa, Tigriffaa, Soomaalii, Ingiliffaa",
+      "Gargaarsa AI owtomaatikii (Galmeen hin kuufamu)",
       "Qajeelfama eegumsa ragaa fi tasgabbii",
       "Dhaabbilee deeggarsaa fi bakka qubannaa amansiisoo waliin walqunnamsiisuu",
       "100% Iccitii • Haasa'aan tokkollee hin kuufamu",
@@ -469,7 +467,7 @@ const LOCALES: Record<string, LocaleContent> = {
     heroImageTag: "ናይ ኢትዮጵያ ዲጂታል ድሕነት መድረኽ",
     heroImageCaption: "መልእኽትታት ካብ ቴሌግራም፡ ዋትስኣፕ፡ ቲክቶክ ወይ ኤስኤምኤስ ቅድሚ ምድምሳሶም ሕጋዊ መርትዖኹም ዓቅቡ።",
     evidenceImageTag: "ክሪፕቶግራፊክ መርትዖ ምዕቃብ",
-    counselorImageTag: "ምስጢራዊ ናይ ስነ-ልቦናን ሕግን ደገፍ",
+    counselorImageTag: "ኣውቶማቲክ 24/7 ናይ AI ድሕነት መምርሒ",
 
     intake1Tag: "ምርመራ መርትዖ",
     intake1Title: "ዲጂታል መርትዖ ዓቅቡ",
@@ -483,11 +481,11 @@ const LOCALES: Record<string, LocaleContent> = {
     ],
 
     intake2Tag: "ናይ ደገፍ ኣገልግሎት",
-    intake2Title: "ምስጢራዊ ናይ ስነ-ልቦና ኣማኻሪ",
-    intake2Desc: "ብቋንቋኹም ምስ ኣማኻሪ ብምስጢር ተዘራረቡ። ናይ ድሕነት ውጥን፡ ምቅላል ጭንቀትን ናይ ኢትዮጵያ ማሕበራት ደገፍን ረኺቡ።",
-    intake2Action: "ምስ ኣማኻሪ ተዘራረቡ",
+    intake2Title: "ናይ AI ደገፍ ቻት (24/7)",
+    intake2Desc: "ምስ ኣውቶማቲክ ናይ AI ረዳእቲ ብምስጢር ተዘራረቡ። ቅልጡፍ ናይ ዲጂታል ድሕነት መምርሒ፡ ናይ መርትዖ ምዕቃብ ሜላታትን ናይ ኢትዮጵያ ህጹጽ ረድኤት ኣድራሻታትን ረኺቡ።",
+    intake2Action: "ናይ AI ደገፍ ቻት ክፈቱ",
     intake2Specs: [
-      "ቋንቋታት፡ ትግርኛ፡ ኣምሓርኛ፡ ኦሮምኛ፡ ሶማሊኛ፡ እንግሊዝኛ",
+      "ኣውቶማቲክ ናይ AI ደገፍ (ዝኾነ መዝገብ ኣይዕቀብን)",
       "መርትዖ ምዕቃብን ናይ ሓደጋ ምቅላል መምርሒታትን",
       "ናብ ዝተረጋገጹ ናይ ኢትዮጵያ ማእከላት ደገፍ ቀጥታዊ ርክብ",
       "100% ምስጢራዊ • ዝኾነ ናይ ዕላል መዝገብ ኣይዕቀብን",
@@ -584,7 +582,7 @@ const LOCALES: Record<string, LocaleContent> = {
     heroImageTag: "Madal Badbaadada Dijitaalka ee Itoobiya",
     heroImageCaption: "Xafid caddeymaha maxkamaddu aqbasho ka hor inta aan farriimaha Telegram, WhatsApp, TikTok ama SMS la tirtirin.",
     evidenceImageTag: "Xaqiijinta Cryptographic ee Caddeynta",
-    counselorImageTag: "Taageero Qarsoodi ah oo Dhanka Maskaxda & Sharciga ah",
+    counselorImageTag: "Hanuuninta Badbaadada ee AI 24/7",
 
     intake1Tag: "Qaadashada Caddeynta",
     intake1Title: "Xafid Caddeymaha Dhijitaalka ah",
@@ -598,11 +596,11 @@ const LOCALES: Record<string, LocaleContent> = {
     ],
 
     intake2Tag: "Habka Taageerada",
-    intake2Title: "La-taliyaha Qarsoodiga ah",
-    intake2Desc: "Kula hadal si qarsoodi ah la-taliye khabiir ah luqaddaada. Hel qorshaha badbaadada, yaraynta cabsida, iyo xiriirinta goobaha magangalyada ee Itoobiya.",
-    intake2Action: "Fur La-taliyaha",
+    intake2Title: "Sheekaysiga Taageerada AI (24/7)",
+    intake2Desc: "Si qarsoodi ah ula hadal caawiyaha tooska ah ee AI. Hel hagid degdeg ah oo ku saabsan badbaadada digital-ka, ilaalinta caddeymaha, iyo macluumaadka xarumaha degdegga ah ee Itoobiya.",
+    intake2Action: "Fur Sheekaysiga AI",
     intake2Specs: [
-      "Luqadaha: Soomaali, Afaan Oromoo, አማርኛ, ትግርኛ, English",
+      "Taageero toos ah oo AI ah (Wax xog ah lama keydiyo)",
       "Hanuuninta badbaadada iyo xafidista caddeymaha",
       "Xiriirinta goobaha taageerada iyo gargaarka sharciga ee la xaqiijiyay",
       "100% Qarsoodi • Ma jiro wadahadal la keydinayo",
@@ -720,12 +718,12 @@ export default function LandingPage() {
       </div>
 
       <main className="flex-1">
-        
+
         {/* Institutional Masthead Header (Mobile-First 2-Column Responsive Layout) */}
         <section className="border-b border-border bg-muted/20 py-10 md:py-16">
           <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-              
+
               {/* Left Column: Direct Institutional Actions */}
               <div className="lg:col-span-7 space-y-4">
                 <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-border bg-background text-xs font-medium text-muted-foreground">
@@ -747,9 +745,9 @@ export default function LandingPage() {
                       {l.intake1Action}
                     </Link>
                   </Button>
-                  <Button asChild variant="outline" className="rounded-md h-9 sm:h-10 px-4 text-xs sm:text-sm font-semibold">
+                  <Button asChild variant="outline" className="rounded-md h-9 sm:h-10 px-4 text-xs sm:text-sm font-semibold border-emerald-600/30 hover:bg-emerald-50 dark:hover:bg-emerald-950/20">
                     <Link href="/chat">
-                      <MessageSquare className="h-4 w-4 mr-2 text-blue-600" />
+                      <Bot className="h-4 w-4 mr-2 text-emerald-600" />
                       {l.intake2Action}
                     </Link>
                   </Button>
@@ -811,7 +809,7 @@ export default function LandingPage() {
         <section className="py-10 border-b border-border">
           <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
             <div className="grid md:grid-cols-2 gap-6">
-              
+
               {/* Terminal 1: Forensic Evidence Intake */}
               <div className="border border-border rounded-lg bg-card overflow-hidden flex flex-col justify-between">
                 <div className="relative h-44 sm:h-48 w-full bg-muted overflow-hidden">
@@ -865,52 +863,60 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Terminal 2: Confidential Crisis Counselor */}
+              {/* Terminal 2: Automated AI Support Chat */}
               <div className="border border-border rounded-lg bg-card overflow-hidden flex flex-col justify-between">
-                <div className="relative h-44 sm:h-48 w-full bg-muted overflow-hidden">
-                  <Image
-                    src="/counselor-support.jpg"
-                    alt="Confidential Ethiopian counselor in consultation"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                  <div className="absolute top-3 left-3">
-                    <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-blue-300 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded border border-blue-500/30">
+                <div className="relative h-44 sm:h-48 w-full bg-linear-to-br from-emerald-950 via-slate-900 to-slate-950 p-5 flex flex-col justify-between text-white overflow-hidden border-b border-border/60">
+                  <div className="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px] opacity-20" />
+                  <div className="relative z-10 flex items-center justify-between">
+                    <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-emerald-300 bg-emerald-950/80 backdrop-blur-md px-2 py-0.5 rounded border border-emerald-500/30">
                       {l.intake2Tag}
                     </span>
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-black/60 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      AUTOMATED AI
+                    </span>
                   </div>
-                  <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <div className="text-[11px] font-mono text-blue-300 font-semibold mb-0.5">
-                      {l.counselorImageTag}
+
+                  <div className="relative z-10 flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0 shadow-lg">
+                      <Bot className="w-6 h-6" />
                     </div>
-                    <div className="text-xs text-white/90 font-medium">
-                      Trauma-Informed Peer Guidance in 5 Ethiopian Languages
+                    <div>
+                      <div className="text-[11px] font-mono text-emerald-300 font-semibold">
+                        {l.counselorImageTag}
+                      </div>
+                      <div className="text-xs text-white/90 font-medium">
+                        Automated Guidance in 5 Ethiopian Languages (Zero-Trace)
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="p-5 sm:p-6 space-y-4 flex-1 flex flex-col justify-between">
                   <div className="space-y-3">
-                    <h2 className="text-lg font-bold text-foreground">
-                      {l.intake2Title}
-                    </h2>
+                    <div className="flex items-center gap-2">
+                      <h2 className="text-lg font-bold text-foreground">
+                        {l.intake2Title}
+                      </h2>
+                      <span className="text-[9px] font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                        AI SYSTEM
+                      </span>
+                    </div>
                     <p className="text-xs text-muted-foreground leading-relaxed">
                       {l.intake2Desc}
                     </p>
                     <div className="border-t border-border/60 pt-3 space-y-1.5">
                       {l.intake2Specs.map((spec, i) => (
                         <div key={i} className="flex items-start gap-2 text-xs text-foreground/80">
-                          <span className="text-blue-600 font-bold">•</span>
+                          <span className="text-emerald-600 font-bold">•</span>
                           <span>{spec}</span>
                         </div>
                       ))}
                     </div>
                   </div>
-                  <Button asChild variant="outline" className="w-full rounded-md h-9 text-xs font-semibold mt-4">
+                  <Button asChild variant="outline" className="w-full rounded-md h-9 text-xs font-semibold mt-4 border-emerald-600/30 hover:bg-emerald-50 dark:hover:bg-emerald-950/20">
                     <Link href="/chat">
-                      <MessageSquare className="h-3.5 w-3.5 mr-2 text-blue-600" />
+                      <Bot className="h-3.5 w-3.5 mr-2 text-emerald-600" />
                       {l.intake2Action}
                       <ArrowRight className="h-3.5 w-3.5 ml-auto" />
                     </Link>
@@ -922,93 +928,11 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Chain-of-Custody Evidence Dossier Specimen (High-Density Forensic Layout) */}
-        <section className="py-12 bg-muted/20 border-b border-border">
-          <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
-            <div className="space-y-4 mb-6">
-              <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <FileCheck2 className="h-4 w-4 text-emerald-700" />
-                {l.specimenTitle}
-              </h2>
-              <p className="text-xs text-muted-foreground">
-                {l.specimenNotice}
-              </p>
-            </div>
-
-            {/* Specimen Sheet */}
-            <div className="border border-border rounded-md bg-card p-5 sm:p-6 space-y-4 font-mono text-xs shadow-xs">
-              
-              <div className="flex flex-wrap items-center justify-between pb-3 border-b border-border gap-2">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-foreground">{l.fieldDocketId}</span>
-                  <span className="text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">
-                    ET-CRIM-2026-9812A
-                  </span>
-                </div>
-                <span className="text-[11px] text-muted-foreground">
-                  INTAKE: 2026-10-19 14:32:08 UTC • CHAIN-VERIFIED
-                </span>
-              </div>
-
-              {/* SHA-256 Hash Box */}
-              <div className="p-3 bg-muted/40 rounded border border-border/80 space-y-1">
-                <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
-                  {l.fieldHash}
-                </span>
-                <p className="text-[11px] text-foreground break-all select-all font-mono">
-                  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-                </p>
-              </div>
-
-              {/* Data Table */}
-              <div className="grid sm:grid-cols-2 gap-3 pt-1">
-                <div className="border border-border/70 rounded p-2.5 space-y-1">
-                  <span className="text-[10px] text-muted-foreground uppercase">{l.fieldPlatform}</span>
-                  <div className="font-sans text-xs font-semibold text-foreground">Telegram Channel & Direct Message</div>
-                </div>
-                <div className="border border-border/70 rounded p-2.5 space-y-1">
-                  <span className="text-[10px] text-muted-foreground uppercase">{l.fieldClassification}</span>
-                  <div className="font-sans text-xs font-semibold text-rose-700 dark:text-rose-400">Threats & Extortion (Sextortion)</div>
-                </div>
-                <div className="border border-border/70 rounded p-2.5 space-y-1">
-                  <span className="text-[10px] text-muted-foreground uppercase">{l.fieldRiskScore}</span>
-                  <div className="font-sans text-xs font-bold text-foreground">85 / 100 — Immediate Protection Recommended</div>
-                </div>
-                <div className="border border-border/70 rounded p-2.5 space-y-1">
-                  <span className="text-[10px] text-muted-foreground uppercase">{l.fieldLaw}</span>
-                  <div className="font-sans text-xs font-semibold text-foreground">Proclamation 958/2016 Art. 13 & 14</div>
-                </div>
-              </div>
-
-              {/* Action row */}
-              <div className="flex flex-wrap items-center justify-between pt-3 border-t border-border gap-3">
-                <p className="text-[11px] text-muted-foreground italic font-sans">
-                  {l.specimenRetentionNote}
-                </p>
-                <div className="flex items-center gap-2">
-                  <Button asChild size="sm" className="bg-emerald-700 hover:bg-emerald-800 text-white rounded-md text-xs font-sans h-8">
-                    <Link href="/upload">
-                      <FileCheck2 className="h-3.5 w-3.5 mr-1.5" />
-                      {l.btnGenerateDossier}
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="sm" className="rounded-md text-xs font-sans h-8">
-                    <Link href="/resources">
-                      <Gavel className="h-3.5 w-3.5 mr-1.5" />
-                      {l.btnViewRights}
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
 
         {/* Ethiopian Cybercrime Statutory Reference Matrix (Clean Table Layout) */}
         <section className="py-12 border-b border-border">
           <div className="container mx-auto px-4 sm:px-6 max-w-5xl space-y-6">
-            
+
             <div className="space-y-1">
               <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                 <Scale className="h-4 w-4 text-emerald-700" />
@@ -1071,7 +995,7 @@ export default function LandingPage() {
         {/* Forensic Custody Protocol (Horizontal / Structured Steps) */}
         <section className="py-12 bg-muted/20 border-b border-border">
           <div className="container mx-auto px-4 sm:px-6 max-w-5xl space-y-6">
-            
+
             <div className="space-y-1">
               <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                 <Shield className="h-4 w-4 text-emerald-700" />

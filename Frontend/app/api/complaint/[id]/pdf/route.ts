@@ -5,7 +5,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const { searchParams } = new URL(request.url)
-  const language = searchParams.get("lang") || "en"
+  const language = searchParams.get("lang") || searchParams.get("language") || "en"
   const isDownload = searchParams.get("download") === "true"
   const disposition = isDownload ? "attachment" : "inline"
 

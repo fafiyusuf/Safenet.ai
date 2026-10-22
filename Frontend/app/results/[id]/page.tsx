@@ -7,6 +7,7 @@ import {
   AlertTriangle,
   ArrowLeft,
   ArrowRight,
+  Bot,
   Check,
   CheckCircle2,
   Copy,
@@ -95,7 +96,7 @@ const RESULTS_UI: Record<Language, {
     recordAnother: "Submit New Evidence",
     dossierTitle: "Forensic Evidence Dossier",
     shaCert: "Cryptographic Chain of Custody Seal",
-    counselorGuidance: "Counselor Safety Guidance",
+    counselorGuidance: "AI Safety Analysis & Guidance",
     categoryAssessment: "Threat Category & Severity Assessment",
     flaggedPhrases: "Flagged Threat Phrases Detected",
     legalStatuteTitle: "Applicable Ethiopian Legal Statute",
@@ -110,8 +111,8 @@ const RESULTS_UI: Record<Language, {
     evidencePdfDesc: "Tamper-proof record with cryptographic SHA-256 hash seal",
     policeFormTitle: "Federal Police Complaint Form",
     policeFormDesc: "Pre-formatted complaint tailored for the Cyber Crime Unit",
-    counselorTitle: "Confidential Safety Counselor",
-    counselorDesc: "Discuss this report confidentially and plan your safety",
+    counselorTitle: "SafeNet AI Support Chat",
+    counselorDesc: "Discuss this report confidentially with our automated AI assistant",
     directoryTitle: "Ethiopian Civic Support Network",
     directoryDesc: "Connect with EWLA legal aid, AWSAD shelters, and 24/7 hotlines",
     copiedDossierId: "Dossier ID Copied!",
@@ -135,7 +136,7 @@ const RESULTS_UI: Record<Language, {
     recordAnother: "አዲስ ማስረጃ ይመዝግቡ",
     dossierTitle: "የማስረጃ ግምገማ ሰነድ",
     shaCert: "የማስረጃው ክሪፕቶግራፊክ ማረጋገጫ (SHA-256)",
-    counselorGuidance: "የአማካሪው የደህንነት ምክር",
+    counselorGuidance: "የAI የደህንነት ትንታኔ እና መመሪያ",
     categoryAssessment: "የጥቃት ምድብ እና የክብደት ትንታኔ",
     flaggedPhrases: "የተለዩ አስጊ ቃላት / ሐረጎች",
     legalStatuteTitle: "ተፈጻሚ የኢትዮጵያ ህግ ማጣቀሻ",
@@ -150,8 +151,8 @@ const RESULTS_UI: Record<Language, {
     evidencePdfDesc: "የSHA-256 ማህተም ያለበት የማስረጃ ሰነድ",
     policeFormTitle: "የፌዴራል ፖሊስ ቅሬታ ማመልከቻ",
     policeFormDesc: "ለሳይበር ወንጀል ምርመራ ክፍል የተዘጋጀ ቅጽ",
-    counselorTitle: "ስለዚህ ክስተት ከአማካሪ ጋር ይነጋገሩ",
-    counselorDesc: "ስሜታዊ ድጋፍ እና የደህንነት እቅድ ማውጣት",
+    counselorTitle: "ስለዚህ ክስተት ከAI ድጋፍ ቻት ጋር ይነጋገሩ",
+    counselorDesc: "ከአውቶሜትድ የAI ረዳት ጋር ሚስጥራዊ የደህንነት ውይይት ያድርጉ",
     directoryTitle: "የድጋፍ ድርጅቶች ማውጫ",
     directoryDesc: "EWLA፣ AWSAD እና የአደጋ ጊዜ መጠለያዎች",
     copiedDossierId: "የሰነድ ቁጥር ተቀድቷል!",
@@ -175,7 +176,7 @@ const RESULTS_UI: Record<Language, {
     recordAnother: "Ragaa Haaraa Galmeessi",
     dossierTitle: "Galmee Qorannoo Ragaa",
     shaCert: "Chaappaa Ragaa Kiripptoogiraafii (SHA-256)",
-    counselorGuidance: "Gorsa Nageenyaa Gorsituu",
+    counselorGuidance: "Gorsa Nageenyaa AI",
     categoryAssessment: "Gosa Miidhaa fi Sadarkaa Balaa",
     flaggedPhrases: "Jechoota Balaa Qaban Adda Bahan",
     legalStatuteTitle: "Seerota Itoophiyaa Reefferansii",
@@ -190,8 +191,8 @@ const RESULTS_UI: Record<Language, {
     evidencePdfDesc: "Chaappaa amanamummaa SHA-256 kan qabu",
     policeFormTitle: "Iyyannoo Poolisii Federaalaa",
     policeFormDesc: "Kutaa Qorannoo Yakka Saayibariitiif kan qophaa'e",
-    counselorTitle: "Gorsituu Nageenyaa Iccitii",
-    counselorDesc: "Gorsa miiraa fi karoora nageenyaa dhuunfaa",
+    counselorTitle: "Haasa'a Deeggarsa AI",
+    counselorDesc: "Gargaaraa AI wajjin haasa'a dhuunfaa godhaa",
     directoryTitle: "Dhaabbilee Deeggarsa Itoophiyaa",
     directoryDesc: "EWLA, AWSAD fi sararoota bilbilaa 24/7",
     copiedDossierId: "Lakk. Galmee Koppiita'eera!",
@@ -215,7 +216,7 @@ const RESULTS_UI: Record<Language, {
     recordAnother: "ሓድሽ ፍጻመ መዝግብ",
     dossierTitle: "ሰነድ መጽናዕቲ መርትዖ",
     shaCert: "ክሪፕቶግራፊክ ማሕተም መርትዖ (SHA-256)",
-    counselorGuidance: "ናይ ድሕነት ምኽሪ ኣማኻሪት",
+    counselorGuidance: "ናይ AI ድሕነት ትንታነን ምኽርን",
     categoryAssessment: "ዓይነት መጥቃዕትን ገምጋም ሓደጋን",
     flaggedPhrases: "ዝተለለዩ ኣስገእቲ ቃላት",
     legalStatuteTitle: "ተፈጸምቲ ሕግታት ኢትዮጵያ",
@@ -230,8 +231,8 @@ const RESULTS_UI: Record<Language, {
     evidencePdfDesc: "ብSHA-256 ዝተሓትመ ዘይቅየር ሰነድ",
     policeFormTitle: "ናይ ፖሊስ ክሲ ቅጥዒ",
     policeFormDesc: "ንፌደራል ፖሊስ ሳይበር ክፍሊ ዝተዳለወ",
-    counselorTitle: "ምስ ምስጢራዊት ኣማኻሪት ተዘራረቡ",
-    counselorDesc: "ስምዒታዊ ደገፍን ናይ ድሕነት መደብን",
+    counselorTitle: "ምስ ናይ AI ደገፍ ቻት ተዘራረቡ",
+    counselorDesc: "ምስ ኣውቶማቲክ ናይ AI ረዳእቲ ብምስጢር ተዘራረቡ",
     directoryTitle: "ማሕበራት ደገፍ ኢትዮጵያ",
     directoryDesc: "ምስ EWLA፡ AWSADን መዕቆቢታትን ተራኸቡ",
     copiedDossierId: "መፍለዪ ቁጽሪ ተቐዲሑ!",
@@ -255,7 +256,7 @@ const RESULTS_UI: Record<Language, {
     recordAnother: "Diiwaangeli Dhacdo Kale",
     dossierTitle: "Galalka Caddeymaha Dhacdada",
     shaCert: "Shaabadda Caddeynta SHA-256",
-    counselorGuidance: "Talada Badbaadada ee La-taliyaha",
+    counselorGuidance: "Hanuuninta Badbaadada ee AI",
     categoryAssessment: "Nooca Xadgudubka & Qiimeynta Darnaanta",
     flaggedPhrases: "Weedhaha Khatarta ah ee la Helay",
     legalStatuteTitle: "Qodobbada Sharciga Itoobiya ee Khuseeya",
@@ -270,8 +271,8 @@ const RESULTS_UI: Record<Language, {
     evidencePdfDesc: "Dukumenti xafidan oo wata shaabadda SHA-256",
     policeFormTitle: "Foomka Dacwada Booliska",
     policeFormDesc: "Loo habeeyay Qaybta Cyber Crime ee Booliska Federaalka",
-    counselorTitle: "La-taliyaha Badbaadada ee Qarsoodiga ah",
-    counselorDesc: "Kala hadal warbixintan oo qorshee badbaadadaada",
+    counselorTitle: "Sheekaysiga Taageerada AI",
+    counselorDesc: "Kala hadal warbixintan caawiyaha tooska ah ee AI",
     directoryTitle: "Shabakadda Taageerada Itoobiya",
     directoryDesc: "La xiriir EWLA, hoyga AWSAD, iyo khadadka 24/7",
     copiedDossierId: "Dossier ID waa la koobiyey!",
@@ -688,19 +689,19 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                   </div>
                 </div>
 
-                {/* 3. Confidential Safety Counselor */}
+                {/* 3. SafeNet AI Support Chat */}
                 <div className="rounded-lg border border-border p-4 bg-muted/20 flex flex-col justify-between space-y-3">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <MessageSquare className="h-4 w-4 text-purple-700" />
+                      <Bot className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                       <h4 className="font-bold text-xs sm:text-sm text-foreground">{ui.counselorTitle}</h4>
                     </div>
                     <p className="text-[11px] text-muted-foreground leading-relaxed">{ui.counselorDesc}</p>
                   </div>
                   <div className="pt-1">
-                    <Button asChild variant="outline" size="sm" className="h-9 px-3 text-xs w-full gap-1.5 border-purple-500/30 hover:bg-purple-500/10 text-purple-800 dark:text-purple-300">
+                    <Button asChild variant="outline" size="sm" className="h-9 px-3 text-xs w-full gap-1.5 border-emerald-500/30 hover:bg-emerald-500/10 text-emerald-800 dark:text-emerald-300">
                       <Link href="/chat">
-                        <Sparkles className="h-3.5 w-3.5" />
+                        <Bot className="h-3.5 w-3.5" />
                         {ui.openChatBtn}
                       </Link>
                     </Button>

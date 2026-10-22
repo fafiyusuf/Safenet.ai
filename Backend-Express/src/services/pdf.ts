@@ -26,9 +26,14 @@ const setupFonts = (doc: PDFKit.PDFDocument): boolean => {
   ];
 
   for (const base of possiblePaths) {
+    const abyssinica = path.join(base, 'AbyssinicaSIL-Regular.ttf');
     const regular = path.join(base, 'NotoSansEthiopic-Regular.ttf');
     const bold = path.join(base, 'NotoSansEthiopic-Bold.ttf');
-    if (fs.existsSync(regular) && fs.existsSync(bold)) {
+    if (fs.existsSync(abyssinica)) {
+      doc.registerFont('Ethiopic', abyssinica);
+      doc.registerFont('Ethiopic-Bold', abyssinica);
+      return true;
+    } else if (fs.existsSync(regular) && fs.existsSync(bold)) {
       doc.registerFont('Ethiopic', regular);
       doc.registerFont('Ethiopic-Bold', bold);
       return true;
@@ -46,24 +51,15 @@ export const generateEvidencePDF = (report: Report): PassThrough => {
   const isEthiopicScript = ['am', 'ti'].includes(report.language) || /[\u1200-\u137F]/.test(report.extracted_text);
 
   // Set default body font
-  if (hasEthiopicFont && isEthiopicScript) {
-    doc.font('Ethiopic');
-  } else {
-    doc.font('Helvetica');
-  }
+  doc.font('Helvetica');
 
   // Header Banner
   doc.rect(50, 40, 512, 4).fill('#047857');
   doc.moveDown(1.5);
 
-  // Title
-  if (hasEthiopicFont) doc.font('Ethiopic-Bold');
-  else doc.font('Helvetica-Bold');
-  doc.fillColor('#0f172a').fontSize(18).text('DIGITAL EVIDENCE DOCUMENTATION', { align: 'center' });
-  
-  if (hasEthiopicFont) doc.font('Ethiopic');
-  else doc.font('Helvetica');
-  doc.fillColor('#047857').fontSize(11).text('SafeNet.ai — Cryptographic Tamper-Evident Record', { align: 'center' });
+  // Title (English)
+  doc.font('Helvetica-Bold').fillColor('#0f172a').fontSize(18).text('DIGITAL EVIDENCE DOCUMENTATION', { align: 'center' });
+  doc.font('Helvetica').fillColor('#047857').fontSize(11).text('SafeNet.ai — Cryptographic Tamper-Evident Record', { align: 'center' });
   doc.moveDown(1.5);
 
   const langLabels: Record<string, string> = {
@@ -75,28 +71,31 @@ export const generateEvidencePDF = (report: Report): PassThrough => {
   };
 
   // Metadata Card
-  doc.roundedRect(50, doc.y, 512, 90, 6).fillAndStroke('#f8fafc', '#e2e8f0');
+  doc.roundedRect(50, doc.y, 512, 92, 6).fillAndStroke('#f8fafc', '#e2e8f0');
   const metaY = doc.y + 12;
   doc.fillColor('#334155').fontSize(10);
-  doc.text(`Report ID: ${report.id}`, 65, metaY);
+  doc.font('Helvetica').text(`Report ID: ${report.id}`, 65, metaY);
   doc.text(`Timestamp: ${new Date(report.created_at).toUTCString()}`, 65, metaY + 16);
   doc.text(`Platform: ${report.platform_id.toUpperCase()}`, 65, metaY + 32);
-  doc.text(`Language: ${langLabels[report.language] || report.language}`, 65, metaY + 48);
-  if (report.file_hash) {
-    doc.fillColor('#047857').text(`SHA-256 Hash: ${report.file_hash}`, 65, metaY + 64);
+
+  const langText = `Language: ${langLabels[report.language] || report.language}`;
+  if (hasEthiopicFont && /[\u1200-\u137F]/.test(langText)) {
+    doc.font('Ethiopic').text(langText, 65, metaY + 48);
+  } else {
+    doc.font('Helvetica').text(langText, 65, metaY + 48);
   }
-  doc.y = metaY + 90;
+
+  if (report.file_hash) {
+    doc.font('Helvetica').fillColor('#047857').text(`SHA-256 Hash: ${report.file_hash}`, 65, metaY + 64);
+  }
+  doc.y = metaY + 92;
   doc.moveDown(1.5);
 
   // Classification Results
-  if (hasEthiopicFont) doc.font('Ethiopic-Bold');
-  else doc.font('Helvetica-Bold');
-  doc.fillColor('#0f172a').fontSize(13).text('CLASSIFICATION ASSESSMENT');
+  doc.font('Helvetica-Bold').fillColor('#0f172a').fontSize(13).text('CLASSIFICATION ASSESSMENT');
   doc.moveDown(0.4);
 
-  if (hasEthiopicFont) doc.font('Ethiopic');
-  else doc.font('Helvetica');
-  doc.fillColor('#334155').fontSize(10);
+  doc.font('Helvetica').fillColor('#334155').fontSize(10);
   doc.text(`Category: ${report.category.replace(/_/g, ' ').toUpperCase()}`);
   doc.text(`Severity Score: ${report.severity}/100`);
   doc.text(`Risk Level: ${report.risk_level.toUpperCase()}`);
@@ -104,47 +103,52 @@ export const generateEvidencePDF = (report: Report): PassThrough => {
   doc.moveDown(1.2);
 
   // Analysis Rationale
-  if (hasEthiopicFont) doc.font('Ethiopic-Bold');
-  else doc.font('Helvetica-Bold');
-  doc.fillColor('#0f172a').fontSize(13).text('ANALYSIS RATIONALE');
+  doc.font('Helvetica-Bold').fillColor('#0f172a').fontSize(13).text('ANALYSIS RATIONALE');
   doc.moveDown(0.4);
 
-  if (hasEthiopicFont && isEthiopicScript) doc.font('Ethiopic');
-  else doc.font('Helvetica');
-  doc.fillColor('#334155').fontSize(10).text(report.rationale || 'No rationale provided.', { align: 'justify' });
+  const rationale = report.rationale || 'No rationale provided.';
+  if (hasEthiopicFont && /[\u1200-\u137F]/.test(rationale)) {
+    doc.font('Ethiopic');
+  } else {
+    doc.font('Helvetica');
+  }
+  doc.fillColor('#334155').fontSize(10).text(rationale, { align: 'justify' });
   doc.moveDown(1.2);
 
   // Flagged Phrases
   if (report.highlighted_phrases && report.highlighted_phrases.length > 0) {
-    if (hasEthiopicFont) doc.font('Ethiopic-Bold');
-    else doc.font('Helvetica-Bold');
-    doc.fillColor('#b91c1c').fontSize(12).text('FLAGGED PHRASES / INDICATORS');
+    doc.font('Helvetica-Bold').fillColor('#b91c1c').fontSize(12).text('FLAGGED PHRASES / INDICATORS');
     doc.moveDown(0.3);
 
-    if (hasEthiopicFont && isEthiopicScript) doc.font('Ethiopic');
-    else doc.font('Helvetica');
     doc.fillColor('#334155').fontSize(10);
     report.highlighted_phrases.forEach(phrase => {
+      if (hasEthiopicFont && /[\u1200-\u137F]/.test(phrase)) {
+        doc.font('Ethiopic');
+      } else {
+        doc.font('Helvetica');
+      }
       doc.text(`• ${phrase}`);
     });
     doc.moveDown(1.2);
   }
 
   // Extracted Evidence Content
-  if (hasEthiopicFont) doc.font('Ethiopic-Bold');
-  else doc.font('Helvetica-Bold');
-  doc.fillColor('#0f172a').fontSize(13).text('EXTRACTED EVIDENCE CONTENT');
+  doc.font('Helvetica-Bold').fillColor('#0f172a').fontSize(13).text('EXTRACTED EVIDENCE CONTENT');
   doc.moveDown(0.4);
 
   doc.rect(50, doc.y, 512, 12).fill('#f1f5f9');
   doc.y += 4;
 
-  if (hasEthiopicFont && isEthiopicScript) doc.font('Ethiopic');
-  else doc.font('Helvetica');
+  if (hasEthiopicFont && /[\u1200-\u137F]/.test(report.extracted_text)) {
+    doc.font('Ethiopic');
+  } else {
+    doc.font('Helvetica');
+  }
   doc.fillColor('#1e293b').fontSize(9).text(report.extracted_text.substring(0, 3000), { align: 'justify' });
   doc.moveDown(2);
 
   // Chain of custody notice
+  if (doc.y > 670) doc.addPage();
   doc.roundedRect(50, doc.y, 512, 45, 4).fillAndStroke('#ecfdf5', '#a7f3d0');
   const footerBoxY = doc.y + 8;
   doc.fillColor('#065f46').fontSize(8);
@@ -153,6 +157,41 @@ export const generateEvidencePDF = (report: Report): PassThrough => {
 
   doc.end();
   return stream;
+};
+
+const CATEGORY_TRANSLATIONS: Record<string, Record<string, string>> = {
+  am: {
+    threats: 'ማስፈራራት (Threats)',
+    harassment: 'ትንኮሳ (Harassment)',
+    intimidation_blackmail: 'ማስገደድና ማጥላላት (Intimidation & Blackmail)',
+    doxxing: 'የግል መረጃ ማጋለጥ (Doxxing)',
+    hate_speech: 'የጥላቻ ንግግር (Hate Speech)',
+    non_abusive: 'ጥቃት ያልተገኘበት (Non-Abusive)',
+  },
+  ti: {
+    threats: 'ምፍርራህ (Threats)',
+    harassment: 'ምግልባጥ (Harassment)',
+    intimidation_blackmail: 'ምፍርራህን ምጥላዕን (Intimidation & Blackmail)',
+    doxxing: 'ናይ ብሕቲ መረዳእታ ምዝርጋሕ (Doxxing)',
+    hate_speech: 'ዘረባ ጽልኢ (Hate Speech)',
+    non_abusive: 'ጥቃዕቲ ዘይብሉ (Non-Abusive)',
+  },
+  om: {
+    threats: 'Sodaachisuu (Threats)',
+    harassment: 'Qoccolloo (Harassment)',
+    intimidation_blackmail: 'Sodaachisuu fi Saamicha (Blackmail)',
+    doxxing: 'Odeeffannoo Dhuunfaa Facaasuu (Doxxing)',
+    hate_speech: 'Haasaa Jibbiinsaa (Hate Speech)',
+    non_abusive: 'Miidhaa Kan Hin Qabne (Non-Abusive)',
+  },
+  so: {
+    threats: 'Hanjabaad (Threats)',
+    harassment: 'Faraxumeyn (Harassment)',
+    intimidation_blackmail: 'Cabsigelin & Baad (Blackmail)',
+    doxxing: 'Faafinta Xogta Gaarka ah (Doxxing)',
+    hate_speech: 'Hadalka Nacaybka (Hate Speech)',
+    non_abusive: 'Aan Dhib Lahayn (Non-Abusive)',
+  },
 };
 
 export const generateComplaintPDF = (report: Report, language: string = 'en'): PassThrough => {
@@ -176,12 +215,13 @@ export const generateComplaintPDF = (report: Report, language: string = 'en'): P
     doc.font('Ethiopic').fontSize(10).fillColor('#475569').text('አዲስ አበባ፣ ኢትዮጵያ');
     doc.moveDown(1);
 
+    const catLabel = (CATEGORY_TRANSLATIONS.am && CATEGORY_TRANSLATIONS.am[report.category]) || report.category.replace(/_/g, ' ').toUpperCase();
     doc.font('Ethiopic-Bold').fontSize(12).fillColor('#0f172a').text('የክስተት ዝርዝር');
     doc.moveDown(0.4);
     doc.font('Ethiopic').fontSize(10).fillColor('#334155');
     doc.text(`ቀን: ${new Date(report.created_at).toLocaleDateString()}`);
     doc.text(`መድረክ: ${report.platform_id.toUpperCase()}`);
-    doc.text(`የጥቃት ዓይነት: ${report.category}`);
+    doc.text(`የጥቃት ዓይነት: ${catLabel}`);
     doc.text(`የስጋት ደረጃ: ${report.risk_level === 'high' ? 'ከፍተኛ' : report.risk_level === 'medium' ? 'መካከለኛ' : 'ዝቅተኛ'}`);
     doc.moveDown(1);
 
@@ -194,8 +234,12 @@ export const generateComplaintPDF = (report: Report, language: string = 'en'): P
     doc.text('• የጥላቻ ንግግርና የውሸት መረጃ መከላከል አዋጅ ቁጥር 1185/2012');
     doc.moveDown(1);
 
-    doc.font('Ethiopic-Bold').fontSize(12).fillColor('#0f172a').text('የማስረጃ ይዘት ማጠቃለያ');
+    doc.font('Ethiopic-Bold').fontSize(12).fillColor('#0f172a').text('የማስረጃ ይዘትና የትንታኔ ማጠቃለያ');
     doc.moveDown(0.4);
+    if (report.rationale) {
+      doc.font('Ethiopic').fontSize(9.5).fillColor('#334155').text(`ትንታኔ: ${report.rationale}`, { align: 'justify' });
+      doc.moveDown(0.5);
+    }
     doc.font('Ethiopic').fontSize(9).fillColor('#1e293b');
     doc.text(report.extracted_text.substring(0, 1800), { align: 'justify' });
     doc.moveDown(1.5);
@@ -207,6 +251,7 @@ export const generateComplaintPDF = (report: Report, language: string = 'en'): P
     doc.text('2. የሴቶችና ማህበራዊ ጉዳይ ሚኒስቴር | ስልክ: +251-111-515179 / 7711');
     doc.moveDown(2);
 
+    if (doc.y > 690) doc.addPage();
     doc.font('Ethiopic').fontSize(8).fillColor('#64748b').text(`ይህ ሰነድ በSafeNet.ai አማካኝነት የተዘጋጀ ነው | ${new Date().toISOString()}`, { align: 'center' });
   } else if (language === 'ti' && hasEthiopicFont) {
     // Tigrinya Complaint
@@ -222,12 +267,13 @@ export const generateComplaintPDF = (report: Report, language: string = 'en'): P
     doc.font('Ethiopic').fontSize(10).fillColor('#475569').text('ኣዲስ ኣበባ፡ ኢትዮጵያ');
     doc.moveDown(1);
 
+    const catLabel = (CATEGORY_TRANSLATIONS.ti && CATEGORY_TRANSLATIONS.ti[report.category]) || report.category.replace(/_/g, ' ').toUpperCase();
     doc.font('Ethiopic-Bold').fontSize(12).fillColor('#0f172a').text('ዝርዝር ፍጻመ');
     doc.moveDown(0.4);
     doc.font('Ethiopic').fontSize(10).fillColor('#334155');
     doc.text(`ዕለት: ${new Date(report.created_at).toLocaleDateString()}`);
     doc.text(`መድረኽ: ${report.platform_id.toUpperCase()}`);
-    doc.text(`ዓይነት መጥቃዕቲ: ${report.category}`);
+    doc.text(`ዓይነት መጥቃዕቲ: ${catLabel}`);
     doc.text(`ደረጃ ሓደጋ: ${report.risk_level === 'high' ? 'ላዕለዋይ' : report.risk_level === 'medium' ? 'ማእከላይ' : 'ትሑት'}`);
     doc.moveDown(1);
 
@@ -240,8 +286,12 @@ export const generateComplaintPDF = (report: Report, language: string = 'en'): P
     doc.text('• ኣዋጅ ምክልኻል ዘረባ ጽልእን ሓሶት ሓበሬታን ቍጽሪ 1185/2012');
     doc.moveDown(1);
 
-    doc.font('Ethiopic-Bold').fontSize(12).fillColor('#0f172a').text('ጽማቕ ትሕዝቶ መረዳእታ');
+    doc.font('Ethiopic-Bold').fontSize(12).fillColor('#0f172a').text('ጽማቕ ትሕዝቶ መረዳእታን ትንታነን');
     doc.moveDown(0.4);
+    if (report.rationale) {
+      doc.font('Ethiopic').fontSize(9.5).fillColor('#334155').text(`ትንታነ: ${report.rationale}`, { align: 'justify' });
+      doc.moveDown(0.5);
+    }
     doc.font('Ethiopic').fontSize(9).fillColor('#1e293b');
     doc.text(report.extracted_text.substring(0, 1800), { align: 'justify' });
     doc.moveDown(1.5);
@@ -253,6 +303,7 @@ export const generateComplaintPDF = (report: Report, language: string = 'en'): P
     doc.text('2. ሚኒስትሪ ደቂ ኣንስትዮን ማሕበራዊ ጉዳይን | ስልኪ: +251-111-515179 / 7711');
     doc.moveDown(2);
 
+    if (doc.y > 690) doc.addPage();
     doc.font('Ethiopic').fontSize(8).fillColor('#64748b').text(`እዚ ሰነድ ብSafeNet.ai ዝተዳለወ እዩ | ${new Date().toISOString()}`, { align: 'center' });
   } else if (language === 'om') {
     // Afaan Oromoo Complaint

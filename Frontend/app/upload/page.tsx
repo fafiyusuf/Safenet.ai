@@ -8,6 +8,7 @@ import Link from "next/link"
 import {
   AlertTriangle,
   ArrowRight,
+  Bot,
   Camera,
   Check,
   CheckCircle2,
@@ -110,9 +111,9 @@ const UPLOAD_UI_TEXT: Record<string, {
     privacyText: "No personal identity or IP address is stored. Evidentiary dockets purge automatically after 90 days. You retain full control of the generated PDF.",
     dangerTitle: "In Immediate Physical Danger?",
     dangerText: "Call 991 (Federal Police) or 7711 (GBV Toll-Free) immediately for emergency response.",
-    counselorPromptTitle: "Prefer Talking to a Counselor First?",
-    counselorPromptDesc: "Speak privately with our trauma-informed peer counselor. 100% confidential emotional guidance and shelter referrals in 5 languages.",
-    counselorPromptAction: "Open Crisis Counselor",
+    counselorPromptTitle: "Need AI Safety Guidance First?",
+    counselorPromptDesc: "Speak privately with our automated AI assistant. 100% confidential digital safety guidance, evidence preservation advice, and shelter referrals in 5 languages.",
+    counselorPromptAction: "Open AI Support Chat",
     loadSampleBtn: "Load Test Case Specimen",
     sampleIncidentLoaded: "Sample extortion incident loaded for testing",
   },
@@ -145,9 +146,9 @@ const UPLOAD_UI_TEXT: Record<string, {
     privacyText: "SafeNet የእርስዎን ማንነት ወይም የአይፒ አድራሻ አይከታተልም። ሪፖርቶች ከ90 ቀናት በኋላ በራስ-ሰር ይሰረዛሉ።",
     dangerTitle: "አፋጣኝ የደህንነት ስጋት ካለ?",
     dangerText: "ወዲያውኑ ወደ ፖሊስ 991 ወይም ወደ ጾታዊ ጥቃት መስመር 7711 ይደውሉ።",
-    counselorPromptTitle: "በቅድሚያ ከአማካሪ ጋር መነጋገር ይፈልጋሉ?",
-    counselorPromptDesc: "ከስነ-ልቦና ድጋፍ አማካሪ ጋር በ5 ቋንቋዎች በሚስጥር ይነጋገሩ። ምንም መረጃ አይቀመጥም።",
-    counselorPromptAction: "ከአማካሪ ጋር ይነጋገሩ",
+    counselorPromptTitle: "በቅድሚያ ከAI ድጋፍ ቻት ጋር መነጋገር ይፈልጋሉ?",
+    counselorPromptDesc: "ከአውቶሜትድ የAI ድጋፍ ረዳታችን ጋር በሚስጥር ይወያዩ። ፈጣን የደህንነት መመሪያና የማስረጃ አያያዝ ዘዴዎችን ያግኙ።",
+    counselorPromptAction: "የAI ድጋፍ ቻት ይክፈቱ",
     loadSampleBtn: "የናሙና ጥቃት መረጃ ሙላ",
     sampleIncidentLoaded: "የናሙና የማስፈራሪያ መረጃ ተሞልቷል",
   },
@@ -180,9 +181,9 @@ const UPLOAD_UI_TEXT: Record<string, {
     privacyText: "Eenyummaan ykn IP'n hin galmeeffamu. Gabaasni guyyoota 90 booda ofumaan haqama.",
     dangerTitle: "Balaa Ariifachiisaa Keessa Jirtuu?",
     dangerText: "Poolisii Federaalaa 991 ykn toora bilisaa GBV 7711 yeroma sana bilbilaa.",
-    counselorPromptTitle: "Gorsaa waliin haasa'uu barbaadduu?",
-    counselorPromptDesc: "Afaan keessaniin gorsaa iccitii waliin haasa'aa. Nageenya eeguu fi qajeelfama seeraa argadhaa.",
-    counselorPromptAction: "Gorsaa Waliin Haasawaa",
+    counselorPromptTitle: "Haasa'a Deeggarsa AI Waliin Jalqabuu Barbaadduu?",
+    counselorPromptDesc: "Gargaaraa AI owtomaatikii wajjin iccitiin haasa'aa. Nageenya eeguu fi qajeelfama seeraa argadhaa.",
+    counselorPromptAction: "Haasa'a AI Bani",
     loadSampleBtn: "Fakkeenya Qabiyyee Guuti",
     sampleIncidentLoaded: "Fakkeenyi qabiyyee sodaachisaa guutameera",
   },
@@ -215,9 +216,9 @@ const UPLOAD_UI_TEXT: Record<string, {
     privacyText: "መንነትኩም ወይ IP ኣድራሻኹም ኣይዕቀብን እዩ። ጸብጻባት ድሕሪ 90 መዓልታት ይድምሰሱ።",
     dangerTitle: "ህጹጽ ሓደጋ ኣጋጢሙ ዶ?",
     dangerText: "ብህጹጽ ናብ ፖሊስ 991 ወይ ናብ ናጻ መስመር ጾታዊ መጥቃዕቲ 7711 ደውሉ:",
-    counselorPromptTitle: "ቅድም ምስ ኣማኻሪ ክትዛረቡ ትደልዩ ዶ?",
-    counselorPromptDesc: "ብቋንቋኹም ምስ ኣማኻሪ ብምስጢር ተዘራረቡ። ናይ ስነ-ልቦናን ድሕነትን ምኽሪ ረኺቡ።",
-    counselorPromptAction: "ምስ ኣማኻሪ ተዘራረቡ",
+    counselorPromptTitle: "ቅድም ምስ ናይ AI ደገፍ ቻት ክትዛረቡ ትደልዩ ዶ?",
+    counselorPromptDesc: "ምስ ኣውቶማቲክ ናይ AI ረዳእቲ ብምስጢር ተዘራረቡ። ናይ ድሕነት ምኽርን መርትዖ ምዕቃብን ረኺቡ።",
+    counselorPromptAction: "ናይ AI ደገፍ ቻት ክፈቱ",
     loadSampleBtn: "ናይ ፈተነ መረዳእታ ምላእ",
     sampleIncidentLoaded: "ናይ ፈተነ መረዳእታ ተመሊኡ ኣሎ",
   },
@@ -250,9 +251,9 @@ const UPLOAD_UI_TEXT: Record<string, {
     privacyText: "Aqoonsi shakhsi ama IP lama keydiyo. Xogta waxaa la tirtiraa 90 maalmood ka dib.",
     dangerTitle: "Khatar Degdeg ah miyaad ku jirtaa?",
     dangerText: "Wac Booliska Federaalka 991 ama khadka bilaashka ah ee GBV 7711.",
-    counselorPromptTitle: "Ma doonaysaa inaad la-taliye la hadasho marka hore?",
-    counselorPromptDesc: "Si qarsoodi ah ula hadal la-taliye ku hadla luqaddaada. Taageero nafsaani ah oo bilaash ah.",
-    counselorPromptAction: "La Hadal La-taliyaha",
+    counselorPromptTitle: "Ma doonaysaa inaad la hadasho AI Support Chat marka hore?",
+    counselorPromptDesc: "Si qarsoodi ah ula hadal caawiyaha tooska ah ee AI. Hel talooyin badbaado iyo xafidista caddeymaha.",
+    counselorPromptAction: "Fur Sheekaysiga AI",
     loadSampleBtn: "Geli Tusaale Tijaabo ah",
     sampleIncidentLoaded: "Tusaalihii tijaabada waa la buuxiyay",
   },
@@ -916,22 +917,22 @@ export default function UploadPage() {
                 </CardContent>
               </Card>
 
-              {/* Direct Peer Counselor Prompt Card */}
+              {/* Direct AI Support Chat Prompt Card */}
               <div className="border border-border rounded-lg bg-card overflow-hidden shadow-xs">
-                <div className="relative h-28 w-full bg-muted overflow-hidden">
-                  <Image
-                    src="/counselor-support.jpg"
-                    alt="Counselor Support Consultation"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 360px"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                  <div className="absolute bottom-2 left-3 right-3 text-white">
-                    <div className="text-[10px] font-mono text-blue-300 uppercase font-semibold">
-                      Trauma-Informed Support
+                <div className="relative h-24 w-full bg-linear-to-r from-emerald-950 via-slate-900 to-slate-950 p-4 flex items-center gap-3 text-white border-b border-border/60">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+                    <Bot className="w-5 h-5" />
+                  </div>
+                  <div className="space-y-0.5 flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-mono text-emerald-300 uppercase font-semibold">
+                        24/7 AI System
+                      </span>
+                      <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono">
+                        Ephemeral
+                      </span>
                     </div>
-                    <div className="text-xs font-bold">
+                    <div className="text-xs font-bold text-white truncate">
                       {ui.counselorPromptTitle}
                     </div>
                   </div>
@@ -941,9 +942,9 @@ export default function UploadPage() {
                   <p className="text-muted-foreground leading-relaxed">
                     {ui.counselorPromptDesc}
                   </p>
-                  <Button asChild variant="outline" size="sm" className="w-full text-xs h-8 rounded-md font-semibold">
+                  <Button asChild variant="outline" size="sm" className="w-full text-xs h-8 rounded-md font-semibold border-emerald-600/30 hover:bg-emerald-50 dark:hover:bg-emerald-950/20">
                     <Link href="/chat">
-                      <MessageSquare className="h-3.5 w-3.5 mr-1.5 text-blue-600" />
+                      <Bot className="h-3.5 w-3.5 mr-1.5 text-emerald-600" />
                       {ui.counselorPromptAction}
                       <ArrowRight className="h-3.5 w-3.5 ml-auto" />
                     </Link>

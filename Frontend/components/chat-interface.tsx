@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import {
   ArrowLeft,
+  Bot,
   HeartHandshake,
   Lock,
   MessageSquare,
@@ -82,10 +82,13 @@ const PROMPT_SUGGESTIONS: Record<string, string[]> = {
 const CHAT_UI_STRINGS: Record<string, {
   errorMessage: (err: string) => string
   crisisSupport: string
-  counselorTitle: string
-  counselorSubtitle: string
+  chatTitle: string
+  chatSubtitle: string
+  aiBadge: string
   clear: string
+  confidentialBannerTitle: string
   confidentialBanner: string
+  authorName: string
   typing: string
   suggestedTopics: string
   placeholder: string
@@ -95,67 +98,82 @@ const CHAT_UI_STRINGS: Record<string, {
   en: {
     errorMessage: (err) => `I'm sorry, I encountered an issue: ${err}. If you are in immediate danger, please dial 7711 (GBV hotline) or 991 (Police).`,
     crisisSupport: "24/7 Crisis Support:",
-    counselorTitle: "SafeNet Support Counselor",
-    counselorSubtitle: "Encrypted • No Personal Record Stored",
+    chatTitle: "SafeNet AI Support Chat",
+    chatSubtitle: "Automated AI System • Ephemeral & Zero-Trace",
+    aiBadge: "AI Assistant",
     clear: "Clear",
-    confidentialBanner: "This peer counselor session is ephemeral and encrypted. No identifying details are stored.",
-    typing: "Counselor is typing...",
+    confidentialBannerTitle: "Automated Zero-Trace AI Guidance",
+    confidentialBanner: "This is an automated AI support chat providing 24/7 digital safety guidance. This is not human counseling. No personal records or chats are stored.",
+    authorName: "SafeNet AI Support",
+    typing: "AI Assistant is analyzing...",
     suggestedTopics: "Suggested Support Topics:",
     placeholder: "Share what is on your mind or describe the incident... (you are safe here)",
     send: "Send",
-    disclaimer: "SafeNet Counselor provides supportive crisis guidance. To generate formal legal dossiers, use the [Upload Evidence] forensic feature.",
+    disclaimer: "SafeNet AI Support Chat is an automated AI assistant for safety guidance, evidence preservation, and crisis resources. This is not human counseling. For emergency human assistance, dial 7711 (GBV Line) or 991 (Police).",
   },
   am: {
     errorMessage: (err) => `ይቅርታ፣ በግንኙነት ላይ ችግር አጋጥሟል: ${err}። አስቸኳይ አደጋ ካለ እባክዎ 7711 ወይም 991 ይደውሉ።`,
     crisisSupport: "የአደጋ ጊዜ ስልክ መስመሮች:",
-    counselorTitle: "የSafeNet የስነ-ልቦና ድጋፍ አማካሪ",
-    counselorSubtitle: "ሚስጥራዊ • ምንም መለያ አይቀመጥም",
+    chatTitle: "የSafeNet የAI ድጋፍ ቻት",
+    chatSubtitle: "አውቶሜትድ የAI ረዳት • ሚስጥራዊና የማይቀመጥ",
+    aiBadge: "የAI ረዳት",
     clear: "ውይይት አጽዳ",
-    confidentialBanner: "ይህ ውይይት የተጠበቀ ነው። የሚያጋሩት ማንኛውም መረጃ ለህዝብ ክፍት አይደረግም።",
-    typing: "ምላሽ በማዘጋጀት ላይ...",
+    confidentialBannerTitle: "አውቶሜትድ ሚስጥራዊ የAI መመሪያ",
+    confidentialBanner: "ይህ የ24/7 የዲጂታል ደህንነት መመሪያ የሚሰጥ አውቶሜትድ የAI ቴክኖሎጂ ነው። የሰው አማካሪ አይደለም። ምንም የግል መረጃ ወይም ውይይት አይቀመጥም።",
+    authorName: "SafeNet AI ድጋፍ",
+    typing: "የAI ረዳት ምላሽ እያዘጋጀ ነው...",
     suggestedTopics: "የተለመዱ ጥያቄዎች (ይምረጡ):",
     placeholder: "የሚሰማዎትን ወይም ያጋጠመዎትን እዚህ ይጻፉ... (ሚስጥራዊ ነው)",
     send: "ላክ",
-    disclaimer: "SafeNet.ai ለድንገተኛ የስነ-ልቦና ድጋፍ የተዘጋጀ ነው። ለህጋዊ ክስ ማስረጃ ማሰባሰቢያ ወደ [ማስረጃ ይስቀሉ] ይሂዱ።",
+    disclaimer: "ይህ የSafeNet አውቶሜትድ AI ድጋፍ ቻት ሲሆን የሰው አማካሪ አይደለም። ለአስቸኳይ የሰው እርዳታ በ7711 ወይም በ991 ይደውሉ።",
   },
   om: {
     errorMessage: (err) => `Dhiifama, rakkoon qunnamtii uumameera: ${err}. Balaa ariifachiisaan yoo jiraate 7711 ykn 991 bilbilaa.`,
     crisisSupport: "Sarara Balaa Ariifachiisaa 24/7:",
-    counselorTitle: "Gorsaa Deeggarsa SafeNet",
-    counselorSubtitle: "Iccitii • Galmeen Dhuunfaa Hin Kaa'amu",
+    chatTitle: "Haasa'a Deeggarsa AI SafeNet",
+    chatSubtitle: "Gargaaraa AI Owtomaatikii • Iccitiin Eegamaa",
+    aiBadge: "Gargaaraa AI",
     clear: "Haasa'a Qulqulleessi",
-    confidentialBanner: "Mariin kun guutummaatti iccitii kan eeggateedha. Odeeffannoon kamiyyuu hin kuufamu.",
-    typing: "Gorsaan deebii barreessaa jira...",
+    confidentialBannerTitle: "Qajeelfama AI Owtomaatikii",
+    confidentialBanner: "Kun sirna AI owtomaatikii gorsa nageenya dijitaalaa sa'aatii 24/7 kennuudha. Nama gorsaa miti. Galmeen dhuunfaa ykn haasa'aan hin kuufamu.",
+    authorName: "Deeggarsa SafeNet AI",
+    typing: "Gargaaraan AI barreessaa jira...",
     suggestedTopics: "Mata dureewwan Deeggarsaa:",
     placeholder: "Wanta isin yaaddesse ykn isin mudate asitti barreessaa... (nageenyi keessan eegamaadha)",
     send: "Ergi",
-    disclaimer: "Gorsaan SafeNet qajeelfama balaa yeroo ariifachiisaa kenna. Sanada seeraatiif [Ragaa Fe'aa] fayyadamaa.",
+    disclaimer: "Haasa'aan Deeggarsa SafeNet AI sirna AI ti malee gorsa namaa miti. Gargaarsa yeroo balaa ariifachiisaaf 7711 ykn 991 bilbilaa.",
   },
   ti: {
     errorMessage: (err) => `ይቕረታ፡ ኣብ ርክብ ጸገም ኣጋጢሙ: ${err}። ህጹጽ ሓደጋ እንተሃልዩ ብኽብረትኩም 7711 ወይ 991 ደውሉ።`,
     crisisSupport: "ናይ 24/7 ህጹጽ ረድኤት መስመራት:",
-    counselorTitle: "ናይ SafeNet ስነ-ልቦናዊ ደገፍ ኣማኻሪ",
-    counselorSubtitle: "ምስጢራዊ • ናይ ብሕቲ መዝገብ ኣይዕቀብን",
+    chatTitle: "ናይ SafeNet ናይ AI ደገፍ ቻት",
+    chatSubtitle: "ኣውቶማቲክ ናይ AI ረዳእቲ • ውሑስን ምስጢራውን",
+    aiBadge: "ናይ AI ረዳእቲ",
     clear: "ዕላል ኣጽሪ",
-    confidentialBanner: "እዚ ናይ ኣማኻሪ ዘተ ውሑስን ምስጢራውን እዩ። ዝኾነ ናይ መንነት ሓበሬታ ኣይዕቀብን እዩ።",
-    typing: "ኣማኻሪ መልሲ የዳልው ኣሎ...",
+    confidentialBannerTitle: "ኣውቶማቲክ ናይ AI ድሕነት መምርሒ",
+    confidentialBanner: "እዚ ናይ 24/7 ዲጂታል ድሕነት መምርሒ ዝህብ ኣውቶማቲክ ናይ AI ቴክኖሎጂ እዩ። ሰብ ኣማኻሪ ኣይኮነን። ዝኾነ ናይ መንነት ወይ ናይ ዕላል ሓበሬታ ኣይዕቀብን እዩ።",
+    authorName: "SafeNet AI ደገፍ",
+    typing: "ናይ AI ረዳእቲ መልሲ የዳልው ኣሎ...",
     suggestedTopics: "ዝምረጹ ናይ ደገፍ ዛዕባታት:",
     placeholder: "ዝስመዓኩም ዘሎ ወይ ዘጋጠመኩም ኣብዚ ጽሓፉ... (ውሑስ ኢኹም)",
     send: "ስደድ",
-    disclaimer: "SafeNet ስነ-ልቦናዊ ምኽሪ ይህብ። ንሕጋዊ ሰነድ ክሲ ንምድላው ናብ [መርትዖ ኣእትዉ] ኪዱ።",
+    disclaimer: "እዚ ናይ SafeNet ኣውቶማቲክ AI ደገፍ ቻት እዩ እምበር ሰብ ኣማኻሪ ኣይኮነን። ንህጹጽ ናይ ሰብ ሓገዝ ናብ 7711 ወይ 991 ደውሉ።",
   },
   so: {
     errorMessage: (err) => `Waan ka xunnahay, khalad ayaa dhacay: ${err}. Haddii aad khatar ku jirto fadlan wac 7711 ama 991.`,
     crisisSupport: "Khadadka Taageerada Degdegga ah 24/7:",
-    counselorTitle: "La-taliyaha Taageerada SafeNet",
-    counselorSubtitle: "Qarsoodi • Ma Jiro Diiwaan La Keydinayo",
+    chatTitle: "Sheekaysiga Taageerada SafeNet AI",
+    chatSubtitle: "Caawiyaha Tooska ah ee AI • Qarsoodi ah",
+    aiBadge: "Caawiyaha AI",
     clear: "Nadiifi Wada-hadalka",
-    confidentialBanner: "Kalfadhigan la-talintu waa mid sir ah oo la dhowray. Faahfaahin shakhsi ah lama keydiyo.",
-    typing: "La-taliyuhu wuu soo qorayaa...",
+    confidentialBannerTitle: "Hanuuninta AI ee Tooska ah",
+    confidentialBanner: "Kani waa nidaam AI ah oo toos ah oo bixiya hagidda badbaadada digital-ka 24/7. Maaha la-taliye dad ah. Macluumaad shakhsiyeed lama keydiyo.",
+    authorName: "SafeNet AI Taageerada",
+    typing: "Caawiyaha AI ayaa falanqeynaya...",
     suggestedTopics: "Mowduucyada Taageerada ee la Soo Jeediyay:",
     placeholder: "Halkan ku qor waxa kugu dhacay ama dareenkaaga... (halkan waad ku badbaaddaa)",
     send: "Dir",
-    disclaimer: "SafeNet wuxuu bixiyaa hanuunin taageero dhibaato. Si aad u diyaariso gal dacwadeed sharci, isticmaal [Soo Geli Caddeynta].",
+    disclaimer: "Sheekaysiga Taageerada SafeNet AI waa nidaam toos ah oo AI ah, maaha la-talin aadanaha. Caawimaad degdeg ah, wac 7711 ama 991.",
   },
 }
 
@@ -304,27 +322,24 @@ export function ChatInterface() {
       {/* Main Chat Canvas */}
       <div className="flex-1 flex flex-col max-w-4xl w-full mx-auto overflow-hidden px-3 sm:px-4 py-3 sm:py-4">
         
-        {/* Chat Header Details with Counselor Avatar */}
+        {/* Chat Header Details with AI Avatar */}
         <div className="flex items-center justify-between pb-3 border-b border-border">
           <div className="flex items-center gap-2.5 sm:gap-3">
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-emerald-600/30 shrink-0 bg-muted">
-              <Image
-                src="/counselor-support.jpg"
-                alt="SafeNet Counselor"
-                fill
-                className="object-cover"
-                sizes="40px"
-              />
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-emerald-600/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 shadow-xs">
+              <Bot className="w-5 h-5" />
             </div>
             <div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <h2 className="text-xs sm:text-sm font-bold text-foreground">
-                  {chatUI.counselorTitle}
+                  {chatUI.chatTitle}
                 </h2>
-                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                <span className="inline-flex items-center gap-1 text-[9px] font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  {chatUI.aiBadge}
+                </span>
               </div>
               <p className="text-[10px] sm:text-[11px] text-muted-foreground">
-                {chatUI.counselorSubtitle}
+                {chatUI.chatSubtitle}
               </p>
             </div>
           </div>
@@ -344,22 +359,16 @@ export function ChatInterface() {
         <ScrollArea className="flex-1 py-3 sm:py-4 pr-2 sm:pr-3">
           <div className="space-y-4">
             
-            {/* Counselor Warm Welcome Banner */}
-            <div className="p-3 sm:p-3.5 rounded-lg bg-card border border-border shadow-xs max-w-lg mx-auto flex items-center gap-3">
-              <div className="relative w-11 h-11 rounded-full overflow-hidden border border-emerald-500/30 shrink-0 hidden sm:block">
-                <Image
-                  src="/counselor-support.jpg"
-                  alt="Counselor Consultation"
-                  fill
-                  className="object-cover"
-                  sizes="44px"
-                />
+            {/* AI Welcome Banner */}
+            <div className="p-3 sm:p-3.5 rounded-lg bg-card border border-border shadow-xs max-w-lg mx-auto flex items-start gap-3">
+              <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
+                <Sparkles className="w-4 h-4" />
               </div>
-              <div className="space-y-0.5 text-left flex-1">
+              <div className="space-y-1 text-left flex-1">
                 <div className="text-xs font-bold text-foreground flex items-center justify-between">
-                  <span>Zero-Trace Crisis Guidance</span>
-                  <span className="text-[9px] bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-mono font-semibold px-1.5 py-0.2 rounded border border-emerald-500/20">
-                    Encrypted
+                  <span>{chatUI.confidentialBannerTitle}</span>
+                  <span className="text-[9px] bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-mono font-semibold px-1.5 py-0.5 rounded border border-emerald-500/20">
+                    AI • Ephemeral
                   </span>
                 </div>
                 <p className="text-[11px] text-muted-foreground leading-snug">
@@ -376,13 +385,20 @@ export function ChatInterface() {
                   key={idx}
                   className={`flex flex-col ${isUser ? "items-end" : "items-start"} space-y-1`}
                 >
-                  <div className="flex items-center gap-1.5 px-1 text-[10px] uppercase tracking-wider font-mono text-muted-foreground">
+                  <div className="flex items-center gap-1.5 px-1 text-[10px] tracking-wider font-mono text-muted-foreground">
                     {!isUser && (
-                      <div className="relative w-3.5 h-3.5 rounded-full overflow-hidden border border-emerald-600/40 shrink-0">
-                        <Image src="/counselor-support.jpg" alt="" fill className="object-cover" sizes="14px" />
+                      <div className="w-3.5 h-3.5 rounded bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 shrink-0">
+                        <Bot className="w-2.5 h-2.5" />
                       </div>
                     )}
-                    <span>{isUser ? "You" : "SafeNet Crisis Counselor"}</span>
+                    <span className="font-semibold text-foreground/80">
+                      {isUser ? "You" : chatUI.authorName}
+                    </span>
+                    {!isUser && (
+                      <span className="text-[9px] px-1 py-0.2 rounded bg-muted text-muted-foreground border border-border/60">
+                        AI
+                      </span>
+                    )}
                     {msg.timestamp && (
                       <span>
                         • {new Date(msg.timestamp).toLocaleTimeString([], {
@@ -408,8 +424,12 @@ export function ChatInterface() {
             {/* Typing Loader Indicator */}
             {isLoading && (
               <div className="flex flex-col items-start space-y-1">
-                <div className="text-[10px] uppercase tracking-wider font-mono text-muted-foreground px-1">
-                  SafeNet Crisis Counselor
+                <div className="text-[10px] tracking-wider font-mono text-muted-foreground px-1 flex items-center gap-1.5">
+                  <div className="w-3.5 h-3.5 rounded bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 shrink-0">
+                    <Bot className="w-2 h-2" />
+                  </div>
+                  <span className="font-semibold text-foreground/80">{chatUI.authorName}</span>
+                  <span className="text-[9px] px-1 py-0.2 rounded bg-muted text-muted-foreground border border-border/60">AI</span>
                 </div>
                 <div className="bg-card border border-border p-3 rounded-md flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />

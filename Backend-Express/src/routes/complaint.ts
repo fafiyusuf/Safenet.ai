@@ -8,7 +8,7 @@ const router = Router();
 router.get('/:id/pdf', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const language = (req.query.language as string) || 'en';
+    const language = (req.query.language as string) || (req.query.lang as string) || 'en';
 
     const result = await query('SELECT * FROM reports WHERE id = $1', [id]);
 

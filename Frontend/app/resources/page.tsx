@@ -7,6 +7,7 @@ import {
   AlertTriangle,
   ArrowRight,
   BookOpen,
+  Bot,
   Brain,
   Building2,
   Check,
@@ -106,17 +107,17 @@ const RESOURCE_UI_STRINGS: Record<Language, {
     ngoChip: "Advocacy & NGOs",
     showingCount: (c) => `Showing ${c} verified Ethiopian support organizations`,
     noMatchTitle: "No organizations match your current search or filters",
-    noMatchDesc: "While there is no localized office matching this filter, emergency assistance is always accessible nationwide. You can call the 24/7 national hotlines or consult our confidential safety counselor right now.",
+    noMatchDesc: "While there is no localized office matching this filter, emergency assistance is always accessible nationwide. You can call the 24/7 national hotlines or consult our automated AI Support Chat right now.",
     resetFilters: "Reset All Filters",
-    speakCounselor: "Consult Private AI Counselor",
+    speakCounselor: "Open AI Support Chat",
     copied: "Copied!",
     copyPhone: "Copy",
     availabilityLabel: "Hours",
     locationsLabel: "Locations / Branches",
     servicesLabel: "Services Provided",
-    counselorBannerTitle: "Need Confidential, Personalized Safety Advice?",
-    counselorBannerDesc: "Speak directly with our trained digital safety counselor for risk assessment, evidence preservation steps, and immediate de-escalation guidance. Completely anonymous with zero browsing trail.",
-    counselorBannerAction: "Open Confidential Safety Chat",
+    counselorBannerTitle: "Need Automated 24/7 Digital Safety Guidance?",
+    counselorBannerDesc: "Chat with our automated AI assistant for instant risk assessment, evidence preservation steps, and crisis resource routing. Completely anonymous with zero browsing trail.",
+    counselorBannerAction: "Open AI Support Chat",
     domainAbuseTypes: "Types of Online Abuse",
     domainPrevention: "Digital Safety & Prevention",
     domainLegal: "Ethiopian Legal Rights",
@@ -138,17 +139,17 @@ const RESOURCE_UI_STRINGS: Record<Language, {
     ngoChip: "የሲቪክ ድርጅቶች",
     showingCount: (c) => `${c} የተረጋገጡ የድጋፍ ድርጅቶች ቀርበዋል`,
     noMatchTitle: "ከፍለጋዎ ወይም ከማጣሪያዎ ጋር የሚዛመድ ድርጅት አልተገኘም",
-    noMatchDesc: "ለዚህ ልዩ ማጣሪያ የተለየ ቅርንጫፍ ባይኖርም፣ በመላው ኢትዮጵያ የ24/7 ብሔራዊ የስልክ መስመሮች እና ሚስጥራዊ የደህንነት አማካሪያችን ሁልጊዜም ዝግጁ ናቸው።",
+    noMatchDesc: "ለዚህ ልዩ ማጣሪያ የተለየ ቅርንጫፍ ባይኖርም፣ በመላው ኢትዮጵያ የ24/7 ብሔራዊ የስልክ መስመሮች እና አውቶሜትድ የAI ድጋፍ ቻታችን ሁልጊዜም ዝግጁ ናቸው።",
     resetFilters: "ማጣሪያዎችን ዳግም አስጀምር",
-    speakCounselor: "ከሚስጥራዊ አማካሪ ጋር ይነጋገሩ",
+    speakCounselor: "ከAI ድጋፍ ቻት ጋር ይነጋገሩ",
     copied: "ተቀድቷል!",
     copyPhone: "ቅዳ",
     availabilityLabel: "የስራ ሰዓት",
     locationsLabel: "የቢሮ ቦታዎች / ቅርንጫፎች",
     servicesLabel: "የሚሰጡ አገልግሎቶች",
-    counselorBannerTitle: "የግል እና ሚስጥራዊ የደህንነት ምክር ይፈልጋሉ?",
-    counselorBannerDesc: "የስጋት ደረጃዎን ለመገምገም፣ ማስረጃዎችን በህጋዊ መንገድ ለማስቀመጥ እና ስሜታዊ ድጋፍ ለማግኘት ከሰለጠነው የደህንነት አማካሪያችን ጋር በሚስጥር ይወያዩ። ምንም የአሳሽ ታሪክ አይቀመጥም።",
-    counselorBannerAction: "ሚስጥራዊ የደህንነት ውይይት ጀምር",
+    counselorBannerTitle: "አውቶሜትድ 24/7 የዲጂታል ደህንነት መመሪያ ይፈልጋሉ?",
+    counselorBannerDesc: "የስጋት ደረጃዎን ለመገምገም፣ ማስረጃዎችን በህጋዊ መንገድ ለማስቀመጥ እና የመጠለያ መረጃዎችን ለማግኘት ከአውቶሜትድ AI ረዳታችን ጋር በሚስጥር ይወያዩ። ምንም የአሳሽ ታሪክ አይቀመጥም።",
+    counselorBannerAction: "የAI ድጋፍ ቻት ይክፈቱ",
     domainAbuseTypes: "የኦንላይን ጥቃት አይነቶች",
     domainPrevention: "የዲጂታል ደህንነት እና መከላከያ",
     domainLegal: "የኢትዮጵያ ህጋዊ መብቶች",
@@ -170,17 +171,17 @@ const RESOURCE_UI_STRINGS: Record<Language, {
     ngoChip: "Dhaabbilee NGO",
     showingCount: (c) => `Dhaabbilee deeggarsaa mirkanaa'an ${c} agarsiisaa jira`,
     noMatchTitle: "Dhaabbanni barbaaddan walsimu hin argamne",
-    noMatchDesc: "Naannoo kanaan waajjirri dhihoo yoo jiraachuu baateyyuu, sararri bilbila balaa biyyooleessaa 24/7 fi gorsi iccitii yeroo hundumaa jira.",
+    noMatchDesc: "Naannoo kanaan waajjirri dhihoo yoo jiraachuu baateyyuu, sararri bilbila balaa biyyooleessaa 24/7 fi gorsi AI yeroo hundumaa jira.",
     resetFilters: "Filannoo Hunda Qulqulleessi",
-    speakCounselor: "Gorsituu Iccitii Waliin Haasofsiisi",
+    speakCounselor: "Haasa'a AI Waliin Dubbadhu",
     copied: "Koppiita'eera!",
     copyPhone: "Koppii",
     availabilityLabel: "Yeroo Hojii",
     locationsLabel: "Bakka Waajjiraalee",
     servicesLabel: "Tajaajiloota Kennaman",
-    counselorBannerTitle: "Gorsa Nageenyaa Iccitii fi Dhuunfaa Barbaadduu?",
-    counselorBannerDesc: "Sadarkaa balaa qorachuuf, ragaalee seeraan qabachuuf fi deeggarsa miiraa argachuuf gorsituu nageenyaa wajjin haasa'aa.",
-    counselorBannerAction: "Haasawa Nageenyaa Iccitii Eegali",
+    counselorBannerTitle: "Qajeelfama Nageenya Diijitaalaa AI 24/7 Barbaadduu?",
+    counselorBannerDesc: "Sadarkaa balaa qorachuuf, ragaalee seeraan qabachuuf fi deeggarsa argachuuf gargaaraa AI wajjin haasa'aa. Iccitiin guutuu kan eeggameedha.",
+    counselorBannerAction: "Haasa'a AI Bani",
     domainAbuseTypes: "Gosa Miidhaa Saayibarii",
     domainPrevention: "Nageenya Diijitaalaa fi Ittisa",
     domainLegal: "Mirga Seeraa Itoophiyaa",
@@ -202,17 +203,17 @@ const RESOURCE_UI_STRINGS: Record<Language, {
     ngoChip: "ሲቪክ ማሕበራት",
     showingCount: (c) => `${c} ዝተረጋገጹ ናይ ደገፍ ትካላት ቀሪቦም ኣለዉ`,
     noMatchTitle: "ምስ ፍለጋኹም ዝሰማማዕ ትካል ኣይተረኽበን",
-    noMatchDesc: "ነዚ ፍሉይ መምረጺ ዝኸውን ጨንፈር እንተዘይተረኽበ እኳ፡ መላእ ኢትዮጵያ 24/7 ሃገራዊ ናይ ሓደጋ መስመራት 7711ን 6388ን ኩሉ ግዜ ክፉታት እዮም።",
+    noMatchDesc: "ነዚ ፍሉይ መምረጺ ዝኸውን ጨንፈር እንተዘይተረኽበ እኳ፡ መላእ ኢትዮጵያ 24/7 ሃገራዊ ናይ ሓደጋ መስመራት 7711ን 6388ን ናይ AI ደገፍ ቻትን ኩሉ ግዜ ክፉታት እዮም።",
     resetFilters: "መምረጺታት ብምሉኡ ሓድሽ ግበር",
-    speakCounselor: "ምስ ምስጢራዊት ኣማኻሪት ተዘራረቡ",
+    speakCounselor: "ምስ ናይ AI ደገፍ ቻት ተዘራረቡ",
     copied: "ተቐዲሑ!",
     copyPhone: "ቅዳሕ",
     availabilityLabel: "ናይ ስራሕ ሰዓታት",
     locationsLabel: "ጨናፍር / ኣብያተ ጽሕፈት",
     servicesLabel: "ዝወሃቡ ኣገልግሎታት",
-    counselorBannerTitle: "ናይ ውልቂን ምስጢራዊን ናይ ድሕነት ምኽሪ ትደልዩ ዶ?",
-    counselorBannerDesc: "ደረጃ ሓደጋኹም ንምግምጋም፡ መረዳእታ ብሕጋዊ መንገዲ ንምዕቃብን ስምዒታዊ ደገፍ ንምርካብን ምስ ዝሰልጠነት ኣማኻሪት ብምስጢር ተዘራረቡ።",
-    counselorBannerAction: "ምስጢራዊ ናይ ድሕነት ምይይጥ ጀምር",
+    counselorBannerTitle: "ኣውቶማቲክ 24/7 ናይ ዲጂታል ድሕነት ምኽሪ ትደልዩ ዶ?",
+    counselorBannerDesc: "ደረጃ ሓደጋኹም ንምግምጋም፡ መረዳእታ ብሕጋዊ መንገዲ ንምዕቃብን ደገፍ ንምርካብን ምስ ኣውቶማቲክ ናይ AI ረዳእቲ ብምስጢር ተዘራረቡ። ዝኾነ ታሪኽ ኣይዕቀብን።",
+    counselorBannerAction: "ናይ AI ደገፍ ቻት ክፈቱ",
     domainAbuseTypes: "ዓይነታት ናይ ኦንላይን መጥቃዕቲ",
     domainPrevention: "ዲጂታል ድሕነትን መከላኸልን",
     domainLegal: "ሕጋዊ መሰላት ኢትዮጵያ",
@@ -234,17 +235,17 @@ const RESOURCE_UI_STRINGS: Record<Language, {
     ngoChip: "Hay'adaha Bulshada Rayidka",
     showingCount: (c) => `Muujinaya ${c} hay'adood oo taageero ah oo la xaqiijiyey`,
     noMatchTitle: "Lama helin hay'ad u dhiganta raadintaada",
-    noMatchDesc: "In kasta oo aan la helin xafiis gaar ah oo ku yaal gobolkan, khadadka degdegga ah ee qaranka 24/7 iyo la-taliyaha badbaadada ayaa diyaar ku ah meel kasta.",
+    noMatchDesc: "In kasta oo aan la helin xafiis gaar ah oo ku yaal gobolkan, khadadka degdegga ah ee qaranka 24/7 iyo nidaamka AI Support Chat ayaa diyaar ku ah meel kasta.",
     resetFilters: "Dib u Deji Shaandhooyinka Hunda",
-    speakCounselor: "La Hadal La-taliyaha Qarsoodiga ah",
+    speakCounselor: "La Hadal AI Support Chat",
     copied: "Waa la koobiyey!",
     copyPhone: "Koobbi",
     availabilityLabel: "Saacadaha Shaqada",
     locationsLabel: "Xarumaha & Laamaha",
     servicesLabel: "Adeegyada la Bixiyo",
-    counselorBannerTitle: "Ma u Baahan Tahay Talo Badbaado oo Gaar ah oo Qarsoodi ah?",
-    counselorBannerDesc: "Si toos ah ula hadal la-taliyaha badbaadada diijitaalka ah si aad u qiimeyso khatarta, u ilaaliso caddeymaha, una hesho taageero shucuureed.",
-    counselorBannerAction: "Fur Wada-hadalka Badbaadada ee Qarsoodiga ah",
+    counselorBannerTitle: "Ma u Baahan Tahay Hanuuninta Badbaadada ee AI 24/7?",
+    counselorBannerDesc: "Si toos ah ula hadal nidaamka AI si aad u qiimeyso khatarta, u ilaaliso caddeymaha, una hesho macluumaadka xarumaha caawinta. Gebi ahaanba waa qarsoodi.",
+    counselorBannerAction: "Fur Sheekaysiga AI",
     domainAbuseTypes: "Noocyada Xadgudubka Internetka",
     domainPrevention: "Badbaadada Diijitaalka & Ka-hortagga",
     domainLegal: "Xuquuqda Sharciga ee Itoobiya",
@@ -373,7 +374,7 @@ export default function ResourcesPage() {
 
       <main className="flex-1 py-8 md:py-12">
         <div className="container mx-auto px-4 max-w-5xl space-y-8">
-          
+
           {/* Header Banner */}
           <div className="border-b border-border/80 pb-6 space-y-2">
             <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">
@@ -490,41 +491,7 @@ export default function ResourcesPage() {
             </div>
           </div>
 
-          {/* Confidential AI Safety Counselor Card (With Dignified Female Counselor Photo) */}
-          <div className="rounded-lg border border-border bg-card overflow-hidden shadow-xs">
-            <div className="grid md:grid-cols-12 gap-0 items-center">
-              <div className="md:col-span-4 relative h-48 md:h-full min-h-[190px]">
-                <Image
-                  src="/counselor-support.jpg"
-                  alt="Ethiopian female legal and safety counselor"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-background/90 md:from-transparent via-background/40 to-transparent md:to-background/80" />
-              </div>
-              <div className="md:col-span-8 p-5 md:p-6 space-y-3">
-                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  <span>24/7 CONFIDENTIAL ONLINE ASSISTANCE</span>
-                </div>
-                <h3 className="text-lg md:text-xl font-bold text-foreground">
-                  {resUI.counselorBannerTitle}
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  {resUI.counselorBannerDesc}
-                </p>
-                <div className="pt-1">
-                  <Button asChild className="gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs h-10 px-4 rounded-md">
-                    <Link href="/chat">
-                      {resUI.counselorBannerAction}
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
+
 
           {/* Main Navigation Tabs: Support Directory vs Civic Safety & Rights Guide */}
           <Tabs defaultValue="resources" className="w-full space-y-6">
@@ -541,13 +508,13 @@ export default function ResourcesPage() {
 
             {/* TAB 1: SUPPORT DIRECTORY */}
             <TabsContent value="resources" className="space-y-6 mt-0">
-              
+
               {/* Search, Region, and Category Filter Controls */}
               <div className="rounded-lg border border-border bg-card p-4 space-y-4 shadow-xs">
-                
+
                 {/* Search & Region Select Row */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-                  
+
                   {/* Keyword Search Input */}
                   <div className="md:col-span-8 relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -594,9 +561,8 @@ export default function ResourcesPage() {
                     variant={categoryFilter === "all" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCategoryFilter("all")}
-                    className={`h-8 px-3 text-xs rounded-md ${
-                      categoryFilter === "all" ? "bg-foreground text-background" : "bg-background"
-                    }`}
+                    className={`h-8 px-3 text-xs rounded-md ${categoryFilter === "all" ? "bg-foreground text-background" : "bg-background"
+                      }`}
                   >
                     {resUI.allCategories}
                   </Button>
@@ -606,9 +572,8 @@ export default function ResourcesPage() {
                     variant={categoryFilter === "legal_aid" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCategoryFilter("legal_aid")}
-                    className={`h-8 px-3 text-xs rounded-md gap-1.5 ${
-                      categoryFilter === "legal_aid" ? "bg-blue-700 text-white" : "bg-background"
-                    }`}
+                    className={`h-8 px-3 text-xs rounded-md gap-1.5 ${categoryFilter === "legal_aid" ? "bg-blue-700 text-white" : "bg-background"
+                      }`}
                   >
                     <Scale className="h-3.5 w-3.5" />
                     {resUI.legalAidChip}
@@ -619,9 +584,8 @@ export default function ResourcesPage() {
                     variant={categoryFilter === "shelter" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCategoryFilter("shelter")}
-                    className={`h-8 px-3 text-xs rounded-md gap-1.5 ${
-                      categoryFilter === "shelter" ? "bg-amber-700 text-white" : "bg-background"
-                    }`}
+                    className={`h-8 px-3 text-xs rounded-md gap-1.5 ${categoryFilter === "shelter" ? "bg-amber-700 text-white" : "bg-background"
+                      }`}
                   >
                     <Home className="h-3.5 w-3.5" />
                     {resUI.shelterChip}
@@ -632,9 +596,8 @@ export default function ResourcesPage() {
                     variant={categoryFilter === "helpline" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCategoryFilter("helpline")}
-                    className={`h-8 px-3 text-xs rounded-md gap-1.5 ${
-                      categoryFilter === "helpline" ? "bg-emerald-700 text-white" : "bg-background"
-                    }`}
+                    className={`h-8 px-3 text-xs rounded-md gap-1.5 ${categoryFilter === "helpline" ? "bg-emerald-700 text-white" : "bg-background"
+                      }`}
                   >
                     <Phone className="h-3.5 w-3.5" />
                     {resUI.helplineChip}
@@ -645,9 +608,8 @@ export default function ResourcesPage() {
                     variant={categoryFilter === "ngo" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCategoryFilter("ngo")}
-                    className={`h-8 px-3 text-xs rounded-md gap-1.5 ${
-                      categoryFilter === "ngo" ? "bg-purple-700 text-white" : "bg-background"
-                    }`}
+                    className={`h-8 px-3 text-xs rounded-md gap-1.5 ${categoryFilter === "ngo" ? "bg-purple-700 text-white" : "bg-background"
+                      }`}
                   >
                     <Building2 className="h-3.5 w-3.5" />
                     {resUI.ngoChip}
@@ -744,7 +706,7 @@ export default function ResourcesPage() {
                     return (
                       <Card key={resource.id} className="border border-border/90 shadow-xs hover:border-border transition-colors">
                         <CardContent className="p-5 space-y-4">
-                          
+
                           {/* Top Row: Icon + Title + Type Badge + Region */}
                           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                             <div className="flex items-start gap-3.5">
@@ -817,7 +779,7 @@ export default function ResourcesPage() {
 
                           {/* Action Bar: Direct Calling + Email + Website */}
                           <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-border/80">
-                            
+
                             {/* Contact Action Buttons */}
                             <div className="flex flex-wrap items-center gap-2">
                               {resource.phone && (
@@ -898,7 +860,7 @@ export default function ResourcesPage() {
             {/* TAB 2: CIVIC SAFETY & LEGAL RIGHTS GUIDE */}
             <TabsContent value="gbvInfo" className="space-y-6 mt-0">
               <div className="rounded-lg border border-border bg-card p-6 shadow-xs space-y-6">
-                
+
                 {/* Guide Title Banner */}
                 <div className="flex items-center gap-3 pb-4 border-b border-border">
                   <div className="w-10 h-10 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0">
@@ -916,9 +878,8 @@ export default function ResourcesPage() {
                     type="button"
                     variant={activeInfoDomain === "abuseTypes" ? "default" : "outline"}
                     onClick={() => setActiveInfoDomain("abuseTypes")}
-                    className={`h-auto py-2.5 px-3 flex flex-col items-center justify-center gap-1.5 rounded-md text-xs font-semibold ${
-                      activeInfoDomain === "abuseTypes" ? "bg-emerald-700 text-white" : "bg-muted/40"
-                    }`}
+                    className={`h-auto py-2.5 px-3 flex flex-col items-center justify-center gap-1.5 rounded-md text-xs font-semibold ${activeInfoDomain === "abuseTypes" ? "bg-emerald-700 text-white" : "bg-muted/40"
+                      }`}
                   >
                     <AlertTriangle className="h-4 w-4" />
                     <span className="text-center">{resUI.domainAbuseTypes}</span>
@@ -928,9 +889,8 @@ export default function ResourcesPage() {
                     type="button"
                     variant={activeInfoDomain === "prevention" ? "default" : "outline"}
                     onClick={() => setActiveInfoDomain("prevention")}
-                    className={`h-auto py-2.5 px-3 flex flex-col items-center justify-center gap-1.5 rounded-md text-xs font-semibold ${
-                      activeInfoDomain === "prevention" ? "bg-blue-700 text-white" : "bg-muted/40"
-                    }`}
+                    className={`h-auto py-2.5 px-3 flex flex-col items-center justify-center gap-1.5 rounded-md text-xs font-semibold ${activeInfoDomain === "prevention" ? "bg-blue-700 text-white" : "bg-muted/40"
+                      }`}
                   >
                     <Lock className="h-4 w-4" />
                     <span className="text-center">{resUI.domainPrevention}</span>
@@ -940,9 +900,8 @@ export default function ResourcesPage() {
                     type="button"
                     variant={activeInfoDomain === "legalRights" ? "default" : "outline"}
                     onClick={() => setActiveInfoDomain("legalRights")}
-                    className={`h-auto py-2.5 px-3 flex flex-col items-center justify-center gap-1.5 rounded-md text-xs font-semibold ${
-                      activeInfoDomain === "legalRights" ? "bg-purple-700 text-white" : "bg-muted/40"
-                    }`}
+                    className={`h-auto py-2.5 px-3 flex flex-col items-center justify-center gap-1.5 rounded-md text-xs font-semibold ${activeInfoDomain === "legalRights" ? "bg-purple-700 text-white" : "bg-muted/40"
+                      }`}
                   >
                     <Gavel className="h-4 w-4" />
                     <span className="text-center">{resUI.domainLegal}</span>
@@ -952,9 +911,8 @@ export default function ResourcesPage() {
                     type="button"
                     variant={activeInfoDomain === "psychology" ? "default" : "outline"}
                     onClick={() => setActiveInfoDomain("psychology")}
-                    className={`h-auto py-2.5 px-3 flex flex-col items-center justify-center gap-1.5 rounded-md text-xs font-semibold ${
-                      activeInfoDomain === "psychology" ? "bg-amber-700 text-white" : "bg-muted/40"
-                    }`}
+                    className={`h-auto py-2.5 px-3 flex flex-col items-center justify-center gap-1.5 rounded-md text-xs font-semibold ${activeInfoDomain === "psychology" ? "bg-amber-700 text-white" : "bg-muted/40"
+                      }`}
                   >
                     <Brain className="h-4 w-4" />
                     <span className="text-center">{resUI.domainPsych}</span>
@@ -964,7 +922,7 @@ export default function ResourcesPage() {
                 {/* DOMAIN 1: TYPES OF ONLINE ABUSE */}
                 {activeInfoDomain === "abuseTypes" && (
                   <div className="space-y-6 pt-2">
-                    
+
                     {/* Sub-selector pills for abuse types */}
                     <div className="flex flex-wrap gap-1.5 pb-2 border-b border-border/60">
                       {[
@@ -978,11 +936,10 @@ export default function ResourcesPage() {
                         <button
                           key={item.id}
                           onClick={() => setActiveAbuseType(item.id)}
-                          className={`text-xs px-3 py-1.5 rounded-md font-medium transition-colors ${
-                            activeAbuseType === item.id
+                          className={`text-xs px-3 py-1.5 rounded-md font-medium transition-colors ${activeAbuseType === item.id
                               ? "bg-foreground text-background font-bold shadow-xs"
                               : "bg-muted hover:bg-muted/80 text-foreground"
-                          }`}
+                            }`}
                         >
                           {item.label}
                         </button>

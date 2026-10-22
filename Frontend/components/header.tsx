@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { AlertOctagon, FileText, Lock, LogOut, Menu, MessageSquare, Shield, ShieldAlert, Sparkles, Upload } from "lucide-react"
+import { AlertOctagon, Bot, FileText, Lock, LogOut, Menu, MessageSquare, Shield, ShieldAlert, Sparkles, Upload } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -114,8 +114,11 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <MessageSquare className="h-3.5 w-3.5" />
-              {t.chat.title}
+              <Bot className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>{t.chat.title}</span>
+              <span className="text-[9px] px-1 py-0.2 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-mono font-semibold border border-emerald-500/20">
+                AI
+              </span>
             </Link>
             <Link
               href="/resources"
@@ -198,8 +201,11 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
                     isActive("/chat") ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 font-semibold" : "text-foreground hover:bg-muted"
                   }`}
                 >
-                  <MessageSquare className="h-4 w-4 text-blue-600" />
-                  {t.chat.title}
+                  <Bot className="h-4 w-4 text-emerald-600" />
+                  <span>{t.chat.title}</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 font-mono font-semibold ml-auto border border-emerald-500/20">
+                    AI
+                  </span>
                 </Link>
                 <Link
                   href="/resources"
